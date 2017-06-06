@@ -4,288 +4,283 @@ Les Widgets sont des modules d'interface. Chacun d'un effectue une fonction d'en
 Il y a 4 types de Widgets:
 
 - **Controlleurs** - ils envoient des commandes au matériel. Utilisez-les pour contrôler votre équipement;
-- **Afficheurs** - 8Orused for various visualizations of data that comes from hardware to the smartphone;
+- **Afficheurs** - utilisés pour diverses visualisations de données qui viennent du matériel vers le smartphone;
 - **Notifications** - are various widgets to send messages and notifications;
-- **Interface** - are various widgets to make your UI look better;
-- **Others** - widgets that don't belong to any category;
+- **Interface** - sont divers widgets donnant un meilleur aspect à votre Interface Utilisateur;
+- **Autres** - les widgets qui ne conviennent à aucune catégorie;
 
-Each Widget has it's own settings.
+Chaque Widget a ses propres paramètres.
 
-Some of the Widgets (e.g. Bridge Widget) are used to enable some functionality and they don't have any settings.
+Certains des Widgets (par exemple le Widget Bridge) sont utilisés pour activer certaines fonctionnalités et n'ont aucun paramètre.
 
-## Common Widget Settings
-### Pin Selector
-This is one of the main parameters you need to set. It defines which pin to control or to read from.
+## Paramètres Communs des Widgets
+### Sélection de la Broche (Pin Select)
+C'est un des paramètres principaux que vous avez besoin de définir. Il définit quelle broche contrôler et quelle broche lire.
 
 <img src="images/pin_selection.png" style="width: 200px; height:360px"/>
 
-**Digital Pins** - represent physical Digital IO pins on your hardware. PWM-enabled pins are marked with the ```~``` symbol
+**Broches Digitales** - représente les broches d'entrée et sortie physiques de votre matériel. Les broches PWM sont marquées avec le symbole ```~```
 
-**Analog Pins** - represent physical Analog IO pins on your hardware
+**Broches Analogiques** - représente les broches d'entrée et sortie analogiques de votre matériel
 
-**Virtual Pins** - have no physical representation. They are used for any data transfer between Blynk App and your hardware.
-Read more about Virtual Pins [here](http://docs.blynk.cc/#blynk-main-operations-virtual-pins).
+**Broches Virtuelles** - n'a aucune représentation physique. Elles sont utilisées pour n'importe quel transfère de données entre l'Application Blynk et votre matériel.
+Lisez-en plus sur les Broches Virtuelles [ici](http://docs.blynk.cc/#blynk-main-operations-virtual-pins).
 
-### Data Mapping
+### Représentation des Données
 
-In case you want to map incoming values to specific range you may use mapping button :
+Dans le cas où vous souhaitez représenter les données entrantes avec échelle spécifique vous pouvez utiliser le bouton de représentation :
 
 <img src="images/display_edit_mapping.png" style="width: 200px; height:360px"/>
 
-Let's say your sensor sends values from 0 to 1023. But you want to display values in a range 0 to 100 in the application.
-With data mapping enabled, incoming value 1023 will be mapped to 100.
+Disons que votre capteur envoie une valeur entre 0 et 1023. Vous souhaitez cependant afficher les valeurs entre 0 et 100 dans l'application.
+Avec la représentation des données activée, la valeur entrante 1023 sera représentée par 100.
 
-### SPLIT/MERGE
-Some of the Widgets can send more than one value. And with this switch you can control how to send them.
+### SÉPARER/FUSIONNER (SPLIT/MERGE)
+Certains Widgets peuvent envoyer plus d'une valeur et avec cet interrupteur vous pouvez contrôler comment les envoyer.
 
 <img src="images/split_merge.gif" style="width: 300px; height:280px"/>
 
 
-- **SPLIT**:
-Each of the parameters is sent directly to the Pin on your hardware (e.g D7). You don't need to write any code.
+- **SÉPARER (SPLIT)** :
+Chaque paramètre est envoyé directement à la broche de votre matériel (par exemple D7). Vous n'avez pas besoin d'écrire le moindre code.
 
-	**NOTE:** In this mode you send multiple commands from one widget, which can reduce performance of your hardware.
+	**NOTE :** Avec ce mode vous envoyez plusieurs commande à partir d'un widget, ce qui peut entraîner des baisses de performance sur votre matériel.
 
-	Example: If you have a Joystick Widget and it's set to D3 and D4, it will send 2 commands over the Internet:
+	Exemple : Si vous avez un Widget Joystick et qu'il est paramétré sur D3 et D4, il va envoyer 2 commandes sur Internet :
 
 	```cpp
 	digitalWrite(3, value);
 	digitalWrite(4, value);
-```
+	```
 
-- **MERGE**:
-When MERGE mode is selected, you are sending just 1 message, consisting of array of values. But you'll need to parse it on the hardware.
+- **FUSIONNER (MERGE)**:
+Quand le mode FUSIONNER est sélectionné, vous envoyez juste 1 message, consistant en un tableau de valeurs. Vous aurez néanmoins besoin de le traiter du côté matériel.
 
-	This mode can be used with Virtual Pins only.
+	Ce mode ne peut être utilisé qu'avec des Broches Virtuelles.
 
-	Example: Add a zeRGBa Widget and set it to MERGE mode. Choose Virtual Pin V1
+	Exemple : Ajoutez un Widget zeRGBa et paramétrez-le sur le mode FUSIONNER. Choisissez la Broche Virtuelle V1
 
 	```cpp
-	BLYNK_WRITE(V1) // There is a Widget that WRITEs data to V1
+	BLYNK_WRITE(V1) // Il y a un Widget qui ÉCRIT des données sur V1
 	{
-	  int r = param[0].asInt(); // get a RED channel value
-	  int g = param[1].asInt(); // get a GREEN channel value
-	  int b = param[2].asInt(); // get a BLUE channel value
+	  int r = param[0].asInt(); // récupère une valeur du canal ROUGE
+	  int g = param[1].asInt(); // récupère une valeur du canal VERT
+	  int b = param[2].asInt(); // récupère une valeur du canal BLEU
 	}
-```
+	```
 
-### Send On Release
+### Envoyer Au Relâchement (Send On Release)
 
-This option is available for most controller widgets and allows you to decrease data traffic on your hardware.
-For example, when you move joystick widget, commands are continuously streamed to the hardware, during a single joystick move
-you can send dozens of commands. There are use-cases where it's needed, however creating such a load may cause hardware reset.
-We recommend enabling **Send On Release** feature for most of the cases, unless you really need instant feedback.
-This option is enabled by default.
-
-
-### Color gradient
-
-Some display widgets have ability to select gradient. Gradient allows you to colorize your widgets without any coding.
-At the moment we provide 2 types of gradients :
-
-- Warm: Green - Orange - Red;
-- Cold : Green - Blue - Violet;
-
-Gradient changes color of your widget based on min/max properties. For example, you select warm gradient for your level
-display widget with min 0 and max 100 value. When value 10 comes to widget it will have green color, when value 50 comes you'll
-see orange color, when value 80 comes you'll see red color.
+Cette option est disponible pour la plupart des widgets contrôleurs et vous permet de réduire le trafic de données sur votre matériel.
+Par exemple, quand vous bougez un widget Joystick, les commandes sont diffusées continuellement vers votre matériel et durant un simple mouvement de Joystick, vous pouvez envoyer des dizaines de commandes. Dans certains cas d'utilisation cela peut être nécessaire mais créer une telle charge peut causer un redémarrage du matériel.
+Nous recommandons d'activer la fonctionnalité **Envoyer Au Relâchement** dans la plupart des cas, à moins que vous ayez réellement besoin d'un retour instantanné.
+Cette option est activée par défaut.
 
 
-##Controllers
-### Button
-Works in push or switch modes. Allows to send 0/1 (LOW/HIGH) values. Button sends 1 (HIGH) on press and sends 0 (LOW) on release.
+### Gradient de Couleurs
+
+Certains widgets d'affichage ont la capacité de sélectionner un gradient. Le Gradient vous permet de changer la couleur de vos Widgets sans aucun code.
+Nous fournissons actuellement 2 gradients :
+
+- Chaud : Vert - Orange - Rouge;
+- Froid : Vert - Bleu - Violet;
+
+Les Gradients changent la couleur de votre widget en fonction de leur propriété min/max. Par exemple, si vous sélectionnez le gradient chaud pour votre widget d'affichage de niveau avec comme valeurs 0 en minimum et 100 en maximum, quand la valeur 10 arrivera au widget il va devenir vert, quand la valeur 50 arrivera vous verrez du orange et quand la valeur 80 arrivera il deviendra rouge.
+
+
+##Contrôleurs
+### Bouton (Button)
+
+Fonctionne en mode Presser (Push) ou Interrupteur (Switch). Vous permet d'envoyer des valeurs 0/1 (LOW/HIGH). Le bouton envoie 1 (HIGH) à la pression et 0 (LOW) au relâchement.
 
 <img src="images/button.png" style="width: 77px; height:80px"/>
 
 <img src="images/button_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
+**Croquis :** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
 
-### Slider
-Similar to potentiometer. Allows to send values between MIN and MAX.
+### Glissière (Slider)
+Similaire à un potentiomètre. Vous permet d'envoyer des valeurs entre MIN et MAX.
 
 <img src="images/slider.png" style="width: 77px; height:80px"/>
 
 <img src="images/slider_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
+**Croquis :** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
 
-### Timer
-Timer triggers actions at a specific time. Even if smartphone is offline. Start time sends 1 (HIGH). Stop time sends 0 (LOW).
+### Chronomètre (Timer)
+Le Chronomètre déclenche des actions à un moment spécifique, Même si le smartphone est hors-ligne. Le temps de démarrage (START) envoie 1 (HIGH) et le temps d'arrêt (STOP) envoie 0 (LOW).
 
-Recent Android version also has improved Timer within Eventor widget.
-With Eventor Time Event you can assign multiple timers on same pin, send any string/number, select days and timezone.
-It is recommended to use Eventor over Timer widget.
-However Timer widget is still suitable for simple timer events.
+Les versions récentes d'Android ont aussi un Chronomètre amélioré avec le widget Eventor.
+Avec l'évennement Eventor Chronométré vous pouvez assigner plusieurs chronomètres à la même broche, envoyer n'importe quelle chaîne de caractères/nombre, sélectionner des jours et un fuseau horaire.
+Il est recommendé d'utiliser le widget Eventor à la place du Chronomètre.
+Cependant, le widget Chronomètre convient toujours à de simples évènements chronométrés.
 
 <img src="images/timer.png" style="width: 77px; height:80px"/>
 
 <img src="images/timer_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [Timer](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Timer/Timer.ino)
+**Croquis :** [Timer](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Timer/Timer.ino)
 
 ### Joystick
-Control servo movements in 4 directions
+Permet de contrôler les mouvements d'un servo-moteur dans 4 directions
 
-####Settings:
-- SPLIT/MERGE modes - read [here](http://docs.blynk.cc/#widgets-common-widget-settings-splitmerge)
+####Paramètres :
+- Modes SÉPARER/FUSIONNER (SPLIT/MERGE) - lisez [ici](http://docs.blynk.cc/#widgets-common-widget-settings-splitmerge)
 
-- **Rotate on Tilt**
+- **Pivoter sur Inclinaison (Rotate on Tilt)**
 
-When it's ON, Joystck will automatically rotate if you use your smartphone in landscape orientation  
-- **Auto-Return**
--
-When it's OFF, Joystick handle will not return back to center position. It will stay where you left it.
+Quand défini sur ON, le Joystick pivotera automatiquement si vous utilisez votre smartphone avec l'orientation paysage.
+
+- **Retour Automatique (Autoreturn)**
+
+Quand défini sur OFF, le Joystick ne retournera pas à la position centrale. Il restera toujours là où vous l'aurez laissé.
 
 <img src="images/joystick.png" style="width: 77px; height:80px"/>
 
 <img src="images/joystick_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [JoystickTwoAxis](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/JoystickTwoAxis/JoystickTwoAxis.ino)
+**Croquis :** [JoystickTwoAxis](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/JoystickTwoAxis/JoystickTwoAxis.ino)
 
 ### zeRGBa
+zeRGBa est un contrôleur RVB classique (un sélecteur de couleur).
 
-zeRGBa is usual RGB controller (color picker).
+#### Paramètres :
 
-#### Settings:
+- **SÉPARER (SPLIT)** :
+Chacun des paramètres est envoyé directement à la broche de votre matériel (par exemple D7). Vous n'avez à écrire aucun code.
 
-- **SPLIT**:
-Each of the parameters is sent directly to the Pin on your hardware (e.g D7). You don't need to write any code.
+	**NOTE :** Avec ce mode vous envoyez plusieurs commande à partir d'un widget, ce qui peut entraîner des baisses de performance sur votre matériel.
 
-**NOTE:** In this mode you send multiple commands from one widget, which can reduce performance of your hardware.
+	Exemple: Si vous avez un Widget zeRGBa et qu'il est défini à D1, D2, D3, il enverra 3 commandes vers Internet :
 
-Example: If you have a zeRGBa Widget and it's set to D1, D2, D3 it will send 3 commands over the Internet:
+	```cpp
+	digitalWrite(1, r);
+	digitalWrite(2, g);
+	digitalWrite(3, b);
+	```
 
-```cpp
-digitalWrite(1, r);
-digitalWrite(2, g);
-digitalWrite(3, b);
-```
+- **FUSIONNER (MERGE)** :
+	Quand le mode FUSIONNER (MERGE) est sélectionné, vous n'envoyez qu'un message, consistant en un tableau de valeurs. Néanmoins vous avez besoin de le traiter du côté matériel.
 
-- **MERGE**:
-When MERGE mode is selected, you are sending just 1 message, consisting of array of values. But you'll need to parse it on the hardware.
+	Ce mode ne peut être utilisé qu'avec des Broches Virtuelles.
 
-This mode can be used with Virtual Pins only.
+	Exemple: Ajoutez un Widget zeRGBa et paramétrez-le sur le mode FUSIONNER. Choisissez la Broche Virtuelle V1.
 
-Example: Add a zeRGBa Widget and set it to MERGE mode. Choose Virtual Pin V1.
-
-```cpp
-BLYNK_WRITE(V1) // zeRGBa assigned to V1
-{
-    // get a RED channel value
+	```cpp
+	BLYNK_WRITE(V1) // zeRGBa assigné à V1
+	{
+    // Récupère une valeur du canal ROUGE
     int r = param[0].asInt();
-    // get a GREEN channel value
-	int g = param[1].asInt();
-	// get a BLUE channel value
-	int b = param[2].asInt();
-}
-```
+    // Récupère une valeur du canal VERT
+		int g = param[1].asInt();
+		// Récupère une valeur du canal BLEU
+		int b = param[2].asInt();
+	}
+	```
 
-### Step Control
+### Contrôle du Pas (Step Control)
 
-Step control is like 2 buttons assigned to 1 pin. One button increments your value by desired step and another
-one decrements it. It is very useful for use cases where you need to change your values very precisely and you can't
-achieve this precision with slider widget.
+Le contrôle du Pas est comme 2 boutons assignés à 1 broche. Un bouton incrémente vos valeurs par le pas désiré tandis que l'autre les décrémente. C'est très pratique dans des cas d'utilisation où vous avez besoin de changer vos valeurs très précisément et que vous ne pouvez atteindre cette précision avec le widget Glissière (Slider).
 
-**Send Step** option allows you to send step to hardware instead of actual value of step widget.
-**Loop value** option allows you to reset step widget to start value when maximum value is reached.
+L'option **Envoyer le Pas (Send Step)** vous permet d'envoyer le pas au matériel à la place de la valeur actuelle du widget.
+L'option **Boucler la Valeur (Loop Value)** vous permet de réinitialiser la valeur du widget au début quand la valeur maximale est atteinte.
 
-**Sketch:** [Basic Sketch](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
+**Croquis :** [Croquis Basique](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
 
-##Displays
-### Value Display
-Displays incoming data from your sensors or Virtual Pins.
+##Afficheurs
+### Afficheur de Valeur (Value Display)
+Affiche les données entrantes de vos capteurs ou Broches Virtuelles.
 
 <img src="images/display.png" style="width: 77px; height:80px"/>
 
 <img src="images/display_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
+**Croquis :** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
 
-### Labeled Value
-Displays incoming data from your sensors or Virtual Pins. It is a better version of 'Value Display' as it has a formatting
-string, so you could format incoming value to any string you want.
+### Valeur labelée (Labeled Value)
+Affiche les données entrantes de vos capteurs ou Broches Virtuelles. C'est une version meilleure que 'Afficheur de Valeur' (Value Display) car il possède le formatage des chaînes de caractères, donc vous pouvez formater les données entrantes vers n'importe quelle chaîne de caractère vous souhaitez.
 
 <img src="images/display.png" style="width: 77px; height:80px"/>
 
 <img src="images/labeled_value_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
+**Croquis :** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
 
-#### Formatting options
+#### Options de Formatage
 
-Let's assume, your sensor sends number 12.6789 to Blynk application.
-Next formatting options are supported:
+Assumons que votre capteur envoie le nombre 12.6789 à votre application Blynk.
+Les options de formatage suivantes sont supportées :
 
-```/pin/``` - displays the value without formatting (12.6789)
+```/pin/``` - affiche la valeur sans formatage (12.6789)
 
-```/pin./``` - displays the value without decimal part (13)
+```/pin./``` - affiche la valeur sans la partie décimale (13)
 
-```/pin.#/``` - displays the value with 1 decimal digit (12.7)
+```/pin.#/``` - affiche la valeur avec une décimale (12.7)
 
-```/pin.##/``` - displays the value with two decimal places (12.68)
+```/pin.##/``` - affiche la valeur avec deux décimales (12.68)
 
 <img src="images/labeled_value_format_edit.png" style="width: 200px; height:360px"/>
 
 ### LED
-A simple LED for indication. You need to send 0 in order to turn LED off. And 255 in order to turn LED on. Or just use
-Blynk API as described below :
+Une simple LED d'information. Vous devez envoyer 0 afin d'éteindre la LED et 255 pour l'allumer. Sinon, utilisez simplement l'API Blynk comme indiqué ci-dessous :
 
 ```cpp
-WidgetLED led1(V1); //register to virtual pin 1
+WidgetLED led1(V1); // Enregistre comme Broche Virtuelle V1
 led1.off();
 led1.on();
 ```
 
-All values between 0 and 255 will change LED brightness :
+Toutes les valeurs entre 0 et 255 changeront la luminosité de la LED :
 
 ```cpp
 WidgetLED led2(2);
-led2.setValue(127); //set brightness of LED to 50%.
+led2.setValue(127); // Défini la luminosité de la LED à 50%
 ```
 
 <img src="images/led.png" style="width: 77px; height:80px"/>
 
 <img src="images/led_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [LED](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/LED/LED_Blink/LED_Blink.ino)
+**Croquis :** [LED](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/LED/LED_Blink/LED_Blink.ino)
 
-### Gauge
-A great visual way to display incoming numeric values.
+### Jauge (Gauge)
+Un moyen visuel génial pour afficher les valeurs numériques entrantes.
 
 <img src="images/gauge.png" style="width: 77px; height:80px"/>
 
 <img src="images/gauge_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
+**Croquis :** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
 
-#### Formatting options
+#### Options de Formattage
 
-Gauge also has "Label" field which allows use to use formatting.
-Let's assume, your sensor sends number 12.6789 to Blynk application.
-Next formatting options are supported:
+Jauge a aussi un champ "Label" qui nous permet d'utiliser le formatage.
+Assumons que votre capteur envoie le nombre 12.6789 à votre application Blynk.
+Les options de formatage suivantes sont supportées :
 
-```/pin/``` - displays the value without formatting (12.6789)
+```/pin/``` - affiche la valeur sans formatage (12.6789)
 
-```/pin./``` - displays the value without decimal part (13)
+```/pin./``` - affiche la valeur sans la partie décimale (13)
 
-```/pin.#/``` - displays the value with 1 decimal digit (12.7)
+```/pin.#/``` - affiche la valeur avec une décimale (12.7)
 
-```/pin.##/``` - displays the value with two decimal places (12.68)
+```/pin.##/``` - affiche la valeur avec deux décimales (12.68)
 
 ### LCD
-This is a regular 16x2 LCD display made in our secret facility in China.
-#### SIMPLE / ADVANCED MODE
+C'est un affichage LCD 16x2 régulier fabriqué dans notre station secrète en Chine.
 
-#### Commands
-You need to use special commands with this widget:
+#### MODE SIMPLE / AVANCÉ (SIMPLE / ADVANCED)
 
-```
-lcd.print(x, y, "Your Message");
-```
-Where x is a symbol position (0-15), y is a line number (0 or 1),
+#### Commandes
+Vous avez besoin d'utiliser des commandes spéciales avec ce widget :
 
+```cpp
+lcd.print(x, y, "Votre message");
 ```
+Où x est un symbole de position (0-15), y est le numéro d'une ligne (0 ou 1)
+
+```cpp
 lcd.clear();
 ```
 
@@ -293,47 +288,45 @@ lcd.clear();
 
 <img src="images/lcd_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [LCD Advanced Mode](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/LCD/LCD_AdvancedMode/LCD_AdvancedMode.ino)
-**Sketch:** [LCD Simple Mode Pushing](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/LCD/LCD_SimpleModePushing/LCD_SimpleModePushing.ino)
-**Sketch:** [LCD Simple Mode Reading](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/LCD/LCD_SimpleModeReading/LCD_SimpleModeReading.ino)
+**Croquis :** [LCD Mode Avancé](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/LCD/LCD_AdvancedMode/LCD_AdvancedMode.ino)
+**Croquis :** [LCD Mode Simple Écriture](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/LCD/LCD_SimpleModePushing/LCD_SimpleModePushing.ino)
+**Croquis :** [LCD Mode Simple Lecture](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/LCD/LCD_SimpleModeReading/LCD_SimpleModeReading.ino)
 
-#### Formatting options
+#### Options de formattage
 
-Let's assume, your sensor sends number 12.6789 to Blynk application.
-Next formatting options supported:
+Assumons que votre capteur envoie le nombre 12.6789 à votre application Blynk.
+Les options de formatage suivantes sont supportées :
 
-```/pin/``` - displays the value without formatting (12.6789)
+```/pin/``` - affiche la valeur sans formatage (12.6789)
 
-```/pin./``` - displays the value without decimal part (13)
+```/pin./``` - affiche la valeur sans la partie décimale (13)
 
-```/pin.#/``` - displays the value with 1 decimal digit (12.7)
+```/pin.#/``` - affiche la valeur avec une décimale (12.7)
 
-```/pin.##/``` - displays the value with two decimal places (12.68)
+```/pin.##/``` - affiche la valeur avec deux décimales (12.68)
 
 <img src="images/lcd_format_edit.png" style="width: 200px; height:360px"/>
 
-### Graph
-Easily plot incoming data from your project in various designs.
+### Graphique (Graph)
+Tracez facilement les données de votre projet sous différentes formes.
 
 <img src="images/graph.png" style="width: 77px; height:80px"/>
 
 <img src="images/graph_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
+**Croquis :** [BlynkBlink](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
 
-### History Graph
-Allows you to see any data your hardware had sent to server previously. History graph has 3 granularities :
+### Graphique d'Historique (History Graph)
+Vous permet de visualiser n'importe quelle données que votre matériel aura envoyé au préalable. Le Graphique d'Historique a 3 types de précision :
 
-- Minute granularity - ```1h```, ```6h```;
-- Hour granularity - ```1d```, ```1w```;
-- Day granularity - ```1m```, ```3m```;
+- Précision à la Minute - ```1h```, ```6h```;
+- Précision à l'Heure - ```1d```, ```1w```;
+- Précision au Jour - ```1m```, ```3m```;
 
-This means that minimum graph update interval is 1 minute for ```1h``` and ```6h``` periods.
-1 hour for ```1d``` and ```1w``` periods. 1 day for ```1m``` and ```3m``` periods.
-As Blynk Cloud is free to use we have a limit on how many data you can store. At the moment Blynk Cloud accepts
-1 message per minute per pin. In case you send your data more frequently your values will be averaged. For example,
-in case you send value ```10``` at 12:12:05 and than again ```12``` at  12:12:45 as result in history graph you'll see
-value ```11``` for 12:12.
+Cela signifie que l'interval de mise à jour minimum pour le graphique est de 1 minute pour les périodes ```1h``` et ```6h```, 1 heure pour ```1d``` et ```1w`` et 1 jour pour ```1m``` et ```3m```.
+Puisque Blynk Cloud est gratuit, nous limitons combien de données vous pouvez stocker. Pour le moment, Blynk n'accepte qu'un message par minute et par broche. Dans le cas où vous en envoyez plus fréquemment, une moyennes de vos valeurs sera faite. Par exemple, dans le cas où vous envoyez ``10``` à 12:12:05 puis encore ```12``` à 12:12:45, vous verrez comme résultat, dans votre graphique d'historique la valeur ``11``` pour 12:12.
+
+Afin de voir des données avec le graphique d'historique vous 
 
 In order to see data in history graph you need to use either widgets with "Frequency reading" interval (in
 that case your app should be open and running) or you can use ```Blynk.virtualWrite``` on hardware side. Every

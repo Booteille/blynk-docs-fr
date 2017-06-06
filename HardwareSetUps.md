@@ -1,4 +1,4 @@
-#Paramètrages du Matériel
+#Paramètres du Matériel
 ## Arduino à travers l'USB (sans Shield)
 Si vous n'avez pas de Shield et que votre matériel n'a aucune connectivité, vous pouvez tout de même utiliser Blynk – directement par l'USB :
 
