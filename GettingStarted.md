@@ -1,105 +1,104 @@
-#Getting Started  
-Let's get you started in 5 minutes (reading doesn't count!). 
-We will switch on an LED connected to your Arduino using the Blynk App on your smartphone.
+#Guide de démarrage  
+Ce guide vous permettra de commencer en 5 minutes (lire ne compte pas !).
+Nous allons activer une LED connectée à votre Arduino à l'aide de l'application Blynk sur votre smartphone.
 
-Connect an LED as shown here:
+Connectez une LED comme montré ici :
 
 <img src="images/Arduino_LED.jpg" style="width: 250px; height:350px"/>
 
-##Getting Started With The Blynk App
-###1. Create a Blynk Account
-After you download the Blynk App, you'll need to create a New Blynk account. This account is separate from the accounts used for the Blynk Forums, in case you already have one.
+##Guide de démarrage de l'Application Blynk
+###1. Créer un compte Blynk
+Une fois l'application Blynk téléchargée, vous aurez besoin de créer un nouveau compte Blynk. Ce compte est séparé des comptes utilisés pour les Forums Blynk, au cas où vous en avez déjà un.
 
-We recommend using a **real** email address because it will simplify things later.
+Nous recommandons d'utiliser une **réelle** adresse e-mail car ça vous simplifiera les choses plus tard.
 
 <img src="images/register_account.png" style="width: 200px; height:360px"/>
 
-####Why do I need to create an account?
+####Pourquoi ai-je besoin de créer un compte ?
 
-An account is needed to save your projects and have access to them from multiple devices from anywhere. It's also a security measure. 
+Un compte est nécessaire afin de sauvegarder vos projets et y avoir accès à partir de plusieurs périphériques et de n'importe où. C'est aussi une mesure de sécurité.
 
-You can always set up your own [Private Blynk Server](http://docs.blynk.cc/#blynk-server) and have full control.   
+Vous pouvez toujours configurer votre propre [serveur privé Blynk](http://docs.blynk.cc/#blynk-server) et avoir le contrôle absolu.   
 
-###2. Create a New Project
-After you've successfully logged into your account, start by creating a new project.
+###2. Créer un nouveau Projet
+Après vous être correctement identifié avec votre compte, commencez par créer un nouveau projet.
 
 <img src="images/getting_started/create_project_button.png" style="width: 200px; height:360px"/>
- 
-Give it a name.
+
+Donnez-lui un nom.
 
 <img src="images/getting_started/give_project_name.png" style="width: 200px; height:360px"/>
 
-###3. Choose Your Hardware
-Select the hardware model you will use. Check out the [list of supported hardware](http://docs.blynk.cc/#supported-hardware)!
+###3. Choisir son matériel
+Sélectionnez le modèle de matériel que vous allez utiliser. Vous pouvez vérifier la [liste des matériels supportés](http://docs.blynk.cc/#supported-hardware)!
 
 <img src="images/getting_started/select_hardware.png" style="width: 200px; height:360px"/>
 
-###4. Auth Token
+###4. Jeton d'Authentification
 
-**Auth Token** is a unique identifier which is needed to connect your hardware to your smartphone. 
-Every new project you create will have its own Auth Token. You'll get Auth Token automatically on your email after 
-project creation. You can also copy it manually. Click on devices section : 
+Le **Jeton d'Authentification** est un identifiant unique nécessaire pour connecter votre matériel à votre smartphone.
+Chaque nouveau projet que vous créérez a son propre Jeton d'Authentification. Vous obtiendrez un Jeton d'Authentification automatiquement sur votre e-mail après la création d'un projet. Vous pouvez aussi le copier manuellement. Cliquez sur la section périphériques :
 
 <img src="images/getting_started/token_1.png" style="width: 200px; height:360px"/>
 
-Click on device : 
+Cliquez sur le périphérque :
 
 <img src="images/getting_started/list_of_devices.png" style="width: 200px; height:360px"/>
 
-And you'll see token : 
+Et vous verrez le jeton :
 
 <img src="images/getting_started/new_device.png" style="width: 200px; height:360px"/>
 
-<span style="color:#D3435C;">**NOTE:** Don't share your Auth Token with anyone, unless you want someone to have access to your hardware. </span>
+<span style="color:#D3435C;">**NOTE :** Ne partagez votre Jeton d'Authentification avec personne, à moins que vous ne souhaitiez que quelqu'un puisse avoir accès à votre matériel.</span>
 
-It's very convenient to send it over e-mail. Press the e-mail button and the token will be sent to the e-mail address you used for registration. 
-You can also tap on the Token line and it will be copied to the clipboard.
 
-Now press the **"Create"** button.  
+C'est vraiment pratique de l'envoyer via l'e-mail. Pressez le bouton e-mail et le jeton vous sera envoyé à l'adresse e-mail utilisée lors de l'inscription.
+Vous pouvez aussi appuyer sur la ligne du Jeton et il sera copié vers le presse-papier.
+
+Pressez maintenant le bouton **"Create"**.
 
 <img src="images/new_project.png" style="width: 200px; height:360px"/>
 
-###5. Add a Widget
+###5. Ajouter un Widget
 
-Your project canvas is empty, let's add a button to control our LED.
+Votre grille de projet est vide, ajoutons un bouton pour crontrôler notre LED.
 
-Tap anywhere on the canvas to open the widget box. All the available widgets are located here. Now pick a button.
+Appuyez n'importe où sur la grille pour ouvrir la liste des Widgets. Tous les widgets disponibles sont situés ici. Maintenant, choisissez un boutton.
 
-**Widget Box**
+**Liste des widgets**
 
 <img src="images/widgets_box.png" style="width: 200px; height:360px"/>
 
 <img src="images/project_with_button.png" style="width: 200px; height:360px"/>
 
-**Drag-n-Drop** - Tap and hold the Widget to drag it to the new position.
+**Glisser-Déposer** - Tapotez et garder le Widget pour le déposer vers sa nouvelle position.
 
-**Widget Settings** - Each Widget has it's own settings. Tap on the widget to get to them.
+**Paramètres du Widget** - Chaque Widget a ses propres paramètres. Tapez sur le widget pour y accéder.
 
 <img src="images/button_settings.png" style="width: 200px; height:360px"/>
 
-The most important parameter to set is **PIN** . The list of pins reflects physical pins defined by your hardware. If your LED is connected to Digital Pin 8 - then select **D8** (**D** - stands for **D**igital).    
+Le paramètre le plus important est **PIN** (broche, en anglais). La liste des broches reflète les broches physiques définies par votre matériel. Si votre LED est connectée à la broche digitale 8 - alors sélectionnez **D8** (**D** - est pour **D**igital).
 
 <img src="images/pin_selection.png" style="width: 200px; height:360px"/>
 
-###6. Run The Project
-When you are done with the Settings - press the **PLAY** button. This will switch you from EDIT mode to PLAY mode where you can interact with the hardware. While in PLAY mode, you won't be able to drag or set up new widgets, press **STOP** and get back to EDIT mode.
+###6. Démarrer le Projet
+Quand vous aurez terminé avec les Paramètres - appuyez sur le bouton **PLAY**. Vous basculerez ainsi du mode ÉDITION au mode JOUER où vous pouvez interragir avec votre matériel. Pendant le mode JOUER, vous n'êtes pas autorisé à déplacer ou configurer de nouveaux widgets, appuyez sur **STOP** et retournez au mode ÉDITION pour l'être de nouveau.
 
-You will get a message saying "Arduino UNO is offline". We'll deal with that in the next section.
+Vous obtiendrez un message indiquant "Arduino UNO is offline" (Arduino UNO est hors-ligne). Nous traiterons cela dans la prochaine section.
 
 <img src="images/play_button.png" style="width: 200px; height:360px"/>
 
-##Getting Started With Hardware
-###How To Use an Example Sketch
-You should by now have the Blynk Library installed on your computer. If not - [click here](http://docs.blynk.cc/#downloads-blynk-library).
+##Guide de démarrage du Matériel
+###Comment utiliser un croquis d'example
+Vous devriez à partir de maintenant avoir la bibliothèque Blynk installée sur votre ordinateur. Si ce n'est pas le cas - [cliquez-ici](http://docs.blynk.cc/#downloads-blynk-library).
 
-Example sketches will help you get your hardware online quickly and major Blynk features. 
+Les croquis d'exemple vous aideront à connecter votre matériel rapidement et à mettre en place les fonctionnalités majeures de Blynk.
 
-Open the example sketch according to the hardware model or shield you are using.
+Ouvrez le croquis d'exemple en fonction du modèle de votre matériel et du shield que vous utilisez.
 
 <img src="images/connection_type_sketch.png" style="width: 500px; height:217px"/>
 
-
-Let's take a look at the example sketch for an [Arduino UNO + Ethernet shield](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
+Jetons un coup d'oeil au croquis d'exemple pour un [Arduino UNO + Shield Ethernet](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/BlynkBlink/BlynkBlink.ino)
 
 ```cpp
 #define BLYNK_PRINT Serial
@@ -111,49 +110,49 @@ char auth[] = "YourAuthToken";
 
 void setup()
 {
-  Serial.begin(9600); // See the connection status in Serial Monitor
-  Blynk.begin(auth);  // Here your Arduino connects to the Blynk Cloud.
+  Serial.begin(9600); // Affiche l'état de la connexion dans le moniteur Série
+  Blynk.begin(auth);  // Votre Arduino se connecte ici au Cloud de Blynk
 }
 
 void loop()
 {
-  Blynk.run(); // All the Blynk Magic happens here...
+  Blynk.run(); // Toute la magie de Blynk se passe ici...
 }
 ```
 
-###Auth Token
-In this example sketch, find this line:
+###Jeton d'Authentification
+Dans ce croquis d'exemple, trouvez cette ligne :
 
 ```cpp
 char auth[] = "YourAuthToken";
 ```
-This is the [Auth Token](http://docs.blynk.cc/#getting-started-getting-started-with-application-4-auth-token) that you emailed yourself. 
-Please check your email and copy it, then paste it inside the quotation marks.
+C'est le [Jeton d'Authentification](http://docs.blynk.cc/#getting-started-getting-started-with-application-4-auth-token) que vous vous êtes envoyé par e-mail.
+Vérifiez votre e-mail et copiez-le, puis collez-le entre les guillemets.
 
-It should look similar to this:
+Ce devrait ressembler à ceci :
 
-``` 
+```cpp
 char auth[] = "f45626c103a94983b469637978b0c78a";
-``` 
+```
 
-Upload the sketch to the board and open Serial Terminal.  Wait until you see something like this: 
+Téléversez le croquis vers la carte et ouvrez le moniteur Série. Attendez jusqu'à ce que vous voyez quelque chose comme ceci :
 
-``` 
+```
 Blynk v.X.X.X
 Your IP is 192.168.0.11
 Connecting...
 Blynk connected!
 ```
 
-<span style="color:#24C48C" >**Congrats! You are all set! Now your hardware is connected to the Blynk Cloud!**</span>
+<span style="color:#24C48C" >**Félicitations ! Vous l'avez fait ! Le matériel est désormais connecté au Cloud de Blynk !**</span>
 
-##Blynking
-Go back to the Blynk App, push the button and turn the LED on and off! It should be Blynking.
+##Jouer avec Blynk
+Retournez sur l'application de Blynk, appuyez sur le bouton et activez puis désactivez la LED ! Elle devrait clignoter.
 
 <img src="images/button_pressed.png" style="width: 200px; height:360px"/>
 
-Check out [other example sketches](https://github.com/blynkkk/blynk-library/tree/master/examples). 
+Regardez [d'autres croquis d'exemple](https://github.com/blynkkk/blynk-library/tree/master/examples).
 
-Feel free to experiment and combine different examples together to create your own amazing projects. 
+Sentez vous libre d'expérimenter et de combiner différents exemples ensembles afin de créer vos propres projets.
 
-For example, to attach an LED to a [PWM](http://www.arduino.cc/en/Tutorial/Fading)-enabled Pin on your Arduino, set the slider widget to control the brightness of an LED. Just use the same steps described above.
+Par exemple, pour attacher une LED à une broche [PWM](http://www.arduino.cc/en/Tutorial/Fading) sur votre Arduino, paramétrez le widget **slider** afin de contrôler la luminosité d'une LED. Utilisez les mêmes étapes décrites plus haut.

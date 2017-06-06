@@ -1,71 +1,65 @@
-#Intro
-This guide will help you to understand how to get started using Blynk and give a comprehensive overview of all the features.
- 
-If you want to jump straight into playing with Blynk, check out Getting Started.
+#Introduction
+Ce guide vous aidera à comprendre comment commencer à utiliser Blynk et vous donnera un aperçu compréhensible de toutes ses fonctionnalités.
+
+Si vous souhaitez commencer directement à jouer avec Blynk, regardez le guide de démarrage.
 <br>
 
-[Getting Started >](http://docs.blynk.cc/#getting-started)
+[Guide de démarrage >](http://docs.blynk.cc/#getting-started)
 
-##How Blynk Works
-Blynk was designed for the Internet of Things. It can control hardware remotely, it can display sensor data, 
-it can store data, vizualize it and do many other cool things. 
+##Comment fonctionne Blynk
+Blynk a été conçu pour l'Internet des Objets. Il peut contrôler un matériel à distance, il peut afficher des données de capteur, il peut stocker des données, les visualiser et faire beaucoup d'autres trucs cools.
 
-There are three major components in the platform: 
+Il y a trois composants majeurs dans la plateforme:
 
-- **Blynk App** - allows to you create amazing interfaces for your projects using various widgets we provide.
+- **Application Blynk** - vous permet de créer de fantastiques interfaces pour vos projets en utilisant différents widgets que nous fournissons.
 
-- **Blynk Server** - responsible for all the communications between the smartphone and hardware. 
-You can use our Blynk Cloud or run your [private Blynk server](http://docs.blynk.cc/#blynk-server) locally. 
-It's open-source, could easily handle thousands of devices and can even be launched on a Raspberry Pi.
+- **Serveur Blynk** - responsable de toute les communications entre le smartphone et le matériel.
+Vous pouvez utiliser notre Cloude Blynk ou faire tourner votre [Serveur privé Blynk](http://docs.blynk.cc/#blynk-server) localement.
+C'est open-source, ça peut facilement gérer des milliers de périphériques et peut même être démarré sur une Raspberry Pi.
 
-- **Blynk Libraries** - for all the popular hardware platforms - enable communication with the server and 
-process all the incoming and outcoming commands.
+- **Bibliothèque Blynk** - pour toutes les plateformes matériel populaires - active la communication avec le serveur et traite toutes les commandes entrantes et sortantes.
 
-Now imagine: every time you press a Button in the Blynk app, the message travels to ~~space~~ the Blynk Cloud, 
-where it magically finds its way to your hardware. It works the same in the opposite direction and 
-everything happens in a blynk of an eye.
+Maintenant imaginez: chaque fois que vous pressez un Bouton sur l'application Blynk, le message voyage vers ~~l'espace~~ le Cloud Blynk, où il trouve magicalement un chemin vers votre matériel. Ça marche de la même manière dans l'autre sens et tout se déroule en un clignotement.
 
 <img src="images/architecture.png" style="width: 640px; height:478px"/>
 
-##Features
-* Similar API & UI for all supported hardware & devices
-* Connection to the cloud using:
+##Fonctionnalités
+* API et UI similaire pour tous les matériels et périphériques supportés
+* Connexion au cloud via:
   * Ethernet
   * WiFi
-  * Bluetooth and BLE
+  * Bluetooth et BLE
   * USB (Serial)
   * ...
-* Set of easy-to-use Widgets
-* Direct pin manipulation with no code writing
-* Easy to integrate and add new functionality using virtual pins
-* History data monitoring via History Graph widget
-* Device-to-Device communication using Bridge Widget
-* Sending emails, tweets, push notifications, etc.
-* ... new features are constantly added!
+* Collection de widgets faciles à utiliser
+* Manipulation des broches directes sans code à écrire
+* Facilité d'intégrer et ajouter de nouvelles fonctionnalités en utilisant les broches virtuelles
+* Surveillance de l'historique des données via le widget **History Graph**
+* Communication Périphérique-à-Périphérique en utilisant le widget **Bridge**
+* Envoi d'emails, de tweets, de notifications push, etc.
+* ... de nouvelles fonctionnalités sont constamment ajoutées !
 
-You can find [example sketches](https://github.com/blynkkk/blynk-library/tree/master/examples) covering basic Blynk Features. 
-They are included in the library. All the sketches are designed to be easily combined with each other.
+Vous pouvez trouver des [croquis d'example](https://github.com/blynkkk/blynk-library/tree/master/examples) couvrant les fonctionnalités basiques de Blynk.
+Ils sont inclus dans la bibliothèque. Tous les croquis sont conçus pour être facilement combiné entre eux.
 
-##What do I need to Blynk?
-At this point you might be thinking: **"Ok, I want it. What do I need to get started?"** – Just a couple of things, really:
+##Comment commencer à faire du Blynk ?
+À ce niveau vous devez certainement penser : **"Okay, je veux ça. Que faire pour commencer ?"** – Juste quelques trucs, vraiment :
 
-####**1. Hardware**. 
-An Arduino, Raspberry Pi, or a similar development kit.
+####**1. Matériel**.
+Un Arduino, Raspberry Pi, ou un kit de développement similaire.
 
-**Blynk works over the Internet.** 
-This means that the hardware you choose should be able to connect to the internet. Some of the boards, like Arduino Uno 
-will need an Ethernet or Wi-Fi Shield to communicate, others are already Internet-enabled: like the ESP8266, Raspberri Pi with WiFi dongle, Particle Photon or SparkFun Blynk Board. But even if you don't have a shield, you can connect it over USB to your 
-laptop or desktop (it's a bit more complicated for newbies, but we got you covered). 
-What's cool, is that the [list of hardware](http://docs.blynk.cc/#supported-hardware) that works with Blynk is huge and will keep on growing. 
-  
-####**2. A Smartphone**. 
-The Blynk App is a well designed interface builder. It works on both iOS and Android, so no holywars here, ok? 
+**Blynk fonctionne à travers Internet.**
+Ce signifie que le matériel que vous choisissez doit être capable de connecter avec internet. Certaines cartes, comme l'Arduino Uno, vont nécesser un Shield Ethernet ou Wi-Fi pour communiquer, tandis que d'autres sont déjà capables de communiquer avec internet : comme l'ESP8266, le Raspberry Pi avec le donglet Wi-Fi, le Particle Photon ou le SparkFun Blynk Boarf. Néanmoins, même si vous n'avez pas de Shield, vous pouvez le connecter à travers le port USB de votre ordinateur (c'est un poil compliqué pour les débutants, mais nous vous couvrons).
+Ce qui est cool, c'est que la [liste des matériels](http://docs.blynk.cc/#supported-hardware) fonctionnant avec Blynk est immense et continue de grandir.
 
-#Downloads
-##**Blynk Apps for iOS or Android** <br> 
+####**2. Un Smartphone**.
+L'application Blynk est une bâtisseuse d'interface bien conçue. Elle marche à la fois sur iOS et Android, donc aucune guerre sainte ici, ok ?
+
+#Téléchargements
+##**Application Blynk pour iOS ou Android** <br>
 [<img src="http://linkmaker.itunes.apple.com/images/badges/en-us/badge_appstore-lrg.svg" alt="Drawing" style=" width: 170px; height:60px"/>](https://itunes.apple.com/us/app/blynk-control-arduino-raspberry/id808760481?ls=1&mt=8)  &nbsp; &nbsp; &nbsp; &nbsp;[<img src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" alt="Drawing" style=" width: 158px; height:42px"/>](https://play.google.com/store/apps/details?id=cc.blynk)
 
-##**Blynk Library** <br>
-[Download The Blynk Library >](https://github.com/blynkkk/blynk-library/releases/latest)
+##**Bibliothèque Blynk** <br>
+[Téléchargez la Bibliothèque Blynk >](https://github.com/blynkkk/blynk-library/releases/latest)
 
-In case you forgot, or don't know how to install Arduino libraries [click here](http://www.arduino.cc/en/guide/libraries).
+Au cas où vous aurez oublié ou e savez pas comment installer une bibliothèque Arduino, [cliquez-ici](http://www.arduino.cc/en/guide/libraries).

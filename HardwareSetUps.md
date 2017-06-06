@@ -1,100 +1,100 @@
-#Hardware set-ups
-## Arduino over USB (no shield)
-If you don't have any shield and your hardware doesn't have any connectivity, you can still use Blynk – directly over USB :
+#Paramètrages du Matériel
+## Arduino à travers l'USB (sans Shield)
+Si vous n'avez pas de Shield et que votre matériel n'a aucune connectivité, vous pouvez tout de même utiliser Blynk – directement par l'USB :
 
-1. Open [Arduino Serial USB example](https://github.com/blynkkk/blynk-library/blob/master/examples/Boards_USB_Serial/Arduino_Serial_USB/Arduino_Serial_USB.ino) 
-and change [Auth Token](http://docs.blynk.cc/#getting-started-getting-started-with-application-4-auth-token)
+1. Ouvrez [l'exemple Arduino Serial USB](https://github.com/blynkkk/blynk-library/blob/master/examples/Boards_USB_Serial/Arduino_Serial_USB/Arduino_Serial_USB.ino)
+et changez le [Jeton d'Authentification](http://docs.blynk.cc/#getting-started-getting-started-with-application-4-auth-token)
 
 	```cpp
-	// You could use a spare Hardware Serial on boards that have it (like Mega)
+	// Vous pourriez utiliser un Serial Matériel supplémentaire sur les cartes qui en ont (comme le Mega)
 	#include <SoftwareSerial.h>
 	SoftwareSerial DebugSerial(2, 3); // RX, TX
-	
+
 	#define BLYNK_PRINT DebugSerial
 	#include <BlynkSimpleStream.h>
-	
-	// You should get Auth Token in the Blynk App.
-	// Go to the Project Settings (nut icon).
+
+	// Vous devez récupérer le Jeton d'Authentification dans l'application Blynk.
+	// Allez dans les Paramètres du Projet (Icône d'écrou).
 	char auth[] = "YourAuthToken";
-	
+
 	void setup()
 	{
-	  // Debug console
+	  // Console de débuggage
 	  DebugSerial.begin(9600);
-	
-	  // Blynk will work through Serial
+
+	  // Blynk fonctionnera à travers le Serial
 	  Serial.begin(9600);
 	  Blynk.begin(auth, Serial);
 	}
-	
+
 	void loop()
 	{
 	  Blynk.run();
 	}
 	```
-2. Run the script which is usually located in ```/scripts``` folder:
+2. Lancez le script qui est habituellement situé dans le dossier ```/scripts``` :
 
- - Windows:```My Documents\Arduino\libraries\Blynk\scripts```
+ - Windows : ```Mes Documents\Arduino\libraries\Blynk\scripts```
  - Mac	```User$/Documents/Arduino/libraries/Blynk/scripts```
 
-  
-  **On Windows:**
-  
-  Open cmd.exe
-  
-  Write your path to blynk-ser.bat folder. For example:
-   
+
+**Sur Windows :**
+
+Ouvrez cmd.exe
+
+Écrivez votre chemin vers le dossier de blynk-ser.bat. Par exemple :
+
 ```
 cd C:\blynk-library-0.3.1\blynk-library-0.3.1\scripts
 ```
-  
-  Run ```blynk-ser.bat``` file. For example : ```blynk-ser.bat -c COM4``` (where COM4 is port with your Arduino)
-  
-  And press "Enter", press "Enter" and press "Enter"
-  
-  **On Linux and Mac**:
-  
-  Navigate to /scripts folder. For example:
-  
+
+Lancez le fichier ```blynk-ser.bat```. Par exemple : ```blynk-ser.bat -c COM4``` (où COM4 le port où est connecté votre Arduino)
+
+Et pressez "Entrée", pressez "Entrée" puis pressez "Entrée".
+
+**Sur Linux et Mac**:
+
+Naviguez vers le dossier /scripts. Par exemple :
+
 ```
 cd User$/Documents/Arduino/libraries/Blynk/scripts
-``` 
+```
 
-  When inside this folder, run:
-  
+  Une fois à l'intérieur du dossier, lancez :
+
 ```
 user:scripts User$ ./blynk-ser.sh
 ```
 
-  **Warning:** Do no close terminal window with running script.
-  
-  In some cases you may also need to perform : 
+**Attention :** Ne fermez pas une fenêtre de terminal avec un script qui tourne.
+
+Dans certains cas, vous aurez aussi besoin d'exécuter :
 
 ```
 user:scripts User$ chmod +x blynk-ser.sh
 ```
-  
-  You may need also to run it with ```sudo```
-  
+
+Vous pourriez aussi avoir besoin de l'exécuter avec ```sudo```
+
 ```
 user:scripts User$ sudo ./blynk-ser.sh
-``` 
+```
 
-  This is what you'll see in Terminal app on Mac (usbmodem address can be different):
-  
+C'est ce que vous verrez dans l'application Terminal sur Mac (l'adresse d'usbmodem peut être différente) :
+
 ```
 [ Press Ctrl+C to exit ]
 /dev/tty.usbmodem not found.
-Select serial port [ /dev/tty.usbmodem1451 ]: 
+Select serial port [ /dev/tty.usbmodem1451 ]:
 ```
-	
-  Copy the serial port address: ```/dev/tty.usbmodem1451``` and paste it back:
+
+Copiez l'adresse du port série : ```/dev/tty.usbmodem1451``` et collez-le à côté:
 
 ```
 Select serial port [ /dev/tty.usbmodem1451 ]: /dev/tty.usbmodem1451
 ```
-	
-  After you press Enter, you should see an output similar to this:
+
+Après avoir pressé "Entrée", vous devriez voir quelque chose de similaire à ceci :
 
 ```
 Resetting device /dev/tty.usbmodem1451...
@@ -106,24 +106,24 @@ Connecting: GOPEN:/dev/tty.usbmodem1451,raw,echo=0,clocal=1,cs8,nonblock=1,ixoff
 2015/10/03 00:29:45 socat[30438.2046857984] N starting data transfer loop with FDs [3,3] and [4,4]
 ```
 
-<span style="color:#D3435C;">**NOTE:** Arduino IDE may complain with "programmer is not responding". You need to terminate script before uploading new sketch. </span>
+<span style="color:#D3435C;">**NOTE :** Arduino IDE peut se plaindre avec "programmer is not responding" (Le programmeur ne répond pas, en anglais). Vous devez terminer vos scripts avant de téléverser de nouveaux croquis.</span>
 
-Additional materials:
+Contenus additionnels :
 
-- [Tutorial: Control Arduino over USB with Blynk app. No shield required. Mac OS)](https://www.youtube.com/watch?v=fgzvoan_3_w)
-- [How to control arduino (Wirelessly) with blynk via USB. Windows](https://www.youtube.com/watch?v=I_hgIj2FdPI)
-- [Instructables: Control Arduino with Blynk over USB](http://www.instructables.com/id/Control-arduino-using-Blynk-over-usb/)
+- [Tutoriel: Contrôler Arduino via l'USB avec l'Application Blynk. Aucun Shield Nécessaire. (Mac OS) - En Anglais](https://www.youtube.com/watch?v=fgzvoan_3_w)
+- [Comment contrôler Arduino (Sans fil) avec Blynk via l'USB. Windows - En Anglais](https://www.youtube.com/watch?v=I_hgIj2FdPI)
+- [Instructables : Contrôlez Arduino avec Blynk à travers l'USB - En Anglais](http://www.instructables.com/id/Control-arduino-using-Blynk-over-usb/)
 
 
 ## Raspberry Pi
-1. Connect your Raspberry Pi to the Internet and open it's console.
-2. Run this command (it updates your OS package repository to include the required packages):
+1. Connectez votre Rapsberry Pi à Internet et ouvrez sa console.
+2. Lancez cette commande (elle met à jour les dépôts de paquets de votre système d'exploitation pour y inclure les paquets requis) :
 
 	```
 	curl -sL "https://deb.nodesource.com/setup_6.x" | sudo -E bash -
 	```
 
-3. Download and build Blynk JS library using npm:
+3. Téléchargez et créez la bibliothèque Blynk JS en utilisant npm :
 
 	```
 	sudo apt-get update && sudo apt-get upgrade
@@ -133,64 +133,64 @@ Additional materials:
 	sudo npm install -g blynk-library
 	```
 
-4. Run Blynk test script (put your auth token):
+4. Lancez le script de test de Blynk (Mettez votre Jeton d'Authentification):
 
 	```
 	blynk-client 715f8cafe95f4a91bae319d0376caa8c
 	```
 
-5. You can write our own script based on [examples](https://github.com/vshymanskyy/blynk-library-js/tree/master/examples)
+5. Vous pouvez écrire votre propre script basé sur les [exemples](https://github.com/vshymanskyy/blynk-library-js/tree/master/examples)
 
-6. To enable Blynk auto restart for Pi, find ```/etc/rc.local``` file and add there:
+6. Pour activer l'auto-redémarrage de Blynk pour Pi, trouvez le fichier ```/etc/rc.local``` et ajoutez avant ```exit 0``` :
 
 	```
-	node full_path_to_your_script.js <Auth Token> 
+	node chemin_complet_vers_votre_script.js <Auth Token>
 	```
 
-Additional materials:
+Contenus Supplémentaires:
 
-- [Instructables: Blynk on Javascript for Raspberry Pi, Intel Edison and others](http://www.instructables.com/id/Blynk-JavaScript-in-20-minutes-Raspberry-Pi-Edison)
-- [Instructables: Use DHT11/DHT12 sensors with Raspberry Pi and Blynk](http://www.instructables.com/id/Raspberry-Pi-Nodejs-Blynk-App-DHT11DHT22AM2302/?ALLSTEPS)
+- [Instructables: Blynk avec Javascript pour Raspberry Pi, Intel Edison et autres - En Anglais](http://www.instructables.com/id/Blynk-JavaScript-in-20-minutes-Raspberry-Pi-Edison)
+- [Instructables: Utiliser les capteurs DHT11/DHT12 avec Raspberry Pi et Blynk - En Anglais](http://www.instructables.com/id/Raspberry-Pi-Nodejs-Blynk-App-DHT11DHT22AM2302/?ALLSTEPS)
 
-**Note:** Instead of using Node.js, you can also build a C++ libarry version (same as Arduino, WiringPi-based) installation:
-- [Library README for Linux](https://github.com/blynkkk/blynk-library/blob/master/linux/README.md)
-- [Blynk Community Topic: How-To Raspberry Pi](http://community.blynk.cc/t/howto-for-raspberry-pi/332)
-- [Video tutorial - Setting up Blynk and Raspberry Pi:](https://www.youtube.com/watch?v=iSG_8g6KyGE)
+**Note :** Plutôt que d'utiliser Node.js, vous pouvez aussi créer une installation de la version C++ de la bibliothèque (La même que Arduino, basé sur WiringPI) :
+- [LISEZ-MOI de la Bibliothèque pour Linux - En Anglais](https://github.com/blynkkk/blynk-library/blob/master/linux/README.md)
+- [Sujet de la Communauté Blynk : Comment faire avec Raspberry-Pi - En Anglais](http://community.blynk.cc/t/howto-for-raspberry-pi/332)
+- [Tutoriel Vidéo - Configurer Blynk et Raspberry Pi - En Anglais](https://www.youtube.com/watch?v=iSG_8g6KyGE)
 <iframe width="200" height="110" src="https://www.youtube.com/embed/iSG_8g6KyGE" frameborder="0" allowfullscreen></iframe>
 
 ## ESP8266 Standalone
 
-You can run Blynk directly on the ESP8266!
+Vous pouvez faire tourner Blynk directement sur l'ESP8266 !
 
-Install the latest ESP8266 library for Arduino using [this guide](https://github.com/esp8266/Arduino#installing-with-boards-manager). 
+Installez la dernière version de la bibliothèque ESP8266 pour Arduino en utilisant [ce guide](https://github.com/esp8266/Arduino#installing-with-boards-manager).
 
-**Example Sketch:** [ESP8266_Standalone](https://github.com/blynkkk/blynk-library/blob/master/examples/Boards_WiFi/ESP8266_Standalone/ESP8266_Standalone.ino)
+**Croquis d'exemple : Sketch** [ESP8266_Standalone](https://github.com/blynkkk/blynk-library/blob/master/examples/Boards_WiFi/ESP8266_Standalone/ESP8266_Standalone.ino)
 
-Additional materials:
+Contenus supplémentaires:
 
-- [Instructables: ESP8266 ESP-12(Standalone)+ Blynk](http://www.instructables.com/id/ESP8266-ESP-12Standalone-Blynk-101)
-- [Instructables: ESP8266-12 standalone Blynk lm35 temperature sensor](http://www.instructables.com/id/ESP8266-12-blynk-wireless-temperature-LM35-sensor/?ALLSTEPS)
- 
-[Step-by-Step Tutorial in Russian language](http://esp8266.ru/esp8266-blynk)
+- [Instructables: ESP8266 ESP-12(Standalone)+ Blynk - En Anglais](http://www.instructables.com/id/ESP8266-ESP-12Standalone-Blynk-101)
+- [Instructables: ESP8266-12 standalone Blynk lm35 capteur de température - En Anglais](http://www.instructables.com/id/ESP8266-12-blynk-wireless-temperature-LM35-sensor/?ALLSTEPS)
+
+[Tutoriel étape-par-étape - En Russe](http://esp8266.ru/esp8266-blynk)
 
 ## NodeMCU
 
-Please follow [this detailed instruction](https://github.com/blynkkk/blynk-library/tree/master/examples/Boards_WiFi/NodeMCU#instruction-for-nodemcu-setup).
-Or watch [this Video tutorial](https://www.youtube.com/watch?v=FhS44hGk1Lc).
+Suivez [ces instructions détaillées](https://github.com/blynkkk/blynk-library/tree/master/examples/Boards_WiFi/NodeMCU#instruction-for-nodemcu-setup).
+Ou visionnez [ce tutoriel vidéo - En Anglais](https://www.youtube.com/watch?v=FhS44hGk1Lc).
 
 ## Particle
-Blynk works with the whole family of Particle products: Core, Photon and Electron
+Blynk fonctionne avec la famille entière de produits Particle : Core, Photon et Electron
 
-1. Open [Particle Web IDE](https://build.particle.io/build).
-2. Go to the libraries.
-3. Search for **Blynk** in the Community Libraries and click on it
-4. Open ```01_PARTICLE.INO``` example
-5. Click "use this example"
-6. Put your Auth Token here: ``` char auth[] = "YourAuthToken";``` and flash the Particle!
+1. Ouvrez l'[IDE Particle Web](https://build.particle.io/build).
+2. Allez dans les bibliothèques.
+3. Recherchez **Blynk** dans les bibliothèques de la Communauté et cliquez dessus
+4. Ouvrez l'exemple ```01_PARTICLE.INO```
+5. Cliquez sur "utiliser cet exemple"
+6. Mettez votre Jeton d'Authentification ici : ``` char auth[] = "YourAuthToken";``` et flashez le Particle !
 
-You can scan this QR code from Blynk App and you'll get a ready-to-test project for **Particle Photon**. Just put your Auth Token into the ```01_PARTICLE.INO``` example.
+Vous pouvez scanner ce code QR à partir de l'application Blynk et vous obtiendrez un projet prêt-à-tester pour **Particle Photon**. Mettez simplement votre Jeton d'Authentification dans l'exemple ```01_PARTICLE.INO```.
 <img src="images/Particle Demo1530733075.png" style="width: 300px; height:300px"/>
 
-Additional materials:
+Contenus supplémentaires:
 
-- [Particle core + DHT22](https://www.hackster.io/gusgonnet/temperature-humidity-monitor-with-blynk-7faa51)
+- [Particle core + DHT22 - En Anglais](https://www.hackster.io/gusgonnet/temperature-humidity-monitor-with-blynk-7faa51)
