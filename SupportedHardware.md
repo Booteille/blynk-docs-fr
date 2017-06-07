@@ -1,8 +1,8 @@
-# Supported Hardware
+# Matériels Supportés
 
-Blynk supports more than 400 boards already, including support for Arduino, Particle, ARM mbed, TI Energia, MicroPython, Node.js, OpenWRT and many Single Board Computers. You can add your own connection types easily (see [these](https://github.com/blynkkk/blynk-library/tree/master/examples/More/ArduinoClient) examples for Arduino)!
+Blynk supporte déjà plus de 400 cartes, offrant le support pour Arduino, Particle, ARM-basés, TI Energia, MicroPython, Node.js, OpenWRT et de nombreuses ordinateurs à carte unique. Vous pouvez ajouter vos propres types de connexion facilement (voyez [ces](https://github.com/blynkkk/blynk-library/tree/master/examples/More/ArduinoClient) exemples pour Arduino) !
 
-## Platforms
+## Plateformes
 
 - **Arduino** (https://github.com/blynkkk/blynk-library)
   - Arduino Uno, Duemilanove
@@ -11,8 +11,8 @@ Blynk supports more than 400 boards already, including support for Arduino, Part
   - Arduino MKR1000
   - Arduino Zero
   - Arduino Yún (onboard WiFi and Ethernet, via Bridge)
-  
-- **Arduino-like**
+
+- **Semblables à l'Arduino**
   - Blynk Board
   - ESP8266 (Generic, NodeMCU, Witty Cloud, Huzzah, WeMos D1, Seeed Wio Link, etc.)
   - ESP32 Dev Board
@@ -40,6 +40,7 @@ Blynk supports more than 400 boards already, including support for Arduino, Part
   - chipKIT Uno32
   - Alorium XLR8 (FPGA)
   - LinkIt ONE (WiFi only)
+
 - **Energia**
   - Texas Instruments
     - CC3200-LaunchXL
@@ -57,7 +58,7 @@ Blynk supports more than 400 boards already, including support for Arduino, Part
   - SparkFun RedBoard
   - RedBear Duo (WiFi & BLE)
 
-- **ARM mbed** (https://developer.mbed.org/users/vshymanskyy/code/Blynk/)
+- **ARM-basés** (https://developer.mbed.org/users/vshymanskyy/code/Blynk/)
   - Seeed Tiny BLE
   - RedBearLab BLE Nano
   - BBC micro:bit
@@ -78,39 +79,39 @@ Blynk supports more than 400 boards already, including support for Arduino, Part
   - VoCore (OpenWRT + [Espruino package](https://github.com/vshymanskyy/OpenWRT-Espruino-packages))
   - Espruino Pico
   - ...
-  
+
 - **Python** (MicroPython) (https://github.com/wipy/wipy/tree/master/lib/blynk)
   - WiPy
 - **Lua** (https://github.com/blezek/blynk-esp)
   - NodeMCU
 
-## Arduino connection types
+## Types de Connexions à l'Arduino
 
-- USB (Serial), connected to your laptop or desktop
- 
-- **Ethernet:**
+- USB (Serial), connecté à votre ordinateur
+
+- **Ethernet :**
   - Arduino Ethernet Shield (W5100)
   - Arduino Ethernet Shield 2 (W5500)
   - SeeedStudio Ethernet Shield V2.0 (W5200)
   - ENC28J60-based modules
- 
-- **WiFi:**
-  - ESP8266 as WiFi modem (running original firmware)
+
+- **WiFi :**
+  - ESP8266 comme modem WiFi (avec le logiciel original)
   - Arduino WiFi 101 Shield
   - Arduino WiFi Shield
   - Adafruit CC3000 WiFi Breakout / Shield
   - RN-XV WiFly
- 
+
 - **Bluetooth Smart (BLE 4.0):**
   - HM-10, HC-08
   - DFRobot BLE-Link module
   - Microduino/mCookie BLE
   - RedBearLab BLE Mini
   - nRF8001-based boards (Adafruit Bluefruit LE, etc.)
- 
+
 - **Bluetooth 2.0 Serial Port Profile (SPP)**
   - HC-05, HC-06, ...
- 
+
 - **GSM/3G:**
   - SIMCom SIM800 series (SIM800A, SIM800C, SIM800L, SIM800H, SIM808, SIM868)
   - SIMCom SIM900 series (SIM900A, SIM900D, SIM908, SIM968)
@@ -121,14 +122,14 @@ Blynk supports more than 400 boards already, including support for Arduino, Part
   - Adafruit FONA (Mini Cellular GSM Breakout)
   - Adafruit FONA 800/808 Shield
 
-## Made by Community
+## Faits par la Communauté
 
 - [WIZnet-W5500-EVB](http://instructables.com/id/WIZnet-W5500-EVB-and-Blynk-App-communication)
 - [LabVIEW](https://github.com/juncaofish/NI-LabVIEWInterfaceforBlynk)
 - [Node-RED](https://github.com/tzapu/node-red-contrib-blynk) (can be used as bridge to HTTP, TCP, UDP, MQTT, XMPP, IRC, OSC...)
 
-## Boards known to have problems
+## Cartes reconnues pour avoir des problèmes
 
-These boards are not supported and seem not work out of the box:
+Ces cartes ne sont pas supportées et semblent avoir un problème pour marcher hors de leur fonctionnement original :
 - [Arduino UNO WiFi](http://www.arduino.org/products/boards/arduino-uno-wifi)
 - [Arduino Tian](http://www.arduino.org/products/boards/arduino-tian)
