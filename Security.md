@@ -1,50 +1,44 @@
-#Security
+#Sécurité
 
-Blynk server has 3 ports open for different security levels.
+Le serveur Blynk a 3 ports ouverts pour les différents niveaux de sécurité.
 
-* **8441** - SSL/TLS connection for hardware
-* **8442** - plain TCP connection for hardware (no security)
-* **8443** - mutual authentication (mutual SSL) connection for Mobile Apps
+* **8441** - Connexion SSL/TLS pour le matériel
+* **8442** - Connexion TCP pleine pour le matériel (pas de sécurité)
+* **8443** - Connexion pour l'authentification mutuelle (SSL mutuel) pour les Applications Mobile
 
-Hardware may select to connect to 8441 or 8442, depending on it's capabilities.
+Le matériel peut choisir de se connecter au port 8441 ou 8442, en fonction de ses capacités.
 
-#### Use SSL gateway
+#### Utiliser une Passerelle SSL
 
-Most platforms are not capable to handle SSL, so they connect to 8442.
-However, our [gateway script](https://github.com/blynkkk/blynk-library/blob/master/scripts/blynk-ser.sh) can be used to add SSL security layer to communication.
+La plupart des plateformes ne sont pas capables de gérer SSL, alors ils se connectent au port 8442.
+Néanmoins, notre [script de passerelle](https://github.com/blynkkk/blynk-library/blob/master/scripts/blynk-ser.sh) peut être utilisé pour ajouter une couche de sécurité SSL à la communication.
 
 ```bash
 ./blynk-ser.sh -f SSL
 ```
-This will forward all hardware connections from 8441 port to the server via SSL gateway.
-You can run this script on your Raspberry Pi, desktop computer, or even directly on your router!
+Cela va rediriger toutes les connexions matérielles du port 8441 au serveur via la passerelle SSL.
+Vous pouvez lancer ce script sur votre Raspberry Pi, ordinateur, ou même directement sur votre routeur !
 
-**Note:** when using your own server, you should overwrite the bundled server.crt certificate, or specify it to the script using ```--cert``` switch:
-
+**Note :** lorsque vous utilisez votre propre serveur, vous devez écraser le certificat server.crt fourni, ou en spécifier un au script en utilisant l'option ```--cert``` :
 ```bash
 ./blynk-ser.sh -f SSL -s <server ip> -p 8441 --cert=<certificate>.crt
 ```
 
-Flag ```-f SSL``` is enabled by default for USB communication so you don't have to explicit declare it.
+L'option ```-f SSL``` est activée par défaut pour les communications USB donc vous n'avez pas à le déclarer explicitement.
 
-**Note:** SSL is supported by the gateway only on Linux/OSX for now
- 
-If you want to skip SSL, and connect to TCP, you can also do that:
+**Note :** SSL n'est supporté à travers la passerelle que sur Linux/OSX actuellement.
+
+Si vous voulez éviter SSL et vous connecter via TCP, vous pouvez aussi faire ceci :
 
 ```bash
 ./blynk-ser.sh -t TCP
 ```
 
-#### Use Local Blynk Server
+#### Utiliser un Serveur Local Blynk
 
-In order to gain maximum security you could [install Blynk server locally](http://docs.blynk.cc/#blynk-server) and 
-restrict access to your network, so nobody except you could access it. In this case all data is stored locally within
-your network and not send via Internet.
+Afin d'obtenir une sécurité maximale vous pouvez [installer le serveur Blynk localement](http://docs.blynk.cc/#blynk-server) et restraindre l'accès à votre réseau, donc personne à part vous ne pourra y accéder. Dans ce cas toutes les données sont stockées localement dans votre réseau et ne sont pas envoyées vers Internet.
+Dans le cas d'un serveur local Blynk il n'y aussi aucun besoin de protéger la connexion entre votre matériel et le serveur local Blynk.
+C'est vrai pour les connexions Ethernet et partiellement vrai pour les connexion Wi-Fi. Dans le cas du Wi-Fi vous devez au moins utiliser le type WPA, WPA2 (Wi-Fi Protected Access) afin de protéger le traffic sans fil.
 
-In case of Local Blynk Server there is also no need to protect connection between your hardware and Local Blynk Server.
-This is true for Ethernet connection and partially true for Wi-Fi connection. In case of Wi-Fi you have to use at least 
-WPA, WPA2 (Wi-Fi Protected Access) Wi-Fi type in order to protect wireless traffic. 
-
-WPA and WPA2 offer a very robust encryption that is likely to protect all data travelling over the air—given that 
-a strong enough password is used. Even if your data is plain TCP/IP, another user won't be able to decipher captured 
-packets. Still, make sure that your password is strong enough, otherwise the only limiting factor for an attacker is time.
+WPA et WPA2 offrent une encryption robuste qui pourra certainement protéger toutes les données voyageant à travers les ondes, si un mot de passe assez fort est utilisé. Même si vos données sont en TCP/IP pleins, un autre utilisateur ne sera pas en mesure de déchiffrer les paquets capturés.
+Dans tous les cas, assurez-vous que votre mot de passe est assez fort, faute de quoi le seul facteur limitant un attaquant est le temps.
