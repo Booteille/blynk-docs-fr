@@ -1,59 +1,59 @@
-#Sharing
-Blynk offers two types of sharing your projects with other people:
+#Partage
+Blynk dispose de deux manières pour partager vos projets avec d'autres personnes :
 
-- **Share access to your hardware.** Think about giving someone an App for your Project. They can't modify, but can control and see what's there.
+- **Partager l'accès à votre matériel.** Imaginez donner à quelqu'un une Application pour votre Projet. Ils ne peuvent le modifier mais peuvent contrôler et voir ce qu'il y a dedans.
 
-- **Share your Project configuration.** Others will get a clone of your project by scanning a given QR link, but they won't be able to control your hardware. It's great for tutorials, instructables, etc.
+- **Partager la configuration de votre Projet.** Les autres obtiendront un clone de votre projet en scannant un lien QR, mais ils ne seront pas en mesure de contrôler votre matériel. C'est génial pour les tutoriels, instructables, etc.
 
-## Shared access to your hardware
-Imagine giving someone an App to control your Project.
+## Accès partagé à votre matériel
+Imaginez donner à quelqu'un une Application pour contrôler votre Projet.
 
-- people you’ve shared your project with can’t modify anything. They can only use it
-- you can update your app, change the layout, add widgets and it’s immediately synced to everyone
-- you can revoke access at any moment
+- Les personnes à qui vous avez partagé votre projet ne peuvent rien modifier. Elles ne peuvent que l'utiliser
+- Vous pouvez mettre à jour votre application, changer la disposition, ajouter des widgets et tout sera immédiatement synchronisé à tout le monde
+- Vous pouvez révoquer l'accès à tout moment
 
-How it works:
-- you send the QR code to your users (you can email, print, post to social media, do whatever you want)
-- others download Blynk app, scan the QR code and your app opens for them ready to use. They don’t even need to login or create an account.
+Comment cela fonctionne :
+- vous envoyez un code QR à vos utilisateurs (vous pouvez l'envoyer par email, l'imprimer, le publier sur les réseaux sociaux, faire ce que vous voulez avec)
+- les autres téléchargent l'Application Blynk, scannent le code QR et votre application s'ouvre pour eux, prête à l'usage. Ils n'ont même pas besoin de se connecter ou de créer un compte.
 
-Go to your Project's Settings:
+Allez dans vos Paramètres de Projet :
 
 <img src="images/dash_settings_sharing.png" style="width: 200px; height:360px"/>
 
-Click on "Generate Link" button :
+Cliquez sur le bouton "Générer un lien" (Generate link) :
 
 <img src="images/dash_settings_sharing_generate.png" style="width: 200px; height:360px"/>
 
-It will generate QR code you can share with others:
+Ce génèrera un code QR que vous pourrez partager avec les autres :
 
 <img src="images/dash_public_sharing.png" style="width: 200px; height:360px"/>
 
-That's it! Now **Exit the settings and press PLAY button.**
+C'est tout ! Maintenant **Quittez les paramètres et pressez le bouton LANCER.**
 
-Another person would need to install Blynk app and scan QR code from the login screen (scanning from existing profile is not yet supported) ;
+L'autre personne aura besoin d'installer l'application Blynk et de scanner le code QR à partir de l'écran de connexion (Scanner à partir d'un profil existant n'est pas encore supporté) :
 
 <img src="images/scan_qr.png" style="width: 200px; height:360px"/>
 
-**NOTE:** Your Project should be active, don't forget to press Play button.
+**NOTE :** Votre projet doit être actif, n'oubliez pas d'appuyer sur le bouton LANCER.
 
-**WARNING:** Sharing costs 1000 energy and this energy is not recoverable even you didn't use sharing at all.
+**ATTENTIOn :** Partager coûte 1000 d'énergie et cette énergie n'est pas récupérable, même si vous n'avez rien partagé du tout.
 
+## Partager la configuration de votre Projet
+Dans le cas où vous souhaitez partager la configuration de votre projet sans donner l'accès à votre matériel (Par exemple pour créer un tutoriel) - suivez ces étapes :
 
-## Share your Project configuration
-In case you want to share your Project's set up without giving access to your hardware (for example to make a tutorial or instructable)- follow the steps: 
-
-In Project's Settings go to **Clone** button.
+Dans les Paramètres du Projet, utilisez le bouton **Cloner** (**Clone**).
 
 <img src="images/clone.png" style="width: 200px; height:360px"/>
 
-It will generate QR code you can share with anyone.
+Un code QR que vous pourrez partager avec tout le monde sera généré.
 
 <img src="images/QR.png" style="width: 200px; height:360px"/>
 
-Another person **should Log In to Blynk app** and press QR button in Projects gallery
+L'autre personne **devra se Connecter (Log In) à l'application Blynk** et appuyer sur le bouton QR dans la gallerie de Projets.
 
 <img src="images/QR_button_edit.png" style="width: 200px; height:360px"/>
 
-After the scan, a new Project will be created, all the widgets, settings, layout will be cloned. Another person would need enough Energy Balance to clone your Project.
+Après le scan, un nouveau Projet sera créé, tous les widgets, les paramètres et leur disposition seront clonés.
+L'autre personne aura besoin de suffisamment d'Énergie pour cloner votre Projet.
 
-**Auth Token will be different!**. Nobody will get access to your hardware. They just get a copy of the layout and settings.
+**Le Jeton d'Authentification sera différent !**. Personne n'aura accès à votre matériel. Ils auront juste une copie de votre disposition et des paramètres.
