@@ -1,117 +1,116 @@
-# Troubleshooting
+# Résolution des Problèmes
 
-## Connection
+## Connexion
 
-If you experience connection problems, follow these steps:
+Si vous expérimpentez des problèmes de connexion, suivez ces étapes :
+1. Vérifiez que votre matériel, vos câbles et votre alimentation électrique sont de bonne qualité, non-endommagés, etc.
+  Utilisez des câbles et ports USB à haute puissance.
+2. Vérifiez vos câblages en utilisant les exemples (Client TCP/HTTP ou similaire) **fournis avec votre shield ou matériel**.
+  * Une fois que vous comprenez comment gérer la connexion, il est bien plus simple d'utiliser Blynk.
+3. Essayez de lancer la commande ```telnet blynk-cloud.com 8442``` à partir de votre PC, connecté au même réseau que votre matériel.
+  Vous devriez voir quelque chose comme : ```Connected to blynk-cloud.com.```.
+4. Essayez de lancer les exemples par défaut de Blynk pour votre plateforme **sans faire de modifications** afin de voir si ils fonctionnent.
+  * Vérifiez par deux fois que vous avez sélectionné **le bon exemple** pour votre type de connexion et modèle de matériel.
+  * Nos exemples sont fournis avec **des commentaires et des explications**. **Lisez-les attentivement.**
+  * Vérifiez que votre Jeton d'Authentification est valide (copié à partir de l'Application et **ne contient pas d'espace, etc.**).
+  * Si cela ne marche pas, jetez un coup d'oeil à [l'affichage du débogage série](http://docs.blynk.cc/#enable-debug).
+5. Voilà ! Ajoutez vos modifications et fonctionnalités. Amusez-vous bien avec Blynk !
 
-1. Check that your hardware, wires, cables and power supply are good quality, not harmed or damaged, etc.  
-   Use high power USB cables and USB ports.
-2. Check your wiring using the examples (TCP/HTTP Client or similar) **provided with your shield and hardware**.
-   * Once you understand how to manage connection, it's much easier to use Blynk.
-3. Try running command ```telnet blynk-cloud.com 8442``` from your PC, connected to the same network as your hardware.
-   You should see something like: ```Connected to blynk-cloud.com.```.
-4. Try running Blynk default examples for your platform **without modifications** to see if it is working.
-   * Double-check that you have selected **the right example** for your connection type and hardware model.
-   * Our examples come with **comments and explanations**. **Read them carefully.**
-   * Check that your Auth Token is valid (copied from the App and **doesn't contain spaces, etc.**)
-   * If it doesn't work, try looking into [serial debug prints](http://docs.blynk.cc/#enable-debug).
-5. Done! Add your modifications and functionality. Enjoy Blynk!
+***Note :*** lorsque vous avez plusieurs périphériques connectés à votre réseau, ils doivent avoir des adresses MAC et IP différentes. Par exemple, lorsque vous utilisez 2 Arduino UNO avec des shields Ethernet, lancer l'exemple par défaut aux deux causera un problème de connexion. Vous devriez plutôt utiliser l'exemple de [configuration manuelle d'ethernet][manual ethernet configuration](https://github.com/blynkkk/blynk-library/blob/master/examples/Boards_Ethernet/Arduino_Ethernet_Manual/Arduino_Ethernet_Manual.ino).
 
-***Note:*** when you have multiple devices connected to your network, they should all have different MAC and IP addresses. For example, when using 2 Arduino UNO with Ethernet shields, flashing default example to both of them will cause connection problems. You should use [manual ethernet configuration](https://github.com/blynkkk/blynk-library/blob/master/examples/Boards_Ethernet/Arduino_Ethernet_Manual/Arduino_Ethernet_Manual.ino) example.
+## Connexion au réseau WiFi
+Si vous rencontrez des problèmes de connexion WiFi, voici quelques pièges auxquels faire attention :
 
-## WiFi network connection
-If you encounter WiFi connection problems, please check these pitfalls:
+* Vous essayez de vous connecter au réseau "WPA & WPA2 Entreprise" (souvent utilisé dans les bureaux) et votre shield ne supporte pas cette méthode de sécurité
+* Votre connexion WiFi a une page de connexion qui vous demande d'entrer un jeton d'accès (souvent utilisé dans les restaurants)
+* La sécurité de votre réseau WiFi interdit la connexion de périphériques étrangers (Filtrage MAC, etc)
+* Il y a un pare-feu activé. Le port par défaut pour les connexions matériel est 8442. Assurez-vous qu'il soit ouvert
 
-* You're trying to connect to "WPA & WPA2 Enterprise" network (often used in offices), and your shield does not support this security method
-* Your WiFi network has a login page that requests entering an access token (often used in restaurants)
-* Your WiFi network security disallows connecting alien devices completely (MAC filtering, etc)
-* There is a firewall running. Default port for hardware connections is 8442. Make sure it's open.
+## Délai
 
-## Delay
+Si vous utilisez un ```delay()``` long ou demandez à votre matériel de se mettre en veille dans le ```loop()```, attendez-vous à des pertes de connexion ou des performances détériorées.
 
-If you use long ```delay()``` or send your hardware to sleep inside of the ```loop()``` expect connection drops and downgraded performance.
-
-***DON'T DO THAT:***
+***NE FAITES PAS CELA :***
 ```cpp
 void loop()
 {
   ...
-  delay(1000); // this is long delay, that should be avoided
+  delay(1000); // C'est un délai long, ce doit être évité
   other_long_operation();
   ...
   Blynk.run();
 }
 ```
 
-***Note:*** This also applies to the BLYNK_READ & BLYNK_WRITE handlers!
+***Note :*** Cela s'applique aussi aux commandes BLYNK_READ et BLYNK_WRITE !
 
-***SOLUTION:***
-If you need to perform actions in time intervals - use timers, for example [BlynkTimer](http://docs.blynk.cc/#blynk-firmware-blynktimer).
+***SOLUTION :***
+Si vous avez besoin d'effectuer des actions à des intervalles réguliers - utilisez les chronomètres (timers), par exemple [BlynkTimer](http://docs.blynk.cc/#blynk-firmware-blynktimer).
 
-## Flood Error
+## Erreur Flood
 
-If your code frequently sends a lot of requests to our server, your hardware will be disconnected. Blynk App may show "Your hardware is offline"
+Si votre code envoie fréquemment de nombreuses requêtes à notre serveur, votre matériel sera déconnecté. L'Application Blynk indiquera que votre matériel est hors-ligne ("Your hardware is offline").
 
-When ```Blynk.virtualWrite``` is in the ```void loop```, it generates hundreds of "writes" per second 
+Lorsque ```Blynk.virtualWrite``` est dans le ```void loop```, il génère des centaines d'écritures (writes) par seconde.
 
-Here is an example of what may cause flood. ***DON'T DO THAT:***
+Voici un exemple pouvant causer du flood. ***NE FAITES PAS CELA :***
 ```cpp
 void loop()
 {
-  Blynk.virtualWrite(1, value); // This line sends hundreds of messages to Blynk server
+  Blynk.virtualWrite(1, value); // Cette ligne envoie des centaines de messages au serveur Blynk
   Blynk.run();
 }
 ```
 
-***SOLUTION:***
-If you need to perform actions in time intervals - use timers, for example [BlynkTimer](http://docs.blynk.cc/#blynk-firmware-blynktimer).
+***SOLUTION :***
+Si vous avez besoin d'effectuer des actions à des intervalles réguliers - utilisez les chronomètres (timers), par exemple [BlynkTimer](http://docs.blynk.cc/#blynk-firmware-blynktimer).
 
-Using ```delay()``` will not solve the problem either. It may cause [another issue](http://docs.blynk.cc/#delay). Use timers!
+Utiliser un ```delay()``` ne résoudra pas le problème non plus. Ce peut causer [un autre problème](http://docs.blynk.cc/#delay). Utilisez les Chronomètres !
 
-If sending hundreds of requests is what you need for your product you may increase flood limit on local server 
-and within Blynk library.
-For local server you need to change ```user.message.quota.limit``` property within ```server.properties``` file :
+Si envoyer des centaines de requêtes est ce dont vous avez besoin pour votre produit, vous pouvez augmenter la limite de flood sur un serveur local et dans la bibliothèque Blynk.
+Pour le serveur local, vous avez besoin de modifier la propriété ```user.message.quota.limit``` dans le fichier ```server.properties```
+```
+  #100 Req/sec rate limit per user.
+  user.message.quota.limit=100
+```
 
-        #100 Req/sec rate limit per user.
-        user.message.quota.limit=100
-        
-For library you need to change ```BLYNK_MSG_LIMIT``` property within ```BlynkConfig.h``` file :
- 
-        //Limit the amount of outgoing commands.
-        #define BLYNK_MSG_LIMIT 20
+Pour le bibliothèque vous aurez besoin de changer la propriété ```BLYNK_MSG_LIMIT``` dans le fichier ```BlynkConfig.h``` :
+```cpp
+  // Limite le nombre de commandes sortantes
+  #define BLYNK_MSG_LIMIT 20
+```
 
-## Enable debug
+## Activer le débogage
 
-To enable debug prints on the default Serial, add this on the top of your sketch **(it should be the first line
-in your sketch)**:
+Pour activer l'affichage du débogage sur le Serial par défaut, ajoutez ceci en haut de votre croquis **(ce doit être la première ligne de votre croquis)** :
 
 ```cpp
-#define BLYNK_DEBUG // Optional, this enables lots of prints
+#define BLYNK_DEBUG // Optionel, affiche de nombreux messages
 #define BLYNK_PRINT Serial
 ```
-And enable serial in ```void setup()```:
+Et activez le Serial dans ```void setup()``` :
 
 ```cpp
 Serial.begin(9600);
 ```
 
-You can also use spare Hardware serial ports or SoftwareSerial for debug output (you will need an adapter to connect to it with your PC).
+Vous pouvez aussi utiliser d'autres ports matériels de série ou SoftwareSerial pour l'affichage du débogage (Vous aurez besoin d'un adaptateur pour le connecter à l'ordinateur).
 
-***Note:*** enabling debug mode will slow down your hardware processing speed up to 10 times.
+***Note :*** activer le mode débogage rendra la puissance de traitement de votre matériel jusqu'à dix fois plus lente.
 
-## Geo DNS problem
+## Problèmes Geo DNS
 
-Blynk Cloud utilizes [Geo DNS](https://en.wikipedia.org/wiki/Geodns) for non-commercial solutions in order to minimize servers maintenance costs. 
-It means that when you connect to ```blynk-cloud.com```, DNS service redirects you to the closest server based on your IP address.
-The issue is that the hardware and application sometimes are not in the same network. And there is a chance that hardware and smartphone are connected to different servers. You will get ```User is not registered``` message in that case. 
+Le cloud de Blynk utilise [Geo DNS](https://en.wikipedia.org/wiki/Geodns) pour les solutions non-commerciales afin de minimiser les coûts de maintenance des serveurs.
+Cela signifie que lorsque vous vous connectez à ```blynk-cloud.com```, le service DNS vous redirige vers le serveur le plus proche, en foncton de votre adresse IP.
+Le problème est que l'application et le matériel ne sont parfois pas dans le même réseau. Et il y a une chance pour que le matériel et le smartphone soient connectés à des serveurs différents. Vous obtiendrez alors une erreur vous indiquant l'utilisateur n'est pas enregistré (```User is not registered```).
 
-There are 2 ways to resolve this issue:
+Il y a deux manières de résoudre ce problème :
 
-- Use [Local Blynk Server](http://docs.blynk.cc/#blynk-server)
-- ```ping blynk-cloud.com``` from the network your hardware is connected to. Use the IP address that you get during this ping and put it in mobile app like that:
+- Utiliser un [Serveur Blynk Local] (http://docs.blynk.cc/#blynk-server)
+- ```ping blynk-cloud.com``` à partir du réseau où votre matériel est connecté. Utilisez l'adresse IP que vous obtenez durant ce ping et indiquez-le dans votre application mobile de cette manière :
 
  <img src="images/login.png" style="width: 200px; height:360px"/>  <img src="images/custom.png" style="width: 200px; height:360px"/>
 
-## Reset password
+## Réinitialiser le Mot de Passe
 
-On login screen click on "Problems signing in?" label and than "Reset Password" button. You'll get instruction on your email.
+Sur l'écran de connexion, cliquez sur "Problems signin in?" et puis sur le bouton "Reset Password". Vous obtiendrez des instructions par email.
