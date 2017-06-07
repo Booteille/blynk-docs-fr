@@ -1,17 +1,17 @@
 # Opérations Principales de Blynk
 
 ## Broches Virtuelles
-Blynk peut contrôler des broches Digitales et Analogiques d'entrée et sortie sur votre matériel directement. Vous n'avez même pas à écrire de code pour cela.
+Blynk peut contrôler des broches Digitales et Analogiques d'entrée et sortie sur votre hardware directement. Vous n'avez même pas à écrire de code pour cela.
 C'est génial pour faire clignoter des LEDs mais ce n'est souvent pas suffisant...
 
 Nous avons conçu les broches Virtuelles pour envoyer **toute sorte** de données de votre micro-controlleur vers l'Application Blynk et inversement.
 
-Tout ce que vous connecterez à votre matériel sera capable de communiquer avec Blynk.
+Tout ce que vous connecterez à votre hardware sera capable de communiquer avec Blynk.
 Avec les broches Virtuelles vous pouvez envoyer quelque-choque à partir de l'Application, le traiter sur le micro-controlleur et le renvoyer vers le smartphone. Vous pouvez déclencher des fonctions, lire des périphériques I2C, convertir des valeurs, contrôler des servo et DC moteurs, etc.
 
 Les broches Virtuelles peuvent être utiliser pour interfacer avec des bibliothèques externes (Servo, LCD, et autres) et implémenter des fonctionnalités personnalisées.
 
-Le matériel peut envoyer des données aux Widgets à travers les broches Virtuels de cette manière :
+Le hardware peut envoyer des données aux Widgets à travers les broches Virtuels de cette manière :
 
 ```cpp
 Blynk.virtualWrite(pin, "abc");
@@ -22,10 +22,10 @@ Blynk.virtualWrite(pin, "hello", 123, 12.34);
 
 Pour plus d'informations sur les broches Virtuelles, [lisez ceci](http://docs.blynk.cc/#blynk-firmware-virtual-pins-control)
 
-## Envoyer des données de l'application au matériel
-Vous pouvez envoyer n'importe quelle donnée à partir des Widgets de votre application vers le matériel.
+## Envoyer des données de l'application au hardware
+Vous pouvez envoyer n'importe quelle donnée à partir des Widgets de votre application vers le hardware.
 
-Tous les [Widgets Controller](http://docs.blynk.cc/#widgets-controllers) peuvent envoyer des données aux broches virtuelles de votre matériel.
+Tous les [Widgets Controller](http://docs.blynk.cc/#widgets-controllers) peuvent envoyer des données aux broches virtuelles de votre hardware.
 Par exemple, le code ci-dessous montre comment obtenir des valeurs à partir du Widget Button de l'Application
 
 ```cpp
@@ -49,7 +49,7 @@ Certains Widgets (comme le Joystick ou zeRGBa) ont plus d'une sortie.
 <img src="images/joystick_merge_mode.png" style="width: 200px; height:360px"/>
 
 Cette sortie peut être écrite à une broche Virtuelle en tant que tableau de valeurs.
-Du côté matériel - Vous pouvez obtenir n'importe quel élément du tableau [0, 1, 2...] en utilisant :
+Du côté hardware - Vous pouvez obtenir n'importe quel élément du tableau [0, 1, 2...] en utilisant :
 
 ```cpp
 BLYNK_WRITE(V1) // Le Widget ÉCRIT sur la broche Virtuelle V1
@@ -62,8 +62,8 @@ BLYNK_WRITE(V1) // Le Widget ÉCRIT sur la broche Virtuelle V1
 
  **Croquis :** [JoystickTwoAxis](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/JoystickTwoAxis/JoystickTwoAxis.ino#L24)
 
-## Obtenir des données du matériel
-Il y a deux manières d'envoyer des données de votre matériel vers les Widgets de votre application à travers les broches Virtuelles.
+## Obtenir des données du hardware
+Il y a deux manières d'envoyer des données de votre hardware vers les Widgets de votre application à travers les broches Virtuelles.
 
 ### Effectuer des requêtes par Widget
 - En utilisant la fréquence de lecture intégrée pendant que l'Application est active en configurant le paramètre 'Reading Frequency' à un certain interval :
@@ -81,9 +81,9 @@ BLYNK_READ(V5) // Le Widget dans l'application LIT la broche virtuelle V5 avec u
 **Croquis :** [PushDataOnRequest](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/PushDataOnRequest/PushDataOnRequest.ino#L26)
 
 
-### Envoyer des données à partir du matériel
-Si vous avez besoin d'ENVOYER des données de capteur ou autre de votre matériel au Widget, vous pouvez écrire la logique que vous souhaitez.
-Configurez simplement la fréquence en mode PUSH. Toute commande que le matériel envoie au Cloud de Blynk est automatiquement stoqué sur le serveur et vous obtenez cette information soit avec le widget [History Graph](http://docs.blynk.cc/#widgets-displays-history-graph) soit avec [HTTP API](http://docs.blynkapi.apiary.io/#reference/0/pin-history-data/get-all-history-data-for-specific-pin).
+### Envoyer des données à partir du hardware
+Si vous avez besoin d'ENVOYER des données de capteur ou autre de votre hardware au Widget, vous pouvez écrire la logique que vous souhaitez.
+Configurez simplement la fréquence en mode PUSH. Toute commande que le hardware envoie au Cloud de Blynk est automatiquement stoqué sur le serveur et vous obtenez cette information soit avec le widget [History Graph](http://docs.blynk.cc/#widgets-displays-history-graph) soit avec [HTTP API](http://docs.blynkapi.apiary.io/#reference/0/pin-history-data/get-all-history-data-for-specific-pin).
 
 <img src="images/frequency_reading_push.png" style="width: 200px; height:360px"/>
 
@@ -131,8 +131,8 @@ void loop()
 
 ## État de la synchronisation
 
-### Pour le matériel
-Si votre matériel perd la connexion internet et redémarrage, vous pouvez restaurer toutes les valeurs à partir des Widgets dans l'application Blynk.
+### Pour le hardware
+Si votre hardware perd la connexion internet et redémarrage, vous pouvez restaurer toutes les valeurs à partir des Widgets dans l'application Blynk.
 
 ```cpp
 BLYNK_CONNECTED() {
@@ -151,7 +151,7 @@ BLYNK_WRITE(V0) {
 La commande ```Blynk.syncAll()``` restaure toues les valeurs du Widget basées sur les dernières valeurs sauvegardées sur le serveur.
 Les états des toutes les broches analogiques et digitales seront restaurés. Chaque broche Virtuelle va effectuer un évènnement ```BLYNK_WRITE```.
 
-[Synchroniser le matériel avec l'état de l'Application - En Anglais](https://github.com/blynkkk/blynk-library/blob/master/examples/More/Sync/HardwareSyncStateFromApp/HardwareSyncStateFromApp.ino)
+[Synchroniser le hardware avec l'état de l'Application - En Anglais](https://github.com/blynkkk/blynk-library/blob/master/examples/More/Sync/HardwareSyncStateFromApp/HardwareSyncStateFromApp.ino)
 
 Vous pouvez aussi ne mettre à jour qu'une seule broche Virtuelle en appelant ```Blynk.syncVirtual(V0)``` ou vous pouvez mettre à jour plusieurs broches avec ```Blynk.syncVirtual(V0, V1, V2, ...)```.
 
@@ -162,9 +162,9 @@ Vous pouvez aussi utiliser le serveur pour stocker n'importe quelle valeur sans 
 [Stocker plusieurs valeurs sur le serveur - En Anglais](https://github.com/blynkkk/blynk-library/blob/master/examples/More/ServerAsDataStorage/ServerAsDataStorage_MultiValue/ServerAsDataStorage_MultiValue.ino)
 
 ### Pou l'application
-Si vous avez besoin de synchroniser votre matériel avec l'état de votre Widget même si votre application est hors ligne utilisez  ```Blynk.virtualWrite```.
+Si vous avez besoin de synchroniser votre hardware avec l'état de votre Widget même si votre application est hors ligne utilisez  ```Blynk.virtualWrite```.
 
-Imaginez vous avez un Widget LED connecté à la broche Virtuelle V1 dans l'application et un bouton physique attaché à votre matériel.
+Imaginez vous avez un Widget LED connecté à la broche Virtuelle V1 dans l'application et un bouton physique attaché à votre hardware.
 Quand vous appuyez sur le bouton physique, vous attendez que l'application affiche l'état du Widget LED mis à jour.
 Pour y parvenir vous avez besoin d'envoyer ```Blynk.virtualWrite(V1, 255)``` quand un bouton physique est pressé.
 
@@ -194,13 +194,13 @@ Après les étapes ci-dessus, chaque widget aura plus d'un champ "Target" :
 
 Désormais, vous avez besoin d'assigner le périphérique au widget et après cela le widget contrôlera seulement ce périphérique spécifique.
 
-C'est tout ! Maintenant vous avez besoin de téléverser des croquis avec les bons Jetons d'Authentification dans votre matériel.
+C'est tout ! Maintenant vous avez besoin de téléverser des croquis avec les bons Jetons d'Authentification dans votre hardware.
 
 ### Étiquettes
 
 La fonctionnalité Tags (étiquettes, en anglais) vous permet de grouper de multiples périphériques entre eux. Les Tags sont très utiles lorsque vous voulez contrôler plusieurs périphériques avec un seul widget. Par exemple, imaginez un cas où vous avez 3 ampoules intelligentes et vous voulez allumer toutes ces ampoules avec un unique clic. Vous avez besoin d'assigner 3 périphériques à 1 tag et assigner le tag à un bouton. C'est tout.
 
-Les widgets Tag supportent aussi la synchronisation de l'état. Vous pouvez donc obtenir l'état du widget à partir de votre matériel.  Néanmoins vous ne pouvez mettre à jour l'état de tels widgets à partir du matériel.
+Les widgets Tag supportent aussi la synchronisation de l'état. Vous pouvez donc obtenir l'état du widget à partir de votre hardware.  Néanmoins vous ne pouvez mettre à jour l'état de tels widgets à partir du hardware.
 
 ## État des périphériques connectés
 L'application Blynk supporte l'état de connectivité de plusieurs périphériques.
@@ -211,13 +211,13 @@ Dans un monde idéal, quand le périphérique ferme la connexion TCP avec ```con
 Dans la majorité des cas, il n'y a pas de manière facile et instantannée de découvrir que la connexion n'est plus active.
 
 C'est pourquoi Blynk utilise le méchanisme ```HEARTBEAT```. Avec cette approche, le périphérique envoie périodiquement des commandes ```ping``` à un interval prédéfini (10 secondes par défault, [propriété](https://github.com/blynkkk/blynk-library/blob/master/src/Blynk/BlynkConfig.h) ```BLYNK_HEARTBEAT```).
-Dans le cas où le matériel n'envoie rien dans les dix secondes, le serveur attend cinq secondes supplémentaires et après ça, la connexion est considérée comme interrompue et fermée par le serveur. Sur l'interface utilisateur, vous verrez donc la mise à jour de l'état 15 secondes après que ce soit réellement arrivé.
+Dans le cas où le hardware n'envoie rien dans les dix secondes, le serveur attend cinq secondes supplémentaires et après ça, la connexion est considérée comme interrompue et fermée par le serveur. Sur l'interface utilisateur, vous verrez donc la mise à jour de l'état 15 secondes après que ce soit réellement arrivé.
 
-Vous pouvez aussi modifier l'interval de ```HEARTBEAT``` du côté matériel via ```Blynk.config```.
+Vous pouvez aussi modifier l'interval de ```HEARTBEAT``` du côté hardware via ```Blynk.config```.
 Dans ce cas, la formule ```newHeartbeatInterval * 2.3``` sera appliquée. Donc dans le cas où vous avez décider de mettre l'interval ```HEARTBEAT``` à 5 secondes, vous serez notifié à propos de la connexion avec un délai de 11 secondes dans le pire des cas.
 
 ## Changer les propriétés d'un Widget
-Changer certaines propriétés d'un widget à partir du côté matériel est aussi supporté.
+Changer certaines propriétés d'un widget à partir du côté hardware est aussi supporté.
 Par exemple, vous pouvez changer la couleur du widget LED basé sur une condition :
 
 ```cpp
@@ -285,6 +285,6 @@ Vous pouvez aussi changer les propriétés d'un widget via l'[API HTTP](http://d
 
 - Évitez d'utiliser de longs délais avec ```delay()``` – ce peut causer des interruptions de la connexion;
 
-- Si vous envoyez plus de cent valeurs par seconde - vous pouvez provoquer une [erreur Flood](http://docs.blynk.cc/#troubleshooting-flood-error) et votre matériel sera automatiquement déconnecté du serveur;
+- Si vous envoyez plus de cent valeurs par seconde - vous pouvez provoquer une [erreur Flood](http://docs.blynk.cc/#troubleshooting-flood-error) et votre hardware sera automatiquement déconnecté du serveur;
 
 - Faites attention à ne pas envoyer trop de comamndes ```Blynk.virtualWrite``` puisque de nombreux périphériques ne sont pas très puissants (comme l'ESP8266) alors il ne pourra pas gérer beaucoup de requêtes.

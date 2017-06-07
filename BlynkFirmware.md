@@ -8,7 +8,7 @@ La manière la plus simple de configurer Blynk est d'appeler `Blynk.begin()` :
 ```cpp
 Blynk.begin(auth, ...);
 ```
-Cette méthode prend de nombreux paramètres pour différents matériels, en fonction du type de connexion que vous utilisez. Suivez les croquis d'exemple pour votre carte.
+Cette méthode prend de nombreux paramètres pour différents hardwares, en fonction du type de connexion que vous utilisez. Suivez les croquis d'exemple pour votre carte.
 
 `begin()` suit basiquement ces étapes :
 
@@ -90,7 +90,7 @@ Pas la peine d'écrire du code pour de simples choses comme les LEDs, les relais
 
 ## Contrôle des broches Virtuelles
 Les broches Virtuelles sont conçues pour envoyer des données de votre micro-contrôleur à l'Application Blynk et inversement.
-Pensez aux broches Virtuelles comme à des canaux permettant d'envoyer des données. Assurez-vous de bien différencier les broches Virtuelles des broches physiques de votre matériel. Les broches Virtuelles n'ont pas de représentation physique.
+Pensez aux broches Virtuelles comme à des canaux permettant d'envoyer des données. Assurez-vous de bien différencier les broches Virtuelles des broches physiques de votre hardware. Les broches Virtuelles n'ont pas de représentation physique.
 
 Les broches Virtuelles peuvent être utilisées comme interface avec les bibliothèques (Servo, LCD, et autres) et implémentent des fonctionnalités personnalisées.
 Le périphérique peut envoyer des données à l'Application en utilisant `Blynk.virtualWrite(pin, value)` et recevoir des données de l'Application en utilisant `BLYNK_WRITE(vPIN)`.
@@ -252,9 +252,9 @@ Serial.begin(9600);
 ```
 Ouvrez le Moniteur Série et vous verrez l'affichage des messages de déboguage.
 
-Vous pouvez aussi utiliser d'autres ports matériels de série ou SoftwareSerial pour l'affichage du débogage (Vous aurez besoin d'un adaptateur pour le connecter à l'ordinateur).
+Vous pouvez aussi utiliser d'autres ports hardwares de série ou SoftwareSerial pour l'affichage du débogage (Vous aurez besoin d'un adaptateur pour le connecter à l'ordinateur).
 
-***Note :*** activer le mode débogage rendra la puissance de traitement de votre matériel jusqu'à dix fois plus lente.
+***Note :*** activer le mode débogage rendra la puissance de traitement de votre hardware jusqu'à dix fois plus lente.
 
 ### BLYNK_LOG()
 

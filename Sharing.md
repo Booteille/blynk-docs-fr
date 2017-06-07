@@ -1,11 +1,11 @@
 #Partage
 Blynk dispose de deux manières pour partager vos projets avec d'autres personnes :
 
-- **Partager l'accès à votre matériel.** Imaginez donner à quelqu'un une Application pour votre Projet. Ils ne peuvent le modifier mais peuvent contrôler et voir ce qu'il y a dedans.
+- **Partager l'accès à votre hardware.** Imaginez donner à quelqu'un une Application pour votre Projet. Ils ne peuvent le modifier mais peuvent contrôler et voir ce qu'il y a dedans.
 
-- **Partager la configuration de votre Projet.** Les autres obtiendront un clone de votre projet en scannant un lien QR, mais ils ne seront pas en mesure de contrôler votre matériel. C'est génial pour les tutoriels, instructables, etc.
+- **Partager la configuration de votre Projet.** Les autres obtiendront un clone de votre projet en scannant un lien QR, mais ils ne seront pas en mesure de contrôler votre hardware. C'est génial pour les tutoriels, instructables, etc.
 
-## Accès partagé à votre matériel
+## Accès partagé à votre hardware
 Imaginez donner à quelqu'un une Application pour contrôler votre Projet.
 
 - Les personnes à qui vous avez partagé votre projet ne peuvent rien modifier. Elles ne peuvent que l'utiliser
@@ -39,7 +39,7 @@ L'autre personne aura besoin d'installer l'application Blynk et de scanner le co
 **ATTENTIOn :** Partager coûte 1000 d'énergie et cette énergie n'est pas récupérable, même si vous n'avez rien partagé du tout.
 
 ## Partager la configuration de votre Projet
-Dans le cas où vous souhaitez partager la configuration de votre projet sans donner l'accès à votre matériel (Par exemple pour créer un tutoriel) - suivez ces étapes :
+Dans le cas où vous souhaitez partager la configuration de votre projet sans donner l'accès à votre hardware (Par exemple pour créer un tutoriel) - suivez ces étapes :
 
 Dans les Paramètres du Projet, utilisez le bouton **Cloner** (**Clone**).
 
@@ -56,4 +56,4 @@ L'autre personne **devra se Connecter (Log In) à l'application Blynk** et appuy
 Après le scan, un nouveau Projet sera créé, tous les widgets, les paramètres et leur disposition seront clonés.
 L'autre personne aura besoin de suffisamment d'Énergie pour cloner votre Projet.
 
-**Le Jeton d'Authentification sera différent !**. Personne n'aura accès à votre matériel. Ils auront juste une copie de votre disposition et des paramètres.
+**Le Jeton d'Authentification sera différent !**. Personne n'aura accès à votre hardware. Ils auront juste une copie de votre disposition et des paramètres.

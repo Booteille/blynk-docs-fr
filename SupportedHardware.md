@@ -1,4 +1,4 @@
-# Matériels Supportés
+# Hardwares Supportés
 
 Blynk supporte déjà plus de 400 cartes, offrant le support pour Arduino, Particle, ARM-basés, TI Energia, MicroPython, Node.js, OpenWRT et de nombreuses ordinateurs à carte unique. Vous pouvez ajouter vos propres types de connexion facilement (voyez [ces](https://github.com/blynkkk/blynk-library/tree/master/examples/More/ArduinoClient) exemples pour Arduino) !
 

@@ -2,11 +2,11 @@
 
 Le serveur Blynk a 3 ports ouverts pour les différents niveaux de sécurité.
 
-* **8441** - Connexion SSL/TLS pour le matériel
-* **8442** - Connexion TCP pleine pour le matériel (pas de sécurité)
+* **8441** - Connexion SSL/TLS pour le hardware
+* **8442** - Connexion TCP pleine pour le hardware (pas de sécurité)
 * **8443** - Connexion pour l'authentification mutuelle (SSL mutuel) pour les Applications Mobile
 
-Le matériel peut choisir de se connecter au port 8441 ou 8442, en fonction de ses capacités.
+Le hardware peut choisir de se connecter au port 8441 ou 8442, en fonction de ses capacités.
 
 #### Utiliser une Passerelle SSL
 
@@ -16,7 +16,7 @@ Néanmoins, notre [script de passerelle](https://github.com/blynkkk/blynk-librar
 ```bash
 ./blynk-ser.sh -f SSL
 ```
-Cela va rediriger toutes les connexions matérielles du port 8441 au serveur via la passerelle SSL.
+Cela va rediriger toutes les connexions hardwareles du port 8441 au serveur via la passerelle SSL.
 Vous pouvez lancer ce script sur votre Raspberry Pi, ordinateur, ou même directement sur votre routeur !
 
 **Note :** lorsque vous utilisez votre propre serveur, vous devez écraser le certificat server.crt fourni, ou en spécifier un au script en utilisant l'option ```--cert``` :
@@ -37,7 +37,7 @@ Si vous voulez éviter SSL et vous connecter via TCP, vous pouvez aussi faire ce
 #### Utiliser un Serveur Local Blynk
 
 Afin d'obtenir une sécurité maximale vous pouvez [installer le serveur Blynk localement](http://docs.blynk.cc/#blynk-server) et restraindre l'accès à votre réseau, donc personne à part vous ne pourra y accéder. Dans ce cas toutes les données sont stockées localement dans votre réseau et ne sont pas envoyées vers Internet.
-Dans le cas d'un serveur local Blynk il n'y aussi aucun besoin de protéger la connexion entre votre matériel et le serveur local Blynk.
+Dans le cas d'un serveur local Blynk il n'y aussi aucun besoin de protéger la connexion entre votre hardware et le serveur local Blynk.
 C'est vrai pour les connexions Ethernet et partiellement vrai pour les connexion Wi-Fi. Dans le cas du Wi-Fi vous devez au moins utiliser le type WPA, WPA2 (Wi-Fi Protected Access) afin de protéger le traffic sans fil.
 
 WPA et WPA2 offrent une encryption robuste qui pourra certainement protéger toutes les données voyageant à travers les ondes, si un mot de passe assez fort est utilisé. Même si vos données sont en TCP/IP pleins, un autre utilisateur ne sera pas en mesure de déchiffrer les paquets capturés.

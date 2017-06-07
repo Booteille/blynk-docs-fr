@@ -18,7 +18,7 @@ Nous recommandons d'utiliser une **réelle** adresse e-mail car ça vous simplif
 
 Un compte est nécessaire afin de sauvegarder vos projets et y avoir accès à partir de plusieurs périphériques et de n'importe où. C'est aussi une mesure de sécurité.
 
-Vous pouvez toujours configurer votre propre [serveur privé Blynk](http://docs.blynk.cc/#blynk-server) et avoir le contrôle absolu.   
+Vous pouvez toujours configurer votre propre [serveur privé Blynk](https://booteille.github.io/blynk-docs-fr/#blynk-server) et avoir le contrôle absolu.   
 
 ###2. Créer un nouveau Projet
 Après vous être correctement identifié avec votre compte, commencez par créer un nouveau projet.
@@ -29,14 +29,14 @@ Donnez-lui un nom.
 
 <img src="images/getting_started/give_project_name.png" style="width: 200px; height:360px"/>
 
-###3. Choisir son matériel
-Sélectionnez le modèle de matériel que vous allez utiliser. Vous pouvez vérifier la [liste des matériels supportés](http://docs.blynk.cc/#supported-hardware)!
+###3. Choisir son hardware
+Sélectionnez le modèle de hardware que vous allez utiliser. Vous pouvez vérifier la [liste des hardwares supportés](https://booteille.github.io/blynk-docs-fr/#supported-hardware)!
 
 <img src="images/getting_started/select_hardware.png" style="width: 200px; height:360px"/>
 
 ###4. Jeton d'Authentification
 
-Le **Jeton d'Authentification** est un identifiant unique nécessaire pour connecter votre matériel à votre smartphone.
+Le **Jeton d'Authentification** est un identifiant unique nécessaire pour connecter votre hardware à votre smartphone.
 Chaque nouveau projet que vous créérez a son propre Jeton d'Authentification. Vous obtiendrez un Jeton d'Authentification automatiquement sur votre e-mail après la création d'un projet. Vous pouvez aussi le copier manuellement. Cliquez sur la section périphériques :
 
 <img src="images/getting_started/token_1.png" style="width: 200px; height:360px"/>
@@ -49,7 +49,7 @@ Et vous verrez le jeton :
 
 <img src="images/getting_started/new_device.png" style="width: 200px; height:360px"/>
 
-<span style="color:#D3435C;">**NOTE :** Ne partagez votre Jeton d'Authentification avec personne, à moins que vous ne souhaitiez que quelqu'un puisse avoir accès à votre matériel.</span>
+<span style="color:#D3435C;">**NOTE :** Ne partagez votre Jeton d'Authentification avec personne, à moins que vous ne souhaitiez que quelqu'un puisse avoir accès à votre hardware.</span>
 
 
 C'est vraiment pratique de l'envoyer via l'e-mail. Pressez le bouton e-mail et le jeton vous sera envoyé à l'adresse e-mail utilisée lors de l'inscription.
@@ -77,24 +77,24 @@ Appuyez n'importe où sur la grille pour ouvrir la liste des Widgets. Tous les w
 
 <img src="images/button_settings.png" style="width: 200px; height:360px"/>
 
-Le paramètre le plus important est **PIN** (broche, en anglais). La liste des broches reflète les broches physiques définies par votre matériel. Si votre LED est connectée à la broche digitale 8 - alors sélectionnez **D8** (**D** - est pour **D**igital).
+Le paramètre le plus important est **PIN** (broche, en anglais). La liste des broches reflète les broches physiques définies par votre hardware. Si votre LED est connectée à la broche digitale 8 - alors sélectionnez **D8** (**D** - est pour **D**igital).
 
 <img src="images/pin_selection.png" style="width: 200px; height:360px"/>
 
 ###6. Démarrer le Projet
-Quand vous aurez terminé avec les Paramètres - appuyez sur le bouton **PLAY**. Vous basculerez ainsi du mode ÉDITION au mode JOUER où vous pouvez interragir avec votre matériel. Pendant le mode JOUER, vous n'êtes pas autorisé à déplacer ou configurer de nouveaux widgets, appuyez sur **STOP** et retournez au mode ÉDITION pour l'être de nouveau.
+Quand vous aurez terminé avec les Paramètres - appuyez sur le bouton **PLAY**. Vous basculerez ainsi du mode ÉDITION au mode JOUER où vous pouvez interragir avec votre hardware. Pendant le mode JOUER, vous n'êtes pas autorisé à déplacer ou configurer de nouveaux widgets, appuyez sur **STOP** et retournez au mode ÉDITION pour l'être de nouveau.
 
 Vous obtiendrez un message indiquant "Arduino UNO is offline" (Arduino UNO est hors-ligne). Nous traiterons cela dans la prochaine section.
 
 <img src="images/play_button.png" style="width: 200px; height:360px"/>
 
-##Guide de démarrage du Matériel
+##Guide de démarrage du Hardware
 ###Comment utiliser un croquis d'example
-Vous devriez à partir de maintenant avoir la bibliothèque Blynk installée sur votre ordinateur. Si ce n'est pas le cas - [cliquez-ici](http://docs.blynk.cc/#downloads-blynk-library).
+Vous devriez à partir de maintenant avoir la bibliothèque Blynk installée sur votre ordinateur. Si ce n'est pas le cas - [cliquez-ici](https://booteille.github.io/blynk-docs-fr/#downloads-blynk-library).
 
-Les croquis d'exemple vous aideront à connecter votre matériel rapidement et à mettre en place les fonctionnalités majeures de Blynk.
+Les croquis d'exemple vous aideront à connecter votre hardware rapidement et à mettre en place les fonctionnalités majeures de Blynk.
 
-Ouvrez le croquis d'exemple en fonction du modèle de votre matériel et du shield que vous utilisez.
+Ouvrez le croquis d'exemple en fonction du modèle de votre hardware et du shield que vous utilisez.
 
 <img src="images/connection_type_sketch.png" style="width: 500px; height:217px"/>
 
@@ -126,7 +126,7 @@ Dans ce croquis d'exemple, trouvez cette ligne :
 ```cpp
 char auth[] = "YourAuthToken";
 ```
-C'est le [Jeton d'Authentification](http://docs.blynk.cc/#getting-started-getting-started-with-application-4-auth-token) que vous vous êtes envoyé par e-mail.
+C'est le [Jeton d'Authentification](https://booteille.github.io/blynk-docs-fr/#getting-started-getting-started-with-application-4-auth-token) que vous vous êtes envoyé par e-mail.
 Vérifiez votre e-mail et copiez-le, puis collez-le entre les guillemets.
 
 Ce devrait ressembler à ceci :
@@ -144,7 +144,7 @@ Connecting...
 Blynk connected!
 ```
 
-<span style="color:#24C48C" >**Félicitations ! Vous l'avez fait ! Le matériel est désormais connecté au Cloud de Blynk !**</span>
+<span style="color:#24C48C" >**Félicitations ! Vous l'avez fait ! Le hardware est désormais connecté au Cloud de Blynk !**</span>
 
 ##Jouer avec Blynk
 Retournez sur l'application de Blynk, appuyez sur le bouton et activez puis désactivez la LED ! Elle devrait clignoter.

@@ -1,12 +1,12 @@
-#Paramètres du Matériel
+#Paramètres du Hardware
 ## Arduino à travers l'USB (sans Shield)
-Si vous n'avez pas de Shield et que votre matériel n'a aucune connectivité, vous pouvez tout de même utiliser Blynk – directement par l'USB :
+Si vous n'avez pas de Shield et que votre hardware n'a aucune connectivité, vous pouvez tout de même utiliser Blynk – directement par l'USB :
 
 1. Ouvrez [l'exemple Arduino Serial USB](https://github.com/blynkkk/blynk-library/blob/master/examples/Boards_USB_Serial/Arduino_Serial_USB/Arduino_Serial_USB.ino)
-et changez le [Jeton d'Authentification](http://docs.blynk.cc/#getting-started-getting-started-with-application-4-auth-token)
+et changez le [Jeton d'Authentification](https://booteille.github.io/blynk-docs-fr/#getting-started-getting-started-with-application-4-auth-token)
 
 	```cpp
-	// Vous pourriez utiliser un Serial Matériel supplémentaire sur les cartes qui en ont (comme le Mega)
+	// Vous pourriez utiliser un Serial Hardware supplémentaire sur les cartes qui en ont (comme le Mega)
 	#include <SoftwareSerial.h>
 	SoftwareSerial DebugSerial(2, 3); // RX, TX
 
