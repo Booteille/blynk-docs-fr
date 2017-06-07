@@ -1,2 +1,2 @@
-# License
-This project is released under The MIT License (MIT)
+# Licence
+Ce projet est fourni sous la licence MIT.
