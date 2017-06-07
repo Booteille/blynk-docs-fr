@@ -326,222 +326,202 @@ Vous permet de visualiser n'importe quelle données que votre matériel aura env
 Cela signifie que l'interval de mise à jour minimum pour le graphique est de 1 minute pour les périodes ```1h``` et ```6h```, 1 heure pour ```1d``` et ```1w`` et 1 jour pour ```1m``` et ```3m```.
 Puisque Blynk Cloud est gratuit, nous limitons combien de données vous pouvez stocker. Pour le moment, Blynk n'accepte qu'un message par minute et par broche. Dans le cas où vous en envoyez plus fréquemment, une moyennes de vos valeurs sera faite. Par exemple, dans le cas où vous envoyez ``10``` à 12:12:05 puis encore ```12``` à 12:12:45, vous verrez comme résultat, dans votre graphique d'historique la valeur ``11``` pour 12:12.
 
-Afin de voir des données avec le graphique d'historique vous 
+Afin de voir des données dans le graphique d'historique vous avez besoin de widgets avec l'intervalle "Fréquence de lecture" (Frequency reading - dans ce cas votre application doit être ouverte et lancée) ou vous pouvez utiliser ```Blynk.virtualWrite``` du côté matériel. Chaque commande ```Blynk.virtualWrite``` est stockée automatiquement sur le serveur. Dans ce cas vous n'avez pas besoin que l'application soit démarrée.
 
-In order to see data in history graph you need to use either widgets with "Frequency reading" interval (in
-that case your app should be open and running) or you can use ```Blynk.virtualWrite``` on hardware side. Every
-```Blynk.virtualWrite``` command is stored on server automatically. In that case you don't need application to be up and running.
-
-You can also easily clear data for selected pins or get all data for pins via email - just swipe left history graph and click "Erase data".
+Vous pouvez aussi facilement vider les données pour les broches sélectionnées ou récupérer toutes les données des brohes par email - Faitez juste glisser vers la gauche le graphique d'historique et cliquez sur "Supprimer les données" (Erase data).
 
 <img src="images/erase_history_graph.png" style="width: 525px; height:263px"/>
 
-You can also get pin data via [HTTP API](http://docs.blynkapi.apiary.io/#reference/0/pin-history-data/get-all-history-data-for-specific-pin).
+Vous pouvez aussi obtenir les données des broches via l'[API HTTP](http://docs.blynkapi.apiary.io/#reference/0/pin-history-data/get-all-history-data-for-specific-pin).
 
 <img src="images/history_graph.png" style="width: 77px; height:80px"/>
 
 <img src="images/history_graph_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [PushData](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/PushData/PushData.ino)
+**Croquis :** [PushData](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/PushData/PushData.ino)
 
 ### Terminal
-Display data from your hardware. Also allows to send any string to your hardware. Terminal always stores last 25 messages
-your hardware had send to Blynk Cloud. This limit may be increased on Local Server.
+Affiche des données à partir de votre matériel. Aussi, vous permet d'envoyer n'importe quelle chaîne de caractère à votre matériel. Les terminaux conservent toujours les 25 derniers messages que votre matériel a envoyé au Cloud Blynk. Cette limite peut être augmentée sur un Serveur Local.
 
-You need to use special commands with this widget:
+Vous avez besoin d'utiliser des commandes spéciales avec ce widget :
 
 ```cpp
-terminal.print();   // Print values, like Serial.print
-terminal.println(); // Print values, like Serial.println()
-terminal.write();   // Write a raw data buffer
-terminal.flush();   // Ensure that data was sent out of device
+terminal.print();   // Affiche des valeurs, comme Serial.print()
+terminal.println(); // Affiche des valeurs, comme Serial.println()
+terminal.write();   // Écrit un tampon de données brut
+terminal.flush();   // S'assure que les données ont bien été envoyées au périphérique
 ```
 
 <img src="images/terminal.png" style="width: 77px; height:80px"/>
 
 <img src="images/terminal_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [Terminal](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Terminal/Terminal.ino)
+**Croquis :** [Terminal](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Terminal/Terminal.ino)
 
-### Video Streaming
-Simple widget that allows you to display any live stream. Widget supports RTSP (RP, SDP), HTTP/S progressive streaming,
-HTTP/S live streaming. For more info please follow [official Android documentation](https://developer.android.com/guide/appendix/media-formats.html).
+### Flux Vidéo (Video Streaming)
+Widget simple vous permettant d'afficher n'importe quel flux direct. Le Widget supporte RTSP (RP, SDP), HTTP/S flux progressif, HTTP/S flux direct. Pour plus d'informations, référez-vous à la [documentation officielle d'Android](https://developer.android.com/guide/appendix/media-formats.html).
 
-At the moment Blynk doesn't provide streaming servers. So you can either stream directly from camera, use 3-d party
-services or host streaming server on own server (on raspberry for example).
+Pour le moment Blynk ne propose pas de serveurs de flux. Vous pouvez donc soit créer un flux directement à partir de votre caméra, utiliser un service tiers ou héberger un serveur de flux sur votre propre serveur (Sur un Raspberry par exemple).
 
-### Level Display
+### Affichage du Niveau (Level Display)
 
-Displays incoming data from your sensors or Virtual Pins. Level Display is very similar to progress bar, it is very nice
-and fancy view for indication of "filled" events, like "level of battery".
-You can update value display from hardware side with code :
+Affiche les données entrantes de vos capteurs ou Broches Virtuelles. L'Affichage du Niveau est très similaire à la barre de progression, offrant une vue agréable et moderne pour indiquer des évènnements "remplis", comme le "niveau de batterie".
+Vous pouvez mettre à jour l'affichage de la valeur du côté matériel avec le code :
 
 ```cpp
 Blynk.virtualWrite(V1, val);
 ```
 
-Every message that hardware sends to server is stored automatically on server. PUSH mode doesn't require
-application to be online or opened.
+Chaque message que le matériel envoie au serveur est stocké automatiquement sur le serveur. Le mode PUSH ne requiert pas que l'application soit en ligne ou ouverte.
 
-**Sketch:** [Push Example](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/PushData/PushData.ino)
+**Croquis :** [Exemple de PUSH](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/PushData/PushData.ino)
 
 ##Notifications
 ###Twitter
 
-Twitter widget connects your Twitter account to Blynk and allows you to send Tweets from your hardware.
+Le widget Twitter connecte votre compte Twitter à Blynk et vous permet d'envoyer des Tweets à partir de votre matériel.
 
 <img src="http://static1.squarespace.com/static/54765ba7e4b0d055ee0b47a6/54e92d39e4b0c31341b33a9a/55813d09e4b0ba8aa77ab230/1434533129525/TwitterON.png" style="width: 77px; height:80px"/>
 
 <img src="images/twitter_edit.png" style="width: 200px; height:360px"/>
 
-Example code:
+Code d'exemple :
 ```cpp
-Blynk.tweet("Hey, Blynkers! My Arduino can tweet now!");
+Blynk.tweet("Hey, Blynkers! Mon Arduino peut désormais Tweeter !");
 ```
 
-Limitations :
+Limites :
 
-- you cant' send 2 tweets with same message (it's Twitter policy)
-- only 1 tweet per 15 seconds is allowed
+- vous ne pouvez envoyer 2 tweets avec le même message (ce sont les conditions d'utilisation de Twitter)
+- seulement 1 Tweet toutes les 15 secondes est autorisé
 
-**Sketch:** [Twitter](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Twitter/Twitter.ino)
+**Croquis :** [Twitter](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Twitter/Twitter.ino)
 
 ###Email
 
-Email widget allows you to send email from your hardware to any address.
+Le widget d'Email vous permet d'envoyer un email à partir de votre matériel vers n'importe quelle adresse.
 
-Example code:
+Code d'exemple :
 ```cpp
-Blynk.email("my_email@example.com", "Subject", "Your message goes here");
+Blynk.email("mon_email@exemple.com", "Sujet", "Entrez votre message ici");
 ```
 
-It also contains ```to``` field. With this field you may define receiver of email in the app.
-In that case you don't need to specify receiver on hardware :
+Il contient aussi le champ ```destinataire``` (```to```). Avec ce champ vous pouvez défini le destinataire de l'email dans l'application.
+Dans ce cas, vous n'avez pas besoin de préciser le destinataire du côté matériel :
 
  ```cpp
- Blynk.email("Subject", "Your message goes here");
+ Blynk.email("Sujet", "Entrez votre message ici");
  ```
 
 <img src="images/mail.png" style="width: 77px; height:80px"/>
 
 <img src="images/mail_edit.png" style="width: 200px; height:360px"/>
 
-Limitations :
+Limites :
 
-- Maximum allowed email + subject + message length is 120 symbols. However you can increase this limit if necessary
-by adding ```#define BLYNK_MAX_SENDBYTES XXX``` to you sketch. Where ```XXX``` is desired max length of your email.
-For example for ESP you can set this to 1200 max length ```#define BLYNK_MAX_SENDBYTES 1200```. The
-```#define BLYNK_MAX_SENDBYTES 1200``` must be included before any of the Blynk includes.
-- Only 1 email 15 seconds is allowed
-- In case you are using gmail you are limited with 500 mails per day (by google). Other providers may have similar
-limitations, so please be careful.
-- User is limited with 100 messages per day;
+- Nombre maximum de caractères autorisés pour la longueur de l'email + le sujet + le message est de 120 caractères. Néanmoins vous pouvez augmenter cette limite si cela est nécessaire en ajoutant ```#define BLYNK_MAX_SENDBYTES XXX``` à votre croquis. Où ```XXX``` est la taille maximale désirée pour votre email.
+Par exemple, pour un ESP vous pouvez définir à 1200 la longueur maximale ```#define BLYNK_MAX_SENDBYTES 1200```. Le ```#define BLYNK_MAX_SENDBYTES 1200``` doit être inclus avant n'importe quel ```include``` de Blynk.
 
-**Sketch:** [Email](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Email/Email.ino)
+**Croquis :** [Email](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Email/Email.ino)
 
-###Push Notifications
+###Notifications Push (Push Notifications)
 
-Push Notification widget allows you to send push notification from your hardware to your device. Currently it also
-contains 2 additional options :
+Le widget Notification Push vous permet d'envoyez des notifications push de votre matériel à votre périphérique.
+Actuellement il contient 2 options aditionnelles :
 
-- **Notify when hardware offline** - you will get push notification in case your hardware went offline.
-- **Offline Ignore Period** - defines how long hardware could be offline (after it went offline) before sending notification.
-In case period is exceeded - "hardware offline" notification will be send. You will get no notification in case hardware
-was reconnected within specified period.
-- **Priority** high priority gives more chances that your message will be delivered without any delays.
-See detailed explanation [here](https://developers.google.com/cloud-messaging/concept-options#setting-the-priority-of-a-message).
+- **Notifier quand le matériel est Hors-ligne (Notify when hardware offline)** - vous recevrez une notification push lorsque le matériel deviendra hors-ligne.
+- **Période d'Ignorance du status Hors-ligne (Offline Ignore Period)** - défini combien de temps votre matériel peut être hors-ligne (après qu'il soit passé hors-ligne) avant d'envoyer la notification.
+Dans le cas où la période est dépassée - La notification "matériel hors-ligne" (hardware offline) sera envoyée. Vous ne recevrez pas de notification dans le cas où le matériel se reconnecte avant la fin de la période indiquée.
+- **Priorité** Une haute priorité donne plus de chances que votre message sera délivré sans délai.
+Consultez les explications supplémentaires  [ici](https://developers.google.com/cloud-messaging/concept-options#setting-the-priority-of-a-message).
 
-**WARNING** : high priority contributes more to battery drain compared to normal priority messages.
+**ATTENTION** : une priorité haute use plus de batterie que la priorité normale.
 
 <img src="images/push.png" style="width: 77px; height:80px"/>
 
 <img src="images/push_edit.png" style="width: 200px; height:360px"/>
 
-Example code:
+Code d'exemple :
 ```cpp
-Blynk.notify("Hey, Blynkers! My hardware can push now!");
+Blynk.notify("Hey, Blynkers! Mon matériel peut push désormais !");
 ```
 
-Limitations :
+Limites :
 
-- Maximum allowed body length is 120 symbols.
-- Only 1 notification per 15 seconds is allowed
+- La longueur maximale du corps du message est de 120 caractères.
+- Seulement 1 notification toutes les 15 secondes est autorisée
 
-**Sketch:** [PushNotification](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/PushNotification/PushNotification_Button/PushNotification_Button.ino)
+**Croquis :** [PushNotification](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/PushNotification/PushNotification_Button/PushNotification_Button.ino)
 
-###Unicode in notify, email, push, ...
+###Unicode dans les notifications, email, push, ...
 
-The library handles all strings as UTF8 Unicode. If you're facing problems, try to print your message to the Serial and see if it works (the terminal should be set to UTF-8 encoding). If it doesn't work, probably you should read about unicode support of your compiler.  
-If it works, but your message is truncated - you need to increase message length limit (all Unicode symbols consume at least twice the size of Latin symbols).
+La bibliothèque gère toutes les chaînes de caractères en UTF-8 Unicode. Si vous faites face à quelques problèmes, essayez d'afficher le message dans le moniteur Série et voyez si cela fonctionne (le moniteur doit être paramétré sur l'encodage UTF-8). Si cela ne fonctionne pas, vous devriez probablement lire à propos du support de l'unicode de votre compilateur.
+Si cela marche mais que votre message est tronqué - vous avez besoin d'augmenter la taille limite (tout caractère Unicode utilise au moins deux fois la taille des caractères Latin).
 
-###Increasing message length limit
+###Augmentation de la taille limite
 
-You can increase maximum message length by putting on the top of your sketch (before Blynk includes):
+Vous pouvez augmenter la longueur maximale d'un message en ajoutant en haut de votre croquis (avant les ```include``` Blynk) :
 ```cpp
-#define BLYNK_MAX_SENDBYTES 256 // Default is 128
+#define BLYNK_MAX_SENDBYTES 256 // 128 par défaut
 ```
 
 ## Interface
 
-### Tabs
-The only purpose of Tabs widget is to extend your project space. You can have up to 4 tabs.
-Also you can drag widgets between tabs. Just drag widget on the label of required tab of tabs widget.
+### Onglets (Tabs)
+Le seul but du widget Onglets est d'étendre l'espace de votre projet. Vous pouvez avoir jusqu'à 4 onglets.
+Aussi, vous pouvez déplacer les widgets entre les onglets. Déplacez simplement le widget sur le label de l'onglet voulu du widget onglets.
 
 <img src="images/tabs_settings.png" style="width: 200px; height:360px"/>
 
 
 ### Menu
-Menu widget allows you to send command to your hardware based on selection you made on UI. Menu
-sends index of element you selected and not label string. Sending index is starts from 1.
-It works same way as usual ComboBox element. You can also set Menu items
-[from hardware side](http://docs.blynk.cc/#blynk-main-operations-change-widget-properties).
+Le widget Menu vous permet d'envoyer des commandes à votre matériel basé sur la sélection faite sur l'Interface Utilisateur. Le Menu envoie l'index de l'élément que vous sélectionnez et non la valeur du label. Les index envoyés commencent à partir de 1.
+Il fonctionne de la même manière que l'élément habituel ComboBox. Vous pouvez aussi définir des objets Menu [à partir du côté matériel](http://docs.blynk.cc/#blynk-main-operations-change-widget-properties).
 
 <img src="images/menu_edit.png" style="width: 200px; height:360px"/>
 
-Example code:
+Code d'exemple:
 ```
 switch (param.asInt())
   {
-    case 1: { // Item 1
-      Serial.println("Item 1 selected");
+    case 1: { // Objet 1
+      Serial.println("Objet 1 sélectionné");
       break;
     }
     case 2: { // Item 2
-      Serial.println("Item 2 selected");
+      Serial.println("Objet 2 sélectionné");
       break;
     }    
   }
 ```
 
-**Sketch:** [Menu](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Menu/Menu.ino)
+**Croquis :** [Menu](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Menu/Menu.ino)
 
 
-###Time Input
-Time input widget allows you to select start/stop time, day of week, timezone, sunrise/sunset formatted values
-and send them to your hardware. Supported formats for time now are ```HH:MM``` and ```HH:MM AM/PM```.
+###Entrée Temps (Time Input)
+Le widget Entrée Temps vous permet de sélectionner des valeurs de démarrage/arrêt, du jour de la semaine, de fuseau horaire formatées et de les envoyer à votre matériel. Les valeurs actuellement supportées pour le temps sont ```HH:MM``` et ```HH:MM AM/PM```.
 
 Hardware will get selected on UI time as seconds of day (```3600 * hours + 60 * minutes```) for start/stop time.
 
 <img src="images/time_input_settings.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [Simple Time Input for start time](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/TimeInput/SimpleTimeInput/SimpleTimeInput.ino)
+**Croquis :** [Simple Entrée Temps pour le temps de démarrage](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/TimeInput/SimpleTimeInput/SimpleTimeInput.ino)
 
-**Sketch:** [Advanced Time Input](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/TimeInput/AdvancedTimeInput/AdvancedTimeInput.ino)
+**Croquis :** [Entrée Temps Avancée](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/TimeInput/AdvancedTimeInput/AdvancedTimeInput.ino)
 
-### Map
+### Carte (Map)
 
-Map widget allows you set points/pins on map from hardware side. This is very useful widget in case you have
-multiple devices and you want track their values on map.
+Le widget Carte vous permet de définir des points/marqueurs sur votre carte à partir du côté matériel. C'est un widget très utile si vous possédez plusieurs périphériques et que vous voulez pister leurs valeurs sur une carte.
 
-You can send a point to map with regular virtual wrtei command :  
+Vous pouvez envoyer un point vers la carte avec la commande write classique :
 
 ```cpp
-Blynk.virtualWrite(V1, pointIndex, lat, lon, "value");
+Blynk.virtualWrite(V1, pointIndex, lat, lon, "valeur");
 ```
 
-We also created wrapper for you to make suage of map simpler :
+Nous avons aussi créé un adaptateur pour vous afin de rendre l'utilisation de la carte plus facile :
 
-You can change button labels from hardware with :
+Vous pouvez changer les labels des boutons à partir du matériel avec :
 
 ```cpp
 WidgetMap myMap(V1);
@@ -549,245 +529,241 @@ WidgetMap myMap(V1);
 int index = 1;
 float lat = 51.5074;
 float lon = 0.1278;
-myMap.location(index, lat, lon, "value");
+myMap.location(index, lat, lon, "valeur");
 ```
 
-Using save ```index``` allows you to override existing point value.
+Utiliser un ```index``` sauvegardé vous permet de surcharger la valeur d'un point.
 
-**Sketch:** [Basic Sketch](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Map/Map.ino)
+**Croquis :** [Croquis Basique](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Map/Map.ino)
 
-###Table
-Table widget comes handy when you need to structure similar data within 1 graphical element. It works as a usual table.
+###Tableau (Table)
+Le widget Tableau s'avère utile quand vous avez besoin de structurer des données similaire dans 1 élément graphique. Il marche comme un tableau habituel.
 
-You can add a row to the table with :
+Vous pouvez ajouter une ligne au tableau avec :
 
-```Blynk.virtualWrite(V1, "add", id, "Name", "Value");```
+```cpp
+Blynk.virtualWrite(V1, "add", id, "Nom", "Valeur");
+```
 
-**Note :** Max number of rows in the table  is 100. When you reach the limit, table will work as FIFO (First In First Out)list.
-This limit can be changed by configuring ```table.rows.pool.size``` property for local servers.
+**Note :** Le nombre maximum de lignes dans un tableau est de 100. Quand vous atteignez cette limite, le tableau fonctionnera comme une liste FIFO (First In First Out - Premier Arrivé Premier Sorti).
+Cette limite peut être changée en configurant la propriété ```table.rows.pool.size``` pour les serveurs locaux.
 
-To highlight any item in a table by using its' index in a table starting from 0 :
+Surligner n'importe quel objet dans un tableau en utilisant son index, dans un tableau commençant à partir de 0 :
 
-```Blynk.virtualWrite(V1, "pick", 0);```
+```cpp
+Blynk.virtualWrite(V1, "pick", 0);
+```
 
-To clear the table at any time with:
+Vider le tableau à n'importe quel moment avec :
 
-```Blynk.virtualWrite(V1, "clr");```
+```cpp
+Blynk.virtualWrite(V1, "clr");
+```
 
 <img src="images/table_settings.png" style="width: 200px; height:360px"/>
 
-You can also handle other actions coming from table. For example, use row as a switch button.
+Vous pouvez aussi gérer d'autres actions provenant du tableau. Par exemple, utiliser une ligne comme un bouton Interrupter (Switch).
 
-```
+```cpp
 BLYNK_WRITE(V1) {
    String cmd = param[0].asStr();
    if (cmd == "select") {
-       //row in table was selected.
+       //La ligne a été sélectionée dans le tableau
        int rowId = param[1].asInt();
    }
    if (cmd == "deselect") {
-       //row in table was deselected.
+       //La ligne a été désélectionée dans le tableau
        int rowId = param[1].asInt();
    }
    if (cmd == "order") {
-       //rows in table where reodered
+       //Les lignes ont été réorganisées dans le tableau
        int oldRowIndex = param[1].asInt();
        int newRowIndex = param[2].asInt();
    }
 }
 ```
 
-**Sketch:** [Simple Table usage](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Table/Table_Simple/Table_Simple.ino)
+**Croquis :** [Utilisation Simple des Tableaux](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Table/Table_Simple/Table_Simple.ino)
 
-### Device Selector
+### Sélecteur de Périphérique (Device Selector)
 
-Device selector is a powerful widget which allows you to update widgets based on one active device. This widget is particlularly helpful when you have a fleet of devices with similar functionality.
+Le Sélecteur de Périphérique est un widget puissant vous permettant de mettre à jour les widgets en fonction d'un périphérique actif. Ce widget est particulièrement utile lorsque vous avez une flotte de périphériques avec une fonctionnalité similaire.
 
-Imagine you have 4 devices and every device has a Temperature & Humidity sensor connected to it. To display the data for all 4 devices you would need to add 8 widgets.
+Imaginez vous avez 4 périphériques et que chaque périphérique a un capteur de Température & d'Humidité branché dessus. Pour afficher les données des quatre périphériques vous aurez besoin d'ajouter 8 widgets.
 
-With Device Selector, you can use only 2 Widgets which will display Temperature and Humidity based on the active device chosen in Device Selector.  
+Avec le Sélecteur de Périphérique, vous pouvez utiliser seulement 2 Widgets qui affichera la Température et l'Humidité basé sur le périphérique actif choisi avec le Sélecteur de Périphérique.
 
-All you have to do is:
-1. Add Device Selector Widget to the project
-2. Add 2 widgets (for example Value Display Widget) to show Temperature and Humidity
-3. In Widgets Settings you will be able assign them to Device Selector (Source or Target section)
-4. Exit settings, Run the project.
+Tout ce dont vous avez besoin est :
+1. Ajouter le widget Sélecteur de Périphérique (Device Selector) au projet
+2. Ajouter 2 widgets (par exemple, le widget Afficheur de Valeur (Value Display)) afin d'afficher la Température et l'Humidité
+3. Dans les paramètres des widgets vous serez en mesure de les assigner au Sélecteur de Périphérique (Section Source ou Destinataire (Target))
+4. Quitter les paramètres. Lancer le projet.
 
-Now you can change the active device in Device Selector and you will see that Temperature and Humidity values are reflecting the data updates for the device you just picked.
+Désormais vous pouvez changer le périphérique actif dans le sélecteur de périphériques et vous verrez que les valeurs de la Température et de l'Humidité reflètent les données mises à jour pour le périphérique que vous avez choisi.
 
-**NOTE : ** History Graph Widget and Webhook Widget will not work with Device Selector (yet).
+**NOTE : ** Les widgets Graphique d'Historique (History Graph) et Webhook ne fonctionnent pas (encore) avec le Sélecteur de Périphérique.
 
-## Sensors
+## Capteurs
 
-### Accelerometer
+### Accéléromètre (Accelerometer)
 
-Accelerometer is kind of [motion sensors](https://developer.android.com/guide/topics/sensors/sensors_motion.html)
-that allows you to detect motion of your smartphone.
-Useful for monitoring device movement, such as tilt, shake, rotation, or swing.
-Conceptually, an acceleration sensor determines the acceleration that is applied to a device by measuring the forces
-that are applied to the sensor. Measured in ```m/s^2``` applied to ```x```, ```y```, ```z``` axis.
+L'Accéléromètre est un type de [capteurs de mouvement](https://developer.android.com/guide/topics/sensors/sensors_motion.html) vous permettant de détecter les mouvements de votre smartphone.
+Utile pour analyser les mouvements d'un périphérique, comme l'inclinaison, la secousse, la rotation, ou le balancement.
+Conceptuellement, un capteur d'accélération détermine l'accélération appliquée à un périphérique par la mesure des forces appliquées sur le capteur. Mesurée en ```m/s^2``` appliquée aux axes ```x```, ```y```, ```z```.
 
-In order to accept data from it you need to :
+Afin d'accepter des données de ce capter, vous avez besoin de :
 
 ```cpp
 BLYNK_WRITE(V1) {
-  //acceleration force applied to axis x
+  //Force d'accélération appliquée à l'axe x
   int x = param[0].asFloat();
-  //acceleration force applied to axis y
+	//Force d'accélération appliquée à l'axe y
   int y = param[1].asFloat();
-  //acceleration force applied to axis y
+	//Force d'accélération appliquée à l'axe z
   int z = param[2].asFloat();
 }
 ```
 
-Accelerometer doesn't work in background.
+Le widget Accéléromètre ne fonctionne pas en tâche de fond.
 
-### Barometer/pressure
+### Baromètre/Pression (Barometer/Pressure)
 
-Barometer/pressure is kind of [environment sensors](https://developer.android.com/guide/topics/sensors/sensors_environment.html)
-that allows you to measure the ambient air pressure.
+Le capteur Baromètre/Pression est un type de [capteurs environnementaux](https://developer.android.com/guide/topics/sensors/sensors_environment.html) vous permettant de mesure la pression de l'air ambiant.
 
-Measured in in ```hPa``` or ```mbar```.
+Mesurée en ```hPa``` ou ```mbar```.
 
-In oder to accept data from it you need to :
+Afin d'accepter des données de ce capteur vous avez besoin de :
 
 ```cpp
 BLYNK_WRITE(V1) {
-  //pressure in mbar
+  //pression en mbar
   int pressure = param[0].asInt();
 }
 ```
 
-Barometer doesn't work in background.
+Le widget Baromètre ne fonctionne pas en tâche de fond.
 
-### Gravity
+### Gravité (Gravity)
 
-Gravity is kind of [motion sensors](https://developer.android.com/guide/topics/sensors/sensors_motion.html)
-that allows you to detect motion of your smartphone.
-Useful for monitoring device movement, such as tilt, shake, rotation, or swing.
+Le capteur Gravité est un type de [capteurs de mouvement](https://developer.android.com/guide/topics/sensors/sensors_motion.html) vous permettant de détecter les mouvements de votre smartphone.
+Utile pour analyser les mouvements d'un périphérique, comme l'inclinaison, la secousse, la rotation, ou le balancement.
 
-The gravity sensor provides a three dimensional vector indicating the direction and magnitude of gravity.
-Measured in ```m/s^2``` of gravity force applied to ```x```, ```y```, ```z``` axis.
+Le capteur de gravité fourni un vecteur à trois dimensions indiquant la direction et la magnitude de la gravité.
 
-In oder to accept data from it you need to :
+Mesuré en ```m/s^2``` de force de gravité appliquée aux axes ```x```, ```y```, ```z```.
+
+
+Afin d'accepter des données de ce capteur vous avez besoin de :
 
 ```cpp
 BLYNK_WRITE(V1) {
-  //force of gravity applied to axis x
+  //Force de gravité appliquée à l'axe x
   int x = param[0].asFloat();
-  //force of gravity applied to axis y
+	//Force de gravité appliquée à l'axe y
   int y = param[1].asFloat();
-  //force of gravity applied to axis y
+	//Force de gravité appliquée à l'axe z
   int z = param[2].asFloat();
 }
 ```
 
-Gravity doesn't work in background.
+Le widget Gravité ne fonctionne pas en tâche de fond.
 
-### Humidity
+### Humidité (Humidity)
 
-Humidity is kind of [environment sensors](https://developer.android.com/guide/topics/sensors/sensors_environment.html)
-that allows you to measure ambient relative humidity.
+Le capteur d'Humidité est un type de [capteurs environnementaux](https://developer.android.com/guide/topics/sensors/sensors_environment.html) vous permettant de mesurer l'humidité relative ambiante.
 
-Measured in ```%``` - actual relative humidity in percent.
+Mesurée en ```%``` - l'humidité relative actuelle en pourcentage.
 
-In oder to accept data from it you need to :
+Afin d'accepter des données de ce capteur vous avez besoin de :
 
 ```cpp
 BLYNK_WRITE(V1) {
-  // humidity in %
+  // humidité en %
   int humidity = param.asInt();
 }
 ```
 
-Humidity doesn't work in background.
+Le widget Humidité ne fonctionne pas en tâche de fond.
 
-### Light
+### Luminosité (Light)
 
-Light is kind of [environment sensors](https://developer.android.com/guide/topics/sensors/sensors_environment.html)
-that allows you to measure level of light (measures the ambient light level (illumination) in lx).
-In phones it is used to control screen brightness.
+Le capteur de Luminosité est un type de [capteurs environnementaux](https://developer.android.com/guide/topics/sensors/sensors_environment.html) vous permettant de mesurer le niveau de luminosité (mesure le niveau de luminosité ambiant (illumination) en lx).
+Dans les téléphones il est utilisé pour contrôler la luminosité de l'écran.
 
-In order to accept data from it you need to :
+Afin d'accepter des données de ce capteur vous avez besoin de :
 
 ```cpp
 BLYNK_WRITE(V1) {
-  //light value
+  //Valeur de la luminosité
   int lx = param.asInt();
 }
 ```
 
-Light doesn't work in background.
+Le widget Luminosité ne fonctionne pas en tâche de fond.
 
-### Proximity
+### Proximité (Proximity)
 
-Proximity is kind of [position sensors](https://developer.android.com/guide/topics/sensors/sensors_position.html)
-that allows you to determine how close the face of a smartphone is to an object.
-Measured in ```cm``` - distance from phone face to object. However most of this sensors returns only FAR / NEAR information.
-So return value will be ```0/1```. Where 0/LOW  is ```FAR``` and 1/HIGH is ```NEAR```.
+Le capteur de Proximité est un type de [capteurs de position](https://developer.android.com/guide/topics/sensors/sensors_position.html) vous permettant de déterminer combien est proche la face d'un smartphone vis-à-vis d'un objet.
+Mesurée en ```cm``` - la distance de la face d'un téléphone vis-à-vis d'un objet. Néanmoins, la majorité de ces capteurs retournent seulement l'information LOIN / PROCHE (FAR / NEAR).
+La valeur retournée sera donc ```0/1```. Où 0/LOW est ```LOIN``` et 1/HIGH est ```PROCHE```.
 
-In order to accept data from it you need to :
+Afin d'accepter des données de ce capteur vous avez besoin de :
 
 ```cpp
 BLYNK_WRITE(V1) {
-  // distance to object
+  // distance d'un objet
   int proximity = param.asInt();
   if (proximity) {
-     //NEAR
+     //PROCHE
   } else {
-     //FAR
+     //LOIN
   }
 }
 ```
 
-Proximity doesn't work in background.
+Le widget Proximité ne fonctionne pas en tâche de fond.
 
-### Temperature
+### Température
 
-Temperature is kind of [environment sensors](https://developer.android.com/guide/topics/sensors/sensors_environment.html)
-that allows you to measure ambient air temperature.
-Measured in ```°C``` - celcius.
+Le capteur de Température est un type de [capteurs environnementaux](https://developer.android.com/guide/topics/sensors/sensors_environment.html) vous permettant de mesurer la température de l'air ambiant.
+Mesurée en ```°C``` - celcius.
 
-In order to accept data from it you need to :
+Afin d'accepter des données de ce capteur vous avez besoin de :
 
 ```cpp
 BLYNK_WRITE(V1) {
-  // temperature in celcius
+  // température en celcius
   int celcius = param.asInt();
 }
 ```
 
-Temperature doesn't work in background.
+Le widget Température ne fonctionne pas en tâche de fond.
 
-### GPS Trigger
+### Déclencheur GPS (GPS Trigger)
 
-GPS trigger widget allows easily trigger events when you arrive to or leave from some destination. This widget
-will work in background and periodically will check your coordinates. In case your location is within/out required
-radius (selected on widget map) widget will send ```HIGH```/```LOW``` command to hardware. For example, let's assume you have
-GPS Trigger widget assigned to pin ```V1``` and option ```Trigger When Enter```. In that case when you'll arrive to destination
-point widget will trigger ```HIGH``` event.
+Le Déclencheur GPS vous permet de déclencher facilement des évènements lorsque vous arrivez ou quittez une destination.
+Ce widget fonctionnera en tâche de fond et vérifiera périodiquement vos coordonnées. Dans le cas où votre position est à l'intérieur/à l'extérieur du rayon requis (sélectionné sur le widget Carte (Map)), le widget enverra la commande ```HIGH```/```LOW``` au matériel. Par exemple, assumons que vous avez le widget Déclencheur GPS assigné à la broche ```V1``` et l'option ```Déclencher Quand Entrée``` (```Trigger When Enter```). Dans cette situation, lorsque vous arrivez au point de destination, le widget va déclencher l'évennement ```HIGH```.
 
 ```cpp
 BLYNK_WRITE(V1) {
   int state = param.asInt();
   if (state) {
-      //You enter destination
+      //Vous entrez dans une destination
   } else {
-      //You leave destination
+      //Vous quittez une destination
   }
 }
 ```
 
-More details on how GPS widget works you can read [here](https://developer.android.com/guide/topics/location/strategies.html).
+Plus de détails sur le fonctionnement du widget GPS peuvent être lus [ici](https://developer.android.com/guide/topics/location/strategies.html).
 
-GPS trigger widget works in background.
+Le widget Déclencheur GPS fonctionne en tâche de fond.
 
-### GPS Streaming
+### Flux GPS (GPS Streaming)
 
-Useful for monitoring smartphone location data such as latitude, longitude, altitude and speed (speed could be often 0  
-in case smartphone doesn't support it).
+Utile pour analyser des données sur la position du smarthone comme la latitude, longitude, altitude et vitesse (speed - la vitesse peut souvent être sur 0 dans le cas où le smartphone ne le supporte pas).
 
-In order to accept data from this widget you need to :
+Afin d'accepter des données de ce capteur vous avez besoin de :
 
 ```cpp
 BLYNK_WRITE(V1) {
@@ -798,12 +774,12 @@ BLYNK_WRITE(V1) {
 }
 ```
 
-or you can use prepared wrapper ```GpsParam``` :
+ou vous pouvez utiliser l'adaptateur préparé ```GpsParam``` :
 
 ```cpp
 BLYNK_WRITE(V1) {
   GpsParam gps(param);
-  // Print 6 decimal places for Lat
+  // Affiche 7 décimales pour la Latitude
   Serial.println(gps.getLat(), 7);
   Serial.println(gps.getLon(), 7);
 
@@ -812,62 +788,62 @@ BLYNK_WRITE(V1) {
 }
 ```
 
-GPS Streaming works in background.
+Le widget Flux GPS fonctionne en tâche de fond.
 
-**Sketch:** [GPS Stream](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/GPS_Stream/GPS_Stream.ino)
+**Croquis :** [Flux GPS](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/GPS_Stream/GPS_Stream.ino)
 
-## Other
+## Autre
 
-### Bridge
+### Pont (Bridge)
 
-Bridge can be used for Device-to-Device communication (no app. involved). You can send digital/analog/virtual write commands from one device to another, knowing it's auth token.
-At the moment Bridge widget is not required on application side (it is mostly used for indication that we have such feature).  
-**You can use multiple bridges to control multiple devices.**
+Le Pont peut être utilisé pour une communication de Périphérique-à-Périphérique (pas d'application impliquée). Vous pouvez envoyer des commandes d'écriture (write) digitales/analogiques/virtuelles d'un périphérique à un autre, une fois le jeton d'authentification connu.
+Pour le moment le widget Pont ne nécessite pas le côté application (Il est surtout utilisé comme indication que nous possédons une telle fonctionnalité).
+
+**Vous pouvez utiliser plusieurs ponts pour contrôler plusieurs périphériques.**
 
 <img src="images/bridge.png" style="width: 77px; height:80px"/>
 
 <img src="images/bridge_edit.png" style="width: 200px; height:360px"/>
 
-Bridge widget takes a virtual pin, and turns it into a channel to control another device. It means you can control any virtual, digital or analog pins of the target device.
-Be careful not to use pins like ```A0, A1, A2 ...``` when communicating between different device types, as Arduino Core may refer to wrong pins in such cases.
+Le widget Pont prend une broche virtuelle et la transforme en un canal afin de contrôler un autre périphérique. Ce signifie que vous pouvez contrôler n'importe quelle broche virtuelle, digitale ou analogique du périphérique ciblé.
+Faites attention à ne pas utiliser de broches comme ```A0, A1, A2 ...``` lorsque vous communiquez entre différents types de périphériques, car le Coeur d'Arduino peut se référer aux mauvaises branches dans de tels cas.
 
-
-Example code for device A which will send values to device B :
+Code d'exemple pour un périphérique A envoyant des valeurs au périphérique B :
 ```cpp
-WidgetBridge bridge1(V1); //Initiating Bridge Widget on V1 of Device A
-...
+WidgetBridge bridge1(V1); //Initialise le widget Pont sur la broche V1 du Périphérique A
+// ...
 void setup() {
     Blynk.begin(...);
     while (Blynk.connect() == false) {
-        // Wait until Blynk is connected
+        // Attend jusqu'à ce que Blynk soit connecté
     }
-    bridge1.digitalWrite(9, HIGH); // will trigger D9 HIGH on Device B. No code on Device B required
+    bridge1.digitalWrite(9, HIGH); // déclenche D9 HIGH sur le périphérique B. Aucun code n'est requis sur le périphérique B
     bridge1.analogWrite(10, 123);
-    bridge1.virtualWrite(V1, "hello"); // you need to write code on Device B in order to receive this value. See below
+    bridge1.virtualWrite(V1, "hello"); // Vous avez besoin d'écrire du code sur le périphérique B afin de recevoir cette valeur. Observez plus bas
     bridge1.virtualWrite(V2, "value1", "value2", "value3");
 }
 
 BLYNK_CONNECTED() {
-  bridge1.setAuthToken("OtherAuthToken"); // Token of the hardware B
+  bridge1.setAuthToken("OtherAuthToken"); // Jeton du périphérique B
 }
 ```
 
-IMPORTANT: when performing ```virtualWrite()``` with Bridge Widget, Device B will need to process the incoming data from Device A.
-For example, if you are sending value from Device A to Device B using ```bridge.virtualWrite(V5)``` you would need to use this handler on Device B:
+IMPORTANT : pendant l'exécution de ```virtualWrite()``` avec le widget Pont, le périphérique B devra traiter les données provenant du périphérique A.
+Par exemple, si vous envoyez une valeur à partir du périphérique A vers le périphérique B en utilisant ```bridge.virtualWrite(V5)``` vous aurez besoin d'utiliser cette méthode sur le périphérique B :
 
 ```cpp
 BLYNK_WRITE(V5){
-    int pinData = param.asInt(); //pinData variable will store value that came via Bridge
+    int pinData = param.asInt(); // la variable pinData va stocker la valeur récupérée via le Pont
 }
 ```
 
-Keep in mind that ```bridge.virtualWrite``` doesn't send any value to mobile app. You need to call ```Blynk.virtualWrite``` for that.
+Gardez en tête que ```bridge.virtualWrite``` n'envoie aucune valeur à l'application mobile. Vous avez besoin d'appeler ```Blynk.virtualWrite``` pour cela.
 
-**Sketch:** [Bridge](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Bridge/Bridge.ino)
+**Croquis :** [Bridge](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Bridge/Bridge.ino)
 
 ### Eventor
-Eventor widget allows you to create simple behaviour rules or **events**.
-Let's look at a typical use case: read temperature from DHT sensor and send push notification when temperature is over a certain limit :  
+Le widget Eventor vous permet de créer de simples règles comportementales ou **évennements** (**events**).
+Observons un cas d'utilisation typique : lire la température d'un capteur DHT et envoyer une notification push quand la température est au dessus d'une certaine limite :
 
 ```cpp
   float t = dht.readTemperature();
@@ -875,99 +851,90 @@ Let's look at a typical use case: read temperature from DHT sensor and send push
     return;
   }
   if (t > 40) {
-    Blynk.notify(String("Temperature is too high : ") + t);
+    Blynk.notify(String("La Température est trop élevée : ") + t);
   }
 ```
 
-With Eventor you don't need to write this code. All you need is to send value from sensor to server :
+Avec l'Eventor, vous n'avez pas besoin d'écrire ce code. Tout ce dont vous avez besoin est d'envoyer une valeur du capteur vers le serveur :
 
 ```cpp
   float t = dht.readTemperature();
   Blynk.virtualWrite(V0, t);
 ```
-Don't forget that ```virtualWrite``` commands should be wrapped in the timer and can't be used the main loop.
+N'oubliez pas que les commandes ```virtualWrite``` ne peuvent être utilisées dans la boucle principale.
 
-Now configure new **Event** in Eventor widget:
+Maintenant, configurez le nouvel **Évennement** (**Event**) dans le widget Eventor :
 
 <img src="images/eventor/eventor_for_temp_example.png" style="width: 200px; height:360px"/>
 
-**NOTE** Don't forget to add notification widget.
+**NOTE :** N'oubliez pas d'ajouter un widget de notification.
 
-Eventor comes handy when you need to change conditions on the fly without re-uploading new sketch on
-the hardware. You can create as many **events** as you need.
-Eventor also supports Timer events. For example, you can set pin ```V1``` ON/HIGH at 21:00:00 every Friday.
-With Eventor Time Event you can assign multiple timers on same pin, send any string/number, select days and timezone.
+L'Eventor se révèle utile lorsque vous avez besoin de changer des conditions à la colée sans téléverser de nouveau le croquis vers le matériel. Vous pouvez créer autant d'**évennements** que vous le souhaitez.
+L'Eventor supporte aussi des évennements Chronomètre (Timer). Par exemple, vous pouvez définir la broche ```V1``` ON/HIGH à 21:00:00 tous les Vendredi.
+Avec l'Évennement Chronomètre d'Eventor vous pouvez assigner de multiples chronomètres sur la même broche, leur envoyer n'importe quelle chaîne de caractères/nombre, sélectionner des jours et un fuseau horaire.
 
-In order to remove created **event** please use swipe. You can also swipe out last element in the Event itself.
+Afin de supprimer un **évennement** créé, faites-le glisser. Vous pouvez aussi faire glisser dehors le dernier élément de l'Évennement lui-même.
 
 <img src="images/eventor/eventor_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [Eventor](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Eventor/Eventor.ino)
+**Croquis:** [Eventor](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Eventor/Eventor.ino)
 
 
-**NOTE** : Events are triggered only once when the condition is met.
-However there is one exclusion:
-Let's consider simple event as above ```if (temperature > 40) send notification ```.
-When temperature goes beyond 40 threshold - notification action is triggered. If temperature continues to stay above the 40 threshold no actions will be triggered. But if ```temperature``` goes below threshold and then passes it again -
-notification will be sent again (there is no 15 sec limit on Eventor notifications).
+**NOTE** : Les évennemens sont déclenchés uniquement lorsque la condition est rencontrée.
+Néanmoins il y a une exception :
+Considérons le simple évènement suivant ```if (temperature > 40) send notification ```.
+Quand la température dépasse le seuil de 40 - l'action notification est déclenchée. Si la tepérature continue de rester au delà du seuil de 40, aucune action ne sera déclenché. Mais si la notification ```temperature``` descend en dessous du seuil puis passe de nouveau au dessus - la notification sera de nouveau envoyée (il n'y a pas de limite de 15 secondes pour les notifications d'Eventor).
 
-### RTC
+### Horloge Temps-Réel (Real-time clock)
 
-Real-time clock allows you to get time from server. You can preselect any timezone on UI to get time on hardware in required locale.
-No pin required for RTC widget.
+L'Horloge Temps-Réel vous permet d'obtenir l'heure du serveur. Vous pouvez préselectionner n'importe quel fuseau horaire sur l'Interface Utilisateur afin d'obtenir l'heure sur le matériel dans la langue requise.
+Aucune broche n'est requise pour le widget Horloge Temps-Réel
 
 <img src="images/rtc_edit.png" style="width: 200px; height:360px"/>
 
-**Sketch:** [RTC](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/RTC/RTC.ino)
+**Croquis :** [Horloge Temps-Réel](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/RTC/RTC.ino)
 
 ### BLE
 
-Widget for enabling Bluetooth Low Energy support. At the moment BLE widget supported only for Android and requires
-internet connection in order to login and load your profile. However this will be fixed soon. Also some Blynk
-widget not allowed with BLE widget.
+Widget pour activer le support du Bluetooth Basse Énergie (Bluetooth Low Energy). Pour le moment le widget BLE n'est supporté que pour Android et requiert une connexion internet afin de se connecter et charger votre profil. Néanmoins, ce sera bien résolu. Aussi, certains widgets Blynk ne sont pas compatibles avec le widget BLE.
 
-Blynk currently support bunch of different modules. Please check sketches below.
+Actuellement, Blynk supporte beaucoup de modules différents. Référez-vous aux croquis ci-dessous.
 
 <img src="images/ble_settings.png" style="width: 200px; height:360px"/>
 
-**Sketches:** [BLE](https://github.com/blynkkk/blynk-library/tree/master/examples/Boards_Bluetooth)
+**Croquis :** [BLE](https://github.com/blynkkk/blynk-library/tree/master/examples/Boards_Bluetooth)
 
 ### Bluetooth
 
-Widget for enabling Bluetooth support. At the moment Bluetooth widget supported only for Android and requires
-internet connection in order to login and load your profile. However this will be fixed soon. Also some Blynk
-widget not allowed with Bluetooth widget.
+Widget pour activer le support du Bluetooth.
+Widget for enabling Bluetooth support. Pour le moment le widget Bluetooth n'est supporté que pour Android et requiert une connexion internet afin de se connecter et charger votre profil. Néanmoins, ce sera bien résolu. Aussi, certains widgets Blynk ne sont pas compatibles avec le widget Bluetooth.
 
-Blynk currently support bunch of different modules. Please check sketches below.
+Actuellement, Blynk supporte beaucoup de modules différents. Référez-vous aux croquis ci-dessous.
 
 <img src="images/ble_settings.png" style="width: 200px; height:360px"/>
 
-**Sketches:** [Bluetooth](https://github.com/blynkkk/blynk-library/tree/master/examples/Boards_Bluetooth)
+**Croquis :** [Bluetooth](https://github.com/blynkkk/blynk-library/tree/master/examples/Boards_Bluetooth)
 
-### Music Player
+### Lecteur de Musique (Music Player)
 
-Simple UI element with 3 buttons - simulates music player interface. Every button sends it's own command to hardware :
+Un simple élément d'Interface Utilisateur avec 3 boutons - simule l'interface d'un lecteur de musique. Chaque bouton envoie sa propre commande au matériel :
 ```play```, ```stop```, ```prev```, ```next```.
 
-You can also change widget play/stop state via [Change Widget Property](http://docs.blynk.cc/#blynk-main-operations-change-widget-properties)
-feature with ```isOnPlay``` property.
+Vous pouvez aussi changer l'état marche/arrêt (play/stop) du widget via la fonctionnalité [Changer une Propriété de Widget ](http://docs.blynk.cc/#blynk-main-operations-change-widget-properties) avec la propriété ```isOnPlay```.
 
 
-**Sketch:** [Music Player](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Player/Player.ino)
+**Croquis :** [Lecteur d Musique](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Player/Player.ino)
 
 ### Webhook
 
-Webhook is a widget for 3-d party integrations. With webhook widget you can send HTTP/S requests to any 3-d party server
-or device that has HTTP/S API (Philips Hue for instance).
+Le Webhook est un widget pour l'intégration de services tiers. Avec le widget webhook vous pouvez envoyer des requêtes HTTP/S aux serveurs de services tiers ou à un périphérique qui possède une API HTTP/S (par exemple le Philips Hue).
 
-Any write operation from hardware side will trigger webhook widget (same way as for eventor). You can also trigger
-webhook from application side in case control widget assigned to same pin as webhook. You can trigger 3-d party service
-with single button click.
+Toute opération d'écriture du côté matériel déclenche le widget Webhook (de la même manière que pour l'Eventor). Vous pouvez aussi déclencher le Webhook à partir de l'application si un widget contrôleur est assigné à la même broche que le Webhook. Vous pouvez déclencher un service tiers avec le simple appui sur un bouton.
 
-For example, imagine a case when you want to send data from your hardware not only to Blynk but also to Thingspeak server.
-In typical, classic use case you'll need to write code like this (this is minimal and not full sketch) :
+Par exemple, imaginons un cas où vous souhaitez envoyer des données de votre matériel non seulement à Blynk mais aussi au serveur Thingspeak.
+Dans un cas classique typique vous aurez besoin d'écrire du code comme celui-ci (c'est le code minimal et non le croquis entier) :
 
-```
+```cpp
 WiFiClient client;
 if (client.connect("api.thingspeak.com", 80)) {
     client.print("POST /update HTTP/1.1\n");
@@ -982,58 +949,47 @@ if (client.connect("api.thingspeak.com", 80)) {
 }
 ```
 
-With webhook widget this is not necessary anymore. All you need just fill below fields :
+Avec le widget Webhook ce n'est plus nécessaire. Vous avez juste besoin de remplir les champs ci-dessous :
 
 <img src="images/webhook_settings.png" style="width: 200px; height:360px"/>
 
-And do usual :  
+Et faire l'habituel :  
 
-```
+```cpp
 Blynk.virtualWrite(V0, value);
 ```
 
-where V0 is pin assigned to webhook widget.
+où V0 est la broche assignée au widget Webhook.
 
-Also you can use usual Blynk placeholders for pin value in body or url, for example :
+Vous pouvez aussi utiliser les chaînes génériques habituelles pour la valeur de la broche dans le corps (body) ou l'url. Par exemple :
 
 ```
 https://api.thingspeak.com/update?api_key=xxxxxx&field1=/pin/
 ```
 
-or for body
+ou pour le corps
 
 ```
 ["/pin/"]
 ```
 
-You can also refer to specific index of multi value pin (multi pin supports up to 5 values) :
+Vous pouvez aussi vous référer aux indexes spécifiques des broches à multiples valeurs (les broches à multiples valeurs supportent jusqu'à 5 valeurs) :
 
 ```/pin[0]/```,```/pin[1]/```, ```/pin[2]/```
 
-Another cool thing about webhook is that you can make GET requests from Blynk Server side and return response directly to
-your hardware. The beauty here is that you don't need to code request to 3-d party service. Imagine a case when you want to get
-weather from some 3-d party service. For example, you have an url
-```http://api.sunrise-sunset.org/json?lat=33.3823&lng=35.1856&date=2016-10-01```, you can put it in widget, select ```V0``` pin,
-and do usual :  
+Un autre fait sympa à propos du Webhook est que vous pouvez faire des requêtes GET à partir du Serveur Blynk et retourner la réponse directement à votre matériel. Ce qui est intéressant ici est que vous n'avez pas besoin de programmer une requête vers le service tiers. Imaginez un cas où vous souhaiter obtenir la météo d'un service tiers.  Par exemple, vous avez l'url ```http://api.sunrise-sunset.org/json?lat=33.3823&lng=35.1856&date=2016-10-01```, vous souhaitez la mettre dans le widget, sélectionnez la broche ```V0```, et faites l'habituel :  
 
-```
+```cpp
 BLYNK_WRITE(V0){
   String webhookdata = param.asStr();
   Serial.println(webhookdata);
 }
 ```
 
-Now, every time you'll trigger ```V0``` pin (with ```Blynk.virtualWrite(V0, 1)``` from hardware side or with control widget
-assigned to ```V0```) - ```BLYNK_WRITE(V0)``` will be triggered.
+Maintenant, chaque fois que vous déclencherez la broche ```V0``` (avec ```Blynk.virtualWrite(V0, 1)``` du côté matériel ou un widget contrôleur assigné à ```V0```) - ```BLYNK_WRITE(V0)``` sera appelé.
 
-**NOTE :** usually 3-d party servers returns big responses, so you have to increase hardware maximum allowed message size with
-```#define BLYNK_MAX_READBYTES 1024```. Where ```1024``` - is maximum allowed message size.
+**NOTE :** habituellement les serveurs de services tiers retournent de grosses réponses, alors vous devez augmenter la taille maximale autorisée par votre matériel avec ```#define BLYNK_MAX_READBYTES 1024```. Où ```1024``` - est la taille maximum autorisée d'un message.
 
-**NOTE :** Blynk cloud has limitation for webhook widget - you are allowed to send only 1 request per second. You can
- change this on local server with ```webhooks.frequency.user.quota.limit```. Please be very careful using webhooks,
- as many resources not capable to handle even 1 req/sec, so you may be banned on some of them. For example thingspeak
- allows to send 1 request per 15 seconds.
+**NOTE :** Le cloud de Blynk a une limitation pour le widget Webhook - vous n'êtes autorisé de n'envoyer qu'une seule requête par seconde. Vous pouvez changer ceci sur les serveurs locaux avec ```webhooks.frequency.user.quota.limit```. Faites très attention en utilisant les Webhooks car de nombreuses ressources ne sont pas capables de gérer 1 req/sec, donc vous pourriez être banni par certaines d'entre elles. Par exemple, ThingSpeak n'autorise qu'une requête toutes les 15 secondes.
 
- **NOTE :** In order to avoid spamming Blynk Webhook has one more limitation - in case your webhook requests were failed 10 times
- in row your webhook widget will be stopped. In order to resume it you need to open widget and save it again. Failed requests
- are requests that return status code that are not equal to 200 or 302.
+ **NOTE :** Afin d'éviter de polluer Blynk, le Webhook a une limitation supplémentaire - dans le cas où la requête Webhook a échoué dix fois de suite, votre widget Webhook sera arrêté. Afin de le redémarrer vous aurez besoin d'ouvrir le widget et de le sauvegarder de nouveau. Les requêtes échouées sont des requêtes retournant un code status différent de 200 ou 302.
