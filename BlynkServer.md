@@ -1,18 +1,20 @@
-# Blynk server
-Blynk Server is an Open Source Java server, responsible for forwarding messages between Blynk mobile application and 
-various microcontroller boards (i.e. Arduino, Raspberry Pi. etc).
+# Serveur Blynk
+Le serveur Blynk est un serveur Java Open Source, responsable de la redirection des messages entre l'application Blynk et les différents micro-contrôleurs (type Arduino, Raspberry Pi, etc).
 
-Download latest server build:
+Téléchargez la dernière version du serveur :
 
-[Download Blynk Server >](https://github.com/blynkkk/blynk-server/releases)
+[Télécharger le Serveur Blynk >](https://github.com/blynkkk/blynk-server/releases)*
 
-## Why do I need Local Blynk Server?
+\* Un projet expérimental et non-officiel permettant de gérer plus facilement le serveur a vu le jour: [Blynk CLI](https://github.com/booteille/blynk-cli)
 
-- Better security. You are the only one who knows about the server. You can setup security policies tied to your specific needs (MAC, IPs, login names, etc). You can also make it accessible only within your private network.
-- Better stability. No need to rely on 3rd party Cloud solution. You have the full control.
-- Lower latency. Server is as close to you as it could be. 
-- Maximum privacy. All data is stored locally and is not shared with anyone.
+## Pourquoi ai-je besoin d'un serveur local ?
 
-## Installing your own Local Blynk Server
+- Meilleure sécurite. Vous êtes le seul qui sait à propos du serveur. Vous pouvez définir des politiques de sécurité liées à vos besoins spécifiques (MAC, IPs, noms de connexion, etc). Vous pouvez aussi ne rendre celui-ci accessible que dans votre réseau privé.
+- Meilleure stabilité. Vous ne comptez sur aucune solution de Cloud tiers. Vous avez le contrôle absolu.
+- Confidentialité maximale. Toutes les données sont stockées localement et ne sont partagées avec personne.
 
-For detailed instruction please follow [github page](https://github.com/blynkkk/blynk-server#blynk-server).
+## Installer votre propre serveur local Blynk
+
+* Pour des instructions détaillées, référez-vous à la [page github - En Anglais](https://github.com/blynkkk/blynk-server#blynk-server).
+
+* Si vous avez opté pour l'installation avec Blynk CLI, référez-vous plutôt à la [documentation française](https://blynk-cli-fr.readthedocs.io/fr/latest/)
