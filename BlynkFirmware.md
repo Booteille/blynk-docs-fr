@@ -1,107 +1,104 @@
-#Blynk Firmware
+#Logiciel Blynk
 ## Configuration
 
 ### Blynk.begin()
 
-The simplest way to configure Blynk is to call ```Blynk.begin()```:
+La manière la plus simple de configurer Blynk est d'appeler `Blynk.begin()` :
 
 ```cpp
 Blynk.begin(auth, ...);
 ```
-It has various parameters for different hardware, depending on the type of connection you use. Follow the example sketches for your board.
+Cette méthode prend de nombreux paramètres pour différents matériels, en fonction du type de connexion que vous utilisez. Suivez les croquis d'exemple pour votre carte.
 
-```begin()``` is basically doing these steps:
+`begin()` suit basiquement ces étapes :
 
-1. Connects to network (WiFi, Ethernet, ...)
-2. Calls ```Blynk.config(...)``` - sets auth token, server address
-3. Tries to connects to the server once (can block for more than 30s)
+1. Se connecte à un réseau (WiFi, Ethernet, ...)
+2. Appelle `Blynk.config(...)` - défini le jeton d'authentification, l'adresse de l'hôte
+3. Essaie de se connecter au serveur une fois (peut bloquer pour plus de 30s)
 
-If your shield/connection type is not supported yet - you can craft it yourself easily! 
-[Here are some examples](https://github.com/blynkkk/blynk-library/tree/master/examples/More/ArduinoClient).
+Si votre type de connexion/shield n'est pas encore supporté, vous pouvez aisément en créer un vous-même !
+[Voici quelques exemples](https://github.com/blynkkk/blynk-library/tree/master/examples/More/ArduinoClient).
 
 ### Blynk.config()
 
-```config()``` allows you to manage network connection yourself.
-You can set up your shield (WiFi, Ethernet, ...) manually, and then call:
+`config()` vous permet de gérer la connexion au réseau par vous-même.
+Vous pouvez configurer votre shield (WiFi, Ethernet, ...) manuellement, puis appeler :
 
 ```cpp
 Blynk.config(auth, server, port);
 ```
-or just
+ou simplement
 ```cpp
 Blynk.config(auth);
 ```
 
-**Note:** Just after ``` Blynk.config(...) ```, Blynk is not yet connected to the server.  
-It will try to connect when it reaches first ``` Blynk.run() ``` or ``` Blynk.connect() ```call.  
-If you want to skip connecting to the server, just call ``` Blynk.disconnect() ``` right after configuration.
+**Note :** Juste après `Blynk.config(...)`, Blynk n'est pas encore connecté au serveur.
+Il essaiera de se connecter quand il atteindra le premier appel à `Blynk.run()` ou `Blynk.connect()`.
+Si vous souhaitez éviter de vous connecter au serveur, appelez simplement `Blynk.disconnect()` juste après la configuration.
 
-For setting-up WiFi connection, you can use a ```connectWiFi``` (just for convenience):
+Pour paramétrer une connexion WiFi, vous pouvez utiliser `connectWiFi` (juste pour le confort) :
 
 ```cpp
 Blynk.connectWiFi(ssid, pass);
 ```
-To connect to open WiFi networks, set pass to an empty string (```""```).
+Pour se connecter à des réseaux WiFi ouverts, définissez le mot de passe comme étant une chaîne de caractères vide (`""`).
 
-## Connection management
+## Gestion des connexions
 
-There are several functions to help with connection management:
+Il existe plusieurs fonctions aidant à gérer les connexions :
 
 ### Blynk.connect()
 
 ```cpp
-# This functions will try connecting to Blynk server.
-# Returns true when connected, false if timeout reached.
-# Default timeout is 30 seconds.
+# Cette fonction essaiera de se connecter au serveur Blynk.
+# Retourne true quand connecté, false si le délai maximum de connexion est atteint.
+# Le délai maximum est par défaut de 30 secondes.
 bool result = Blynk.connect();
 bool result = Blynk.connect(timeout);
 ```
 
 ### Blynk.disconnect()
 
-To disconnect from Blynk server, use:
+Pour se déconnecter du serveur Blynk, utilisez :
 
 ```cpp
 Blynk.disconnect();
 ```
 
 ### Blynk.connected()
-To get the status of connection to Blynk Server use:
+Pour obtenir l'état de la connexion au serveur Blynk, utilisez :
 
 ```cpp
 bool result = Blynk.connected();
 ```
 
 ### Blynk.run()
-This function should be called frequently to process incoming commands and perform housekeeping of Blynk connection.
-It is usually called in ``` void loop() {} ```.
+Cette fonction doit être appelée fréquemment pour traiter les commandes entrantes et entretenir la connexion Blynk.
+Elle est habituellement appelée dans le `void loop() {}`.
 
-You can initiate it in other places, unless you run out of heap memory (in the cascaded functions with local memory).
-For example, it is not recommended to call ``` Blynk.run() ``` inside of the  ```BLYNK_READ ``` and ``` BLYNK_WRITE ``` functions on low-RAM devices.
+Vopus pouvez l'initier à d'autres endroits, à moins que vous excédiez le tas de la mémoire (heap memory - dans les fonctions imbriquées avec la mémoire locale).
+Par exemple, il n'est pas recommendé d'appeler `Blynk.run()` à l'intérieur des fonctions `BLYNK_READ` et `BLYNK_WRITE` sur des périphériques ayant peu de mémoire vive (RAM).
 
-## Digital & Analog pins control
-The library can perform basic pin IO (input-output) operations out-of-the-box:
+## Contrôle des broches Analogiques et Digitales
+La bibliothèque peut exécuter nativement des opérations basiques sur des broches d'entrée et sortie :
+* digitalRead
+* digitalWrite
+* analogRead
+* analogWrite (Signal Analogique ou PWM en fonction de la plateforme)
 
-    digitalRead
-    digitalWrite
-    analogRead
-    analogWrite (PWM or Analog signal depending on the platform)
+Pas la peine d'écrire du code pour de simples choses comme les LEDs, les relais et les capteurs analogiques.
 
-No need to write code for simple things like LED, Relay control and analog sensors.
+## Contrôle des broches Virtuelles
+Les broches Virtuelles sont conçues pour envoyer des données de votre micro-contrôleur à l'Application Blynk et inversement.
+Pensez aux broches Virtuelles comme à des canaux permettant d'envoyer des données. Assurez-vous de bien différencier les broches Virtuelles des broches physiques de votre matériel. Les broches Virtuelles n'ont pas de représentation physique.
 
-## Virtual pins control
-Virtual Pins are designed to send any data from your microcontroller to the Blynk App and back. 
-Think about Virtual Pins as channels for sending any data. Make sure you differentiate Virtual Pins from physical 
-pins on your hardware. Virtual Pins have no physical representation.
+Les broches Virtuelles peuvent être utilisées comme interface avec les bibliothèques (Servo, LCD, et autres) et implémentent des fonctionnalités personnalisées.
+Le périphérique peut envoyer des données à l'Application en utilisant `Blynk.virtualWrite(pin, value)` et recevoir des données de l'Application en utilisant `BLYNK_WRITE(vPIN)`.
 
-Virtual Pins can be used to interface with libraries (Servo, LCD and others) and implement custom functionality. 
-The device may send data to the App using  ```Blynk.virtualWrite(pin, value)``` and receive data from the App using ```BLYNK_WRITE(vPIN)```.
-
-#### Virtual Pin data types
-The actual values are sent as strings, so there are no practical limits on the data that can be sent.  
-However, remember the limitations of the platform when dealing with numbers. For example the integer on Arduino 
-is 16-bit, allowing range -32768 to 32767.
-You can interpret incoming data as Integers, Floats, Doubles and Strings:
+#### Types de données des broches Virtuelles
+Les valeurs actuelles sont envoyées en tant que chaînes de caractères, don il n'y a pas de limite pratique sur les données qui peuvent être envoyées.
+Néanmoins, souvenez-vous des limitations de la plateforme quand vous traitez des nombres. Par exemple les nombres entiers sur l'Arduino font 16 bits, permettant des nombres entre -32768 et 32767.
+Vous pouvez interpréter les données entrantes comme étant des nombres entiers (Integer), décimaux (Float, Double) et des chaînes de caractères (String) :
 ```cpp
 param.asInt();
 param.asFloat();
@@ -109,7 +106,7 @@ param.asDouble();
 param.asStr();
 ```
 
-You can also get the RAW data from the param buffer:
+Vous pouvez aussi récupérer les données brutes à partir du paramètre tampon.
 
 ```cpp
 param.getBuffer()
@@ -118,41 +115,41 @@ param.getLength()
 
 ### Blynk.virtualWrite(vPin, value)
 
-You can send all the formats of data to Virtual Pins
+Vous pouvez envoyer tous les formats de données aux broches Virtuelles
 
 ```cpp
-// Send string
+// Envoie une chaîne de caractères
 Blynk.virtualWrite(pin, "abc");
 
-// Send integer
+// Envoie un nombre entier
 Blynk.virtualWrite(pin, 123);
 
-// Send float
+// Envoie un nombre décimal
 Blynk.virtualWrite(pin, 12.34);
 
-// Send multiple values as an array
+// Envoie plusieurs valeurs en tant que tableau (array)
 Blynk.virtualWrite(pin, "hello", 123, 12.34);
 
-// Send RAW data
+// Envoie les données brutes
 Blynk.virtualWriteBinary(pin, buffer, length);
 ```
 
-**Note:** Calling ```virtualWrite``` attempts to send the value to the network immediately.
+**Note :** Appeler `virtualWrite` provoque une tentative d'envoyer la valeur au réseau immédiatement.
 
 ### Blynk.setProperty(vPin, "property", value)
 
-This allows [changing widget properties](#blynk-main-operations-change-widget-properties)
+Cela permet de [changer les propriétés d'un widget](#blynk-main-operations-change-widget-properties)
 
 ### BLYNK_WRITE(vPIN)
 
-```BLYNK_WRITE``` defines a function that is called when device receives an update of Virtual Pin value from the server:
+`BLYNK_WRITE` défini une fonction qui est appelée lorsque le périphérique reçoit une mise à jour de la valeur de la broche Virtuelle à partir du serveur :
 
 ```cpp
 BLYNK_WRITE(V0)
 {   
-  int value = param.asInt(); // Get value as integer
-  
-  // The param can contain multiple values, in such case:
+  int value = param.asInt(); // Obtient la valeur comme étant un nombre entier
+
+  // Le paramètre peut contenir plusieurs valeurs, auquel cas :
   int x = param[0].asInt();
   int y = param[1].asInt();
 }
@@ -160,7 +157,7 @@ BLYNK_WRITE(V0)
 
 ### BLYNK_READ(vPIN)
 
-```BLYNK_READ``` defines a function that is called when device is requested to send it's current value of Virtual Pin to the server. Normally, this function should contain some ```Blynk.virtualWrite``` calls.
+`BLYNK_READ` défini une fonction qui est appelée quand il est demandé au périphérique d'envoyer la valeur actuelle d'une broche Virtuelle au serveur. Normalement, cette fonction doit contenir quelques appels à `Blynk.virtualWrite`.
 
 ```cpp
 BLYNK_READ(V0)
@@ -171,41 +168,42 @@ BLYNK_READ(V0)
 
 ### BLYNK_WRITE_DEFAULT()
 
-This redefines the handler for all pins that are not covered by custom ```BLYNK_WRITE``` functions.
+Redéfini la commande pour chaque broche qui ne sont pas couvertes par des fonctions `BLYNK_WRITE` personnalisées.
 
 ```cpp
 BLYNK_WRITE_DEFAULT()
 {
-  int pin = request.pin;      // Which exactly pin is handled?
-  int value = param.asInt();  // Use param as usual.
+  int pin = request.pin;      // Quelle broche est gérée, exactement ?
+  int value = param.asInt();  // Utilise le paramètre comme d'habitude.
 }
 ```
 
 ### BLYNK_READ_DEFAULT()
 
-This redefines the handler for all pins that are not covered by custom ```BLYNK_READ``` functions.
+
+Redéfini la commande pour chaque broche qui ne sont pas couvertes par des fonctions `BLYNK_READ` personnalisées.
 
 ```cpp
 BLYNK_READ_DEFAULT()
 {
-  int pin = request.pin;      // Which exactly pin is handled?
+  int pin = request.pin;    // Quelle broche est gérée, exactement ?
   Blynk.virtualWrite(pin, newValue);
 }
 ```
 
 ### BLYNK_CONNECTED()
 
-This function is called every time Blynk gets connected to the server. It's convenient to call sync functions here.
+Cette fonction est appelée à chaque fois que Blynk se connecte au serveur. Il est convenu d'utiliser des fonctions de synchronisation ici.
 
 ```cpp
 BLYNK_CONNECTED() {
-// Your code here
+// Votre code ici
 }
 ```
 
 ### Blynk.syncAll()
 
-Request server to send the most recent values for all widgets. In other words, all analog/digital pin states will be restored and every virtual pin will generate BLYNK_WRITE event.
+Demande au serveur d'envoyer les valeurs les plus récentes pour chaque widget. En d'autres mots, les états de toutes les broches analogiques/digitales seront restaurés et chaque broche virtuelle génèrera un évennement `BLYNK_WRITE`.
 
 ```cpp
 BLYNK_CONNECTED() {
@@ -217,79 +215,79 @@ BLYNK_CONNECTED() {
 
 ### Blynk.syncVirtual(vPin)
 
-Requests virtual pins value update. The corresponding ```BLYNK_WRITE``` handler is called as the result.
+Demande une mise à jour de la valeur des broches Virtuelles. La commande `BLYNK_WRITE` est appelée comme résultat.
 
 ```cpp
 Blynk.syncVirtual(V0);
-# Requesting multiple pins is also supported:
+# Envoyer une requête à plusieurs broches est aussi possible :
 Blynk.syncVirtual(V0, V1, V6, V9, V16);
 ```
 
 ## BlynkTimer
 
-```BlynkTimer``` enables you to perform periodic actions in the main ```loop()``` context.  
-It is the same as widely used SimpleTimer, but fixes several issues.  
-```BlynkTimer``` is included in Blynk library by default, so no need to install SimpleTimer separately or include SimpleTimer.h   
-**Please note that a single BlynkTimer object allows to schedule up to 16 timers.**
+`BlynkTimer` vous permet d'exécuter des actions périodiquement dans le contexte `loop()` principal.
+C'est le même que le communément utilisé SimpleTimer, mais corrige différents problèmes.
+`BlynkTimer` est inclus dans la bibliothèque Blynk par défaut, donc il n'y a pas besoin d'installer SimpleTimer séparément ou d'inclure SimpleTimer.h.
+**Notez qu'un seul objet BlynkTimer vous autorise de planifier jusqu'à 16 chronomètres.**
+Pour plus d'informations sur l'utilisation du chronomètre, vous pouvez vous référer ici : http://playground.arduino.cc/Code/SimpleTimer  
+Et voici un [croquis d'exemple pour BlynkTimer](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/PushData/PushData.ino#L30).
 
-For more information on timer usage, please see: http://playground.arduino.cc/Code/SimpleTimer  
-And here is a BlynkTimer [example sketch](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/PushData/PushData.ino#L30).
-
-## Debugging
+## Déboguage
 
 ### #define BLYNK_PRINT
 ### #define BLYNK_DEBUG
 
+Pour activer l'affichage des messages de déboguage sur le port Série par défaut, ajoutez en haut de votre croquis **(doit être la première ligne)** :
 To enable debug prints on the default Serial, add on the top of your sketch **(should be the first line)**:
 
 ```cpp
-#define BLYNK_PRINT Serial // Defines the object that is used for printing
-#define BLYNK_DEBUG        // Optional, this enables more detailed prints
+#define BLYNK_PRINT Serial // Défini l'objet utilisé pour l'affichage
+#define BLYNK_DEBUG        // Optionnel, active un affichage plus détaillé
 ```
 
-And enable Serial Output in setup():
+Et activez la sortie Série dans le `setup()` :
 
 ```cpp
 Serial.begin(9600);
 ```
-Open Serial Monitor and you'll see the debug prints.
+Ouvrez le Moniteur Série et vous verrez l'affichage des messages de déboguage.
 
-You can also use spare Hardware serial ports or SoftwareSerial for debug output (you will need an adapter to connect to it with your PC).
+Vous pouvez aussi utiliser d'autres ports matériels de série ou SoftwareSerial pour l'affichage du débogage (Vous aurez besoin d'un adaptateur pour le connecter à l'ordinateur).
 
-<span style="color:#D3435C;">**WARNING:** Enabling ```BLYNK_DEBUG``` will slowdown your hardware processing speed up to 10 times!</span>
+***Note :*** activer le mode débogage rendra la puissance de traitement de votre matériel jusqu'à dix fois plus lente.
 
 ### BLYNK_LOG()
 
-When ```BLYNK_PRINT``` is defined, you can use ```BLYNK_LOG``` to print your logs. The usage is similar to ```printf```:
+Lorsque `BLYNK_PRINT` est défini, vous pouvez utiliser `BLYNK_LOG` pour afficher vos journaux. Son utilisation est similaire à `printf` :
 
 ```cpp
-BLYNK_LOG("This is my value: %d", 10);
+BLYNK_LOG("Voici ma valeur : %d", 10);
 ```
 
-On some platforms (like Arduino 101) the ```BLYNK_LOG``` may be unavailable, or may just use too much resources.  
-In this case you can use a set of simpler log functions:
+Sur d'autres plateformes (comme l'Arduino 101) `BLYNK_LOG` peut être indisponible, ou peut utiliser trop de ressources.
+Dans ce cas vous pouvez utiliser un groupe de fonctions de journalisation simples :
 
 ```cpp
-BLYNK_LOG1("Heeey"); // Print a string
-BLYNK_LOG1(10);      // Print a number
-BLYNK_LOG2("This is my value: ", 10); // Print 2 values
-BLYNK_LOG4("Temperature: ", 24, " Humidity: ", 55); // Print 4 values
-...
+BLYNK_LOG1("Heeey"); // Affiche une chaîne de caractères
+BLYNK_LOG1(10);      // Affiche un nombre
+BLYNK_LOG2("Voici ma valeur : ", 10); // Affiche 2 valeurs
+BLYNK_LOG4("Température: ", 24, " Humidité: ", 55); // Affiche 4 valeurs
+// ...
 ```
 
-## Minimizing footprint
+## Réduire l'empreinte
 
-To minimize the program Flash/RAM, you can disable some of the built-in functionality:
+Pour minimiser la mémoire vive/flash de votre programme, vous pouvez désactiver certaines fonctionnalités natives :
 
-1. Comment-out ```#define BLYNK_PRINT``` to remove prints
-2. Put on the top of your sketch:
+1. Commentez `#define BLYNK_PRINT` pour supprimer les affichages
+2. Ajoutez en haut de votre croquis :
+```cpp
+#define BLYNK_NO_BUILTIN   // Désactive les opérations natives des broches digitales et analogiques
+#define BLYNK_NO_FLOAT     // Désactive les opérations des décimales
 ```
-#define BLYNK_NO_BUILTIN   // Disable built-in analog & digital pin operations
-#define BLYNK_NO_FLOAT     // Disable float operations
-```
 
-Please also remember that a single ```BlynkTimer``` can schedule many timers, so most probably you need only one instance of BlynkTimer in your sketch.
+Souvenez-vous aussi qu'un simple `BlynkTimer` peut planifier plusieurs chronomètres, vous n'aurez donc probablement besoin que d'une seule instance de BlynkTimer dans votre croquis.
 
-## Porting, hacking
+## Porter, Bidouiller
 
-If you want to dive into crafting/hacking/porting Blynk library implementation, please also check [this documemtation](https://github.com/blynkkk/blynk-library/tree/master/extras/docs).
+Si vous voulez plonger dans la fabrication/modification/portage d'une implémentation de la bibliothèque Blynk, veuillez vous référer à [cette documentation](https://github.com/blynkkk/blynk-library/tree/master/extras/docs).
