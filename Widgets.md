@@ -24,7 +24,7 @@ C'est un des paramètres principaux que vous avez besoin de définir. Il défini
 **Broches Analogiques** - représente les broches d'entrée et sortie analogiques de votre matériel
 
 **Broches Virtuelles** - n'a aucune représentation physique. Elles sont utilisées pour n'importe quel transfère de données entre l'Application Blynk et votre matériel.
-Lisez-en plus sur les Broches Virtuelles [ici](https://booteille.github.io/blynk-docs-fr/#blynk-main-operations-virtual-pins).
+Lisez-en plus sur les Broches Virtuelles [ici](https://booteille.github.io/blynk-docs-fr/#operations-principales-de-blynk-broches-virtuelles).
 
 ### Représentation des Données
 
@@ -126,7 +126,7 @@ Cependant, le widget Chronomètre convient toujours à de simples évènements c
 Permet de contrôler les mouvements d'un servo-moteur dans 4 directions
 
 ####Paramètres :
-- Modes SÉPARER/FUSIONNER (SPLIT/MERGE) - lisez [ici](https://booteille.github.io/blynk-docs-fr/#widgets-common-widget-settings-splitmerge)
+- Modes SÉPARER/FUSIONNER (SPLIT/MERGE) - lisez [ici](https://booteille.github.io/blynk-docs-fr/#widgets-parametres-communs-des-widgets-separerfusionner-splitmerge)
 
 - **Pivoter sur Inclinaison (Rotate on Tilt)**
 
@@ -476,7 +476,7 @@ Aussi, vous pouvez déplacer les widgets entre les onglets. Déplacez simplement
 
 ### Menu
 Le widget Menu vous permet d'envoyer des commandes à votre matériel basé sur la sélection faite sur l'Interface Utilisateur. Le Menu envoie l'index de l'élément que vous sélectionnez et non la valeur du label. Les index envoyés commencent à partir de 1.
-Il fonctionne de la même manière que l'élément habituel ComboBox. Vous pouvez aussi définir des objets Menu [à partir du côté matériel](https://booteille.github.io/blynk-docs-fr/#blynk-main-operations-change-widget-properties).
+Il fonctionne de la même manière que l'élément habituel ComboBox. Vous pouvez aussi définir des objets Menu [à partir du côté matériel](https://booteille.github.io/blynk-docs-fr/#operations-principales-de-blynk-changer-les-proprietes-dun-widget).
 
 <img src="images/menu_edit.png" style="width: 200px; height:360px"/>
 
@@ -920,7 +920,7 @@ Actuellement, Blynk supporte beaucoup de modules différents. Référez-vous aux
 Un simple élément d'Interface Utilisateur avec 3 boutons - simule l'interface d'un lecteur de musique. Chaque bouton envoie sa propre commande au matériel :
 ```play```, ```stop```, ```prev```, ```next```.
 
-Vous pouvez aussi changer l'état marche/arrêt (play/stop) du widget via la fonctionnalité [Changer une Propriété de Widget ](https://booteille.github.io/blynk-docs-fr/#blynk-main-operations-change-widget-properties) avec la propriété ```isOnPlay```.
+Vous pouvez aussi changer l'état marche/arrêt (play/stop) du widget via la fonctionnalité [Changer une Propriété de Widget ](https://booteille.github.io/blynk-docs-fr/#operations-principales-de-blynk-changer-les-proprietes-dun-widget) avec la propriété ```isOnPlay```.
 
 
 **Croquis :** [Lecteur d Musique](https://github.com/blynkkk/blynk-library/blob/master/examples/Widgets/Player/Player.ino)

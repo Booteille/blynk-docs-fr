@@ -18,7 +18,7 @@ Nous recommandons d'utiliser une **réelle** adresse e-mail car ça vous simplif
 
 Un compte est nécessaire afin de sauvegarder vos projets et y avoir accès à partir de plusieurs périphériques et de n'importe où. C'est aussi une mesure de sécurité.
 
-Vous pouvez toujours configurer votre propre [serveur privé Blynk](https://booteille.github.io/blynk-docs-fr/#blynk-server) et avoir le contrôle absolu.   
+Vous pouvez toujours configurer votre propre [serveur privé Blynk](https://booteille.github.io/blynk-docs-fr/#serveur-blynk) et avoir le contrôle absolu.   
 
 ###2. Créer un nouveau Projet
 Après vous être correctement identifié avec votre compte, commencez par créer un nouveau projet.
@@ -30,7 +30,7 @@ Donnez-lui un nom.
 <img src="images/getting_started/give_project_name.png" style="width: 200px; height:360px"/>
 
 ###3. Choisir son hardware
-Sélectionnez le modèle de hardware que vous allez utiliser. Vous pouvez vérifier la [liste des hardwares supportés](https://booteille.github.io/blynk-docs-fr/#supported-hardware)!
+Sélectionnez le modèle de hardware que vous allez utiliser. Vous pouvez vérifier la [liste des hardwares supportés](https://booteille.github.io/blynk-docs-fr/#hardwares-supportes)!
 
 <img src="images/getting_started/select_hardware.png" style="width: 200px; height:360px"/>
 
@@ -90,7 +90,7 @@ Vous obtiendrez un message indiquant "Arduino UNO is offline" (Arduino UNO est h
 
 ##Guide de démarrage du Hardware
 ###Comment utiliser un croquis d'example
-Vous devriez à partir de maintenant avoir la bibliothèque Blynk installée sur votre ordinateur. Si ce n'est pas le cas - [cliquez-ici](https://booteille.github.io/blynk-docs-fr/#downloads-blynk-library).
+Vous devriez à partir de maintenant avoir la bibliothèque Blynk installée sur votre ordinateur. Si ce n'est pas le cas - [cliquez-ici](https://booteille.github.io/blynk-docs-fr/#telechargements-bibliotheque-blynk).
 
 Les croquis d'exemple vous aideront à connecter votre hardware rapidement et à mettre en place les fonctionnalités majeures de Blynk.
 
@@ -126,7 +126,7 @@ Dans ce croquis d'exemple, trouvez cette ligne :
 ```cpp
 char auth[] = "YourAuthToken";
 ```
-C'est le [Jeton d'Authentification](https://booteille.github.io/blynk-docs-fr/#getting-started-getting-started-with-application-4-auth-token) que vous vous êtes envoyé par e-mail.
+C'est le [Jeton d'Authentification](https://booteille.github.io/blynk-docs-fr/#guide-de-demarrage-guide-de-demarrage-de-lapplication-blynk-4-jeton-dauthentification) que vous vous êtes envoyé par e-mail.
 Vérifiez votre e-mail et copiez-le, puis collez-le entre les guillemets.
 
 Ce devrait ressembler à ceci :

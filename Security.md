@@ -36,7 +36,7 @@ Si vous voulez éviter SSL et vous connecter via TCP, vous pouvez aussi faire ce
 
 #### Utiliser un Serveur Local Blynk
 
-Afin d'obtenir une sécurité maximale vous pouvez [installer le serveur Blynk localement](https://booteille.github.io/blynk-docs-fr/#blynk-server) et restraindre l'accès à votre réseau, donc personne à part vous ne pourra y accéder. Dans ce cas toutes les données sont stockées localement dans votre réseau et ne sont pas envoyées vers Internet.
+Afin d'obtenir une sécurité maximale vous pouvez [installer le serveur Blynk localement](https://booteille.github.io/blynk-docs-fr/#serveur-blynk) et restraindre l'accès à votre réseau, donc personne à part vous ne pourra y accéder. Dans ce cas toutes les données sont stockées localement dans votre réseau et ne sont pas envoyées vers Internet.
 Dans le cas d'un serveur local Blynk il n'y aussi aucun besoin de protéger la connexion entre votre hardware et le serveur local Blynk.
 C'est vrai pour les connexions Ethernet et partiellement vrai pour les connexion Wi-Fi. Dans le cas du Wi-Fi vous devez au moins utiliser le type WPA, WPA2 (Wi-Fi Protected Access) afin de protéger le traffic sans fil.
 

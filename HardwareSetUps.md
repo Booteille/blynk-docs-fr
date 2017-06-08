@@ -3,7 +3,7 @@
 Si vous n'avez pas de Shield et que votre hardware n'a aucune connectivité, vous pouvez tout de même utiliser Blynk – directement par l'USB :
 
 1. Ouvrez [l'exemple Arduino Serial USB](https://github.com/blynkkk/blynk-library/blob/master/examples/Boards_USB_Serial/Arduino_Serial_USB/Arduino_Serial_USB.ino)
-et changez le [Jeton d'Authentification](https://booteille.github.io/blynk-docs-fr/#getting-started-getting-started-with-application-4-auth-token)
+et changez le [Jeton d'Authentification](https://booteille.github.io/blynk-docs-fr/#guide-de-demarrage-guide-de-demarrage-de-lapplication-blynk-4-jeton-dauthentification)
 
 	```cpp
 	// Vous pourriez utiliser un Serial Hardware supplémentaire sur les cartes qui en ont (comme le Mega)

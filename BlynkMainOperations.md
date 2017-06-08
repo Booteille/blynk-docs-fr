@@ -20,12 +20,12 @@ Blynk.virtualWrite(pin, 12.34);
 Blynk.virtualWrite(pin, "hello", 123, 12.34);
 ```
 
-Pour plus d'informations sur les broches Virtuelles, [lisez ceci](https://booteille.github.io/blynk-docs-fr/#blynk-firmware-virtual-pins-control)
+Pour plus d'informations sur les broches Virtuelles, [lisez ceci](https://booteille.github.io/blynk-docs-fr/#logiciel-blynk-controle-des-broches-virtuelles)
 
 ## Envoyer des données de l'application au hardware
 Vous pouvez envoyer n'importe quelle donnée à partir des Widgets de votre application vers le hardware.
 
-Tous les [Widgets Controller](https://booteille.github.io/blynk-docs-fr/#widgets-controllers) peuvent envoyer des données aux broches virtuelles de votre hardware.
+Tous les [Widgets Controller](https://booteille.github.io/blynk-docs-fr/#widgets-controleurs) peuvent envoyer des données aux broches virtuelles de votre hardware.
 Par exemple, le code ci-dessous montre comment obtenir des valeurs à partir du Widget Button de l'Application
 
 ```cpp
@@ -83,12 +83,12 @@ BLYNK_READ(V5) // Le Widget dans l'application LIT la broche virtuelle V5 avec u
 
 ### Envoyer des données à partir du hardware
 Si vous avez besoin d'ENVOYER des données de capteur ou autre de votre hardware au Widget, vous pouvez écrire la logique que vous souhaitez.
-Configurez simplement la fréquence en mode PUSH. Toute commande que le hardware envoie au Cloud de Blynk est automatiquement stoqué sur le serveur et vous obtenez cette information soit avec le widget [History Graph](https://booteille.github.io/blynk-docs-fr/#widgets-displays-history-graph) soit avec [HTTP API](http://docs.blynkapi.apiary.io/#reference/0/pin-history-data/get-all-history-data-for-specific-pin).
+Configurez simplement la fréquence en mode PUSH. Toute commande que le hardware envoie au Cloud de Blynk est automatiquement stoqué sur le serveur et vous obtenez cette information soit avec le widget [History Graph](https://booteille.github.io/blynk-docs-fr/#widgets-afficheurs-graphique-dhistorique-history-graph) soit avec [HTTP API](http://docs.blynkapi.apiary.io/#reference/0/pin-history-data/get-all-history-data-for-specific-pin).
 
 <img src="images/frequency_reading_push.png" style="width: 200px; height:360px"/>
 
-Nous vous recommandons d'envoyer des données par interval et d'éviter une [erreur Flood](https://booteille.github.io/blynk-docs-fr/#troubleshooting-flood-error).  
-Vous pouvez utiliser des chronomètres comme [BlynkTimer](https://booteille.github.io/blynk-docs-fr/#blynk-firmware-blynktimer).
+Nous vous recommandons d'envoyer des données par interval et d'éviter une [erreur Flood](https://booteille.github.io/blynk-docs-fr/#resolution-des-problemes-erreur-flood).  
+Vous pouvez utiliser des chronomètres comme [BlynkTimer](https://booteille.github.io/blynk-docs-fr/#logiciel-blynk-blynktimer).
 Suivez les instructions de ce [croquis d'exemple](https://github.com/blynkkk/blynk-library/blob/master/examples/GettingStarted/PushData/PushData.ino) pour plus de détails.
 
 Voici comment cela peut marcher :
@@ -281,10 +281,10 @@ Vous pouvez aussi changer les propriétés d'un widget via l'[API HTTP](http://d
 ## Limitations et Recommendations
 - Ne mettez pas ```Blynk.virtualWrite``` ou n'importe quelle commande ```Blynk.*``` à l'intérieur de ```void loop()```- ce provoquera une tonne de messages sortants vers notre serveur et votre connexion sera interrompue.
 
-- Nous recommandons d'utiliser les fonctions avec des intervals. Par exemple, avec [BlynkTimer](https://booteille.github.io/blynk-docs-fr/#blynk-firmware-blynktimer)
+- Nous recommandons d'utiliser les fonctions avec des intervals. Par exemple, avec [BlynkTimer](https://booteille.github.io/blynk-docs-fr/#logiciel-blynk-blynktimer)
 
 - Évitez d'utiliser de longs délais avec ```delay()``` – ce peut causer des interruptions de la connexion;
 
-- Si vous envoyez plus de cent valeurs par seconde - vous pouvez provoquer une [erreur Flood](https://booteille.github.io/blynk-docs-fr/#troubleshooting-flood-error) et votre hardware sera automatiquement déconnecté du serveur;
+- Si vous envoyez plus de cent valeurs par seconde - vous pouvez provoquer une [erreur Flood](https://booteille.github.io/blynk-docs-fr/#resolution-des-problemes-erreur-flood) et votre hardware sera automatiquement déconnecté du serveur;
 
 - Faites attention à ne pas envoyer trop de comamndes ```Blynk.virtualWrite``` puisque de nombreux périphériques ne sont pas très puissants (comme l'ESP8266) alors il ne pourra pas gérer beaucoup de requêtes.

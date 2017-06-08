@@ -13,7 +13,7 @@ Si vous expérimpentez des problèmes de connexion, suivez ces étapes :
   * Vérifiez par deux fois que vous avez sélectionné **le bon exemple** pour votre type de connexion et modèle de matériel.
   * Nos exemples sont fournis avec **des commentaires et des explications**. **Lisez-les attentivement.**
   * Vérifiez que votre Jeton d'Authentification est valide (copié à partir de l'Application et **ne contient pas d'espace, etc.**).
-  * Si cela ne marche pas, jetez un coup d'oeil à [l'affichage du débogage série](https://booteille.github.io/blynk-docs-fr/#enable-debug).
+  * Si cela ne marche pas, jetez un coup d'oeil à [l'affichage du débogage série](https://booteille.github.io/blynk-docs-fr/#resolution-des-problemes-activer-le-debogage).
 5. Voilà ! Ajoutez vos modifications et fonctionnalités. Amusez-vous bien avec Blynk !
 
 ***Note :*** lorsque vous avez plusieurs périphériques connectés à votre réseau, ils doivent avoir des adresses MAC et IP différentes. Par exemple, lorsque vous utilisez 2 Arduino UNO avec des shields Ethernet, lancer l'exemple par défaut aux deux causera un problème de connexion. Vous devriez plutôt utiliser l'exemple de [configuration manuelle d'ethernet][manual ethernet configuration](https://github.com/blynkkk/blynk-library/blob/master/examples/Boards_Ethernet/Arduino_Ethernet_Manual/Arduino_Ethernet_Manual.ino).
@@ -45,7 +45,7 @@ void loop()
 ***Note :*** Cela s'applique aussi aux commandes BLYNK_READ et BLYNK_WRITE !
 
 ***SOLUTION :***
-Si vous avez besoin d'effectuer des actions à des intervalles réguliers - utilisez les chronomètres (timers), par exemple [BlynkTimer](https://booteille.github.io/blynk-docs-fr/#blynk-firmware-blynktimer).
+Si vous avez besoin d'effectuer des actions à des intervalles réguliers - utilisez les chronomètres (timers), par exemple [BlynkTimer](https://booteille.github.io/blynk-docs-fr/#logiciel-blynk-blynktimer).
 
 ## Erreur Flood
 
@@ -63,9 +63,9 @@ void loop()
 ```
 
 ***SOLUTION :***
-Si vous avez besoin d'effectuer des actions à des intervalles réguliers - utilisez les chronomètres (timers), par exemple [BlynkTimer](https://booteille.github.io/blynk-docs-fr/#blynk-firmware-blynktimer).
+Si vous avez besoin d'effectuer des actions à des intervalles réguliers - utilisez les chronomètres (timers), par exemple [BlynkTimer](https://booteille.github.io/blynk-docs-fr/#logiciel-blynk-blynktimer).
 
-Utiliser un ```delay()``` ne résoudra pas le problème non plus. Ce peut causer [un autre problème](https://booteille.github.io/blynk-docs-fr/#delay). Utilisez les Chronomètres !
+Utiliser un ```delay()``` ne résoudra pas le problème non plus. Ce peut causer [un autre problème](https://booteille.github.io/blynk-docs-fr/#resolution-des-problemes-delai). Utilisez les Chronomètres !
 
 Si envoyer des centaines de requêtes est ce dont vous avez besoin pour votre produit, vous pouvez augmenter la limite de flood sur un serveur local et dans la bibliothèque Blynk.
 Pour le serveur local, vous avez besoin de modifier la propriété ```user.message.quota.limit``` dans le fichier ```server.properties```
@@ -106,7 +106,7 @@ Le problème est que l'application et le matériel ne sont parfois pas dans le m
 
 Il y a deux manières de résoudre ce problème :
 
-- Utiliser un [Serveur Blynk Local] (https://booteille.github.io/blynk-docs-fr/#blynk-server)
+- Utiliser un [Serveur Blynk Local] (https://booteille.github.io/blynk-docs-fr/#serveur-blynk)
 - ```ping blynk-cloud.com``` à partir du réseau où votre matériel est connecté. Utilisez l'adresse IP que vous obtenez durant ce ping et indiquez-le dans votre application mobile de cette manière :
 
  <img src="images/login.png" style="width: 200px; height:360px"/>  <img src="images/custom.png" style="width: 200px; height:360px"/>
